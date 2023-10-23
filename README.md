@@ -1,4 +1,4 @@
-# the-city-game
+# CSC207GP
 #### Domain: 
 interactive logic game design/ city database  analysis
 #### Software Specification:
