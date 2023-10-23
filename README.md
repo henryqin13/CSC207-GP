@@ -1,1 +1,1 @@
-# CSC207gp-CICIC
+# the-city-game
