@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class APIClient {
 
@@ -19,16 +20,18 @@ public class APIClient {
         this.key = key;
     }
 
-    public String getData(String endpoint) {
-        String url = baseUrl + endpoint;
+    public HttpResponse<String> getData(String body) {
+//        String url = baseUrl + body;
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
+                .uri(URI.create(baseUrl))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + key)
+                .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
                 .build();
 
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.body();
+            return response;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
