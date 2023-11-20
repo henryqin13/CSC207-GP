@@ -1,4 +1,11 @@
-package view.GuesserView;
+package view;
+
+import interface_adapter
+import interface_adapter.guest_users.guestState;
+import interface_adapter.guest_users.guestViewModel;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +16,9 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class GuesserStartView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String startButton = "Start";
+public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
+    public final String viewName = "Sign Up";
+
     private final SignupViewModel signupViewModel;
     private final guestViewModel guestViewModel;
     private final JTextField usernameInputField = new JTextField(15);
@@ -177,6 +185,4 @@ public class GuesserStartView extends JPanel implements ActionListener, Property
             JOptionPane.showMessageDialog(this, state.getUsernameError());
         }
     }
-
-public class GuesserStartView {
 }
