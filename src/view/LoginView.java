@@ -1,3 +1,4 @@
+/*
 package view;
 
 import interface_adapter.login.LoginController;
@@ -110,9 +111,11 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.add(buttons);
     }
 
-    /**
+    */
+/**
      * React to a button click that results in evt.
-     */
+     *//*
+
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
@@ -127,4 +130,5 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         usernameInputField.setText(state.getUsername());
     }
 
+*/
 }

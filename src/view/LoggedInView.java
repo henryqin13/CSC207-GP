@@ -1,3 +1,4 @@
+/*
 package view;
 
 import interface_adapter.logged_in.LoggedInState;
@@ -20,9 +21,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     final JButton logOut;
 
-    /**
+    */
+/**
      * A window with a title and a JButton.
-     */
+     *//*
+
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -47,9 +50,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
     }
 
-    /**
+    */
+/**
      * React to a button click that results in evt.
-     */
+     *//*
+
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
@@ -59,4 +64,4 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
     }
-}
+}*/

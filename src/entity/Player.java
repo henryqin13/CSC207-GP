@@ -7,9 +7,9 @@ public class Player {
     private int score;
     private List<Role> roles;
 
-    public Player(String name, int score, List<Role> roles) {
+    public Player(String name, List<Role> roles) {
         this.name = name;
-        this.score = score;
+        this.score = 0;
         this.roles = roles;
     }
 
