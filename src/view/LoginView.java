@@ -129,6 +129,5 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private void setFields(LoginState state) {
         usernameInputField.setText(state.getUsername());
     }
-
-*/
 }
+*/
