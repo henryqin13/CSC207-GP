@@ -1,3 +1,4 @@
+/*
 package view.GuesserView;
 
 import javax.swing.*;
@@ -163,9 +164,11 @@ public class GuesserStartView extends JPanel implements ActionListener, Property
         this.add(buttons);
     }
 
-    /**
+    */
+/**
      * React to a button click that results in evt.
-     */
+     *//*
+
     public void actionPerformed(ActionEvent evt) {
         JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
     }
@@ -180,3 +183,4 @@ public class GuesserStartView extends JPanel implements ActionListener, Property
 
 public class GuesserStartView {
 }
+*/
