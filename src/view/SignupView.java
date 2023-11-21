@@ -1,3 +1,4 @@
+/*
 package view;
 
 import interface_adapter
@@ -171,9 +172,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(buttons);
     }
 
-    /**
+    */
+/**
      * React to a button click that results in evt.
-     */
+     *//*
+
     public void actionPerformed(ActionEvent evt) {
         JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
     }
@@ -186,3 +189,4 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         }
     }
 }
+*/
