@@ -14,9 +14,9 @@ public class PlayerManagerUseCase {
         this.players = new HashMap<>();
     }
 
-    public void addPlayer(String playerName, List<Role> roles) {
+    public void addPlayer(String playerName,String password, List<Role> roles) {
         if (!players.containsKey(playerName)) {
-            players.put(playerName, new Player(playerName, roles));
+            players.put(playerName, new Player(playerName,password, roles));
             System.out.println("Player " + playerName + " created.");
         } else {
             System.out.println("Player " + playerName + " already exists");
