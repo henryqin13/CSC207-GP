@@ -1,2 +1,4 @@
-package interface_adapter.Guest;public class GuestViewModel {
+package interface_adapter.Guest;
+
+public class GuestViewModel {
 }

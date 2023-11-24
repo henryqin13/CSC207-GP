@@ -1,2 +1,4 @@
-package interface_adapter.Guesser;public class GuesserController {
+package interface_adapter.Guesser;
+
+public class GuesserController {
 }
