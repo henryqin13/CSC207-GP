@@ -1,4 +1,4 @@
 package interface_adapter.LoggedIn;
 
-public class LoggedInState {
+public class LoggedInViewModel {
 }
