@@ -4,11 +4,13 @@ import java.util.List;
 
 public class Player {
     private String name;
+    private final String password;
     private int score;
     private List<Role> roles;
 
-    public Player(String name, List<Role> roles) {
+    public Player(String name, String password, List<Role> roles) {
         this.name = name;
+        this.password = password;
         this.score = 0;
         this.roles = roles;
     }
@@ -27,6 +29,10 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getPassword(){
+        return this.password;
     }
 
     public List<Role> getRoles() {
