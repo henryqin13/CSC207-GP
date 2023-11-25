@@ -5,11 +5,14 @@ import data_access.ConfigLoader;
 import data_access.OpenAI;
 import interface_adapter.ViewManagerModel;
 import use_case.GameSessionManagerUseCase;
+import use_case.GameUseCase;
 import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.http.HttpResponse;
+import java.util.Scanner;
+
 
 public class Main {
 
@@ -39,14 +42,29 @@ public class Main {
 
 
         OpenAI api = new OpenAI(ENDPOINT, apiKey);
+        GameUseCase game = new GameUseCase(api);
+        game.startGame();
 
+        Scanner scanner = new Scanner(System.in);
 
-            String prompt = "give a random city";
-            String response = api.getResponse(prompt);
-            if (response != null) {
-                System.out.println("Response: " + response);
-                // Parse the JSON to extract the response text
+        boolean hasGuessedCorrectly = false;
+        int numberOfHintsGiven = 0;
+        while (!hasGuessedCorrectly) {
+            String hint = game.getHint();
+            System.out.println("Hint #" + (numberOfHintsGiven + 1) + ": " + hint);
+
+            System.out.print("Guess the city: ");
+            String userGuess = scanner.nextLine();
+            hasGuessedCorrectly = game.guessCity(userGuess);
+            if (hasGuessedCorrectly) {
+                System.out.println("Congratulations! You guessed the city correctly!");
+            } else {
+                System.out.println("That's not correct. Try again!");
+                numberOfHintsGiven++;
+                // if (numberOfHintsGiven >= MAX_HINTS) break;
             }
+        }
+        scanner.close();
 
 
 
@@ -62,10 +80,5 @@ public class Main {
 
 //        viewManagerModel.setActiveView(label);
 //        viewManagerModel.firePropertyChanged();
-
-
-
-        application.pack();
-        application.setVisible(true);
     }
 }
