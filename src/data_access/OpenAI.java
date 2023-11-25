@@ -20,14 +20,13 @@ public class OpenAI extends APIClient {
                 + "\"messages\": ["
                 + "    {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},"
                 + "    {\"role\": \"user\", \"content\": \"%s\"}"
-                + "],"
-                + "\"max_tokens\": 50"
+                + "]"
+//                + "\"max_tokens\": 50"
                 + "}", prompt);
 
         HttpResponse<String> response = super.getData(requestBody);
         if (response.statusCode() >= 200 && response.statusCode() < 300) {
             if (response.body() != null && !response.body().isBlank()) {
-                System.out.println("Response received: " + response.body());
                 return getContent(response.body());
             } else {
                 System.out.println("Received an empty response.");
