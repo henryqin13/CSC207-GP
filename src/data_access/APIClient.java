@@ -20,13 +20,12 @@ public class APIClient {
         this.key = key;
     }
 
-    public HttpResponse<String> getData(String body) {
-//        String url = baseUrl + body;
+    public HttpResponse<String> getData(String requestBody) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + key)
-                .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                 .build();
 
         try {
