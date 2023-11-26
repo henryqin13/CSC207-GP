@@ -67,6 +67,9 @@ public class Main {
         scanner.close();
 
 
+//        GameView gameView = GameUseCaseFactory.create(viewManagerModel, GameModel, userDataAccessObject);
+//        views.add(signupView, signupView.viewName);
+
 
 
 
