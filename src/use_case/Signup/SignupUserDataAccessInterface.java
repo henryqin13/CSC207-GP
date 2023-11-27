@@ -1,9 +1,9 @@
 package use_case.Signup;
 
-import entity.Player;
+import entity.User;
 
 public interface SignupUserDataAccessInterface {
     boolean existsByName(String identifier);
 
-    void save(Player player);
+    void save(User user);
 }
