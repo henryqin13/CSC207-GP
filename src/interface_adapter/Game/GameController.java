@@ -4,15 +4,13 @@ import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInputData;
 
 public class GameController {
-    final GameInputBoundary userSignupUseCaseInteractor;
-    public GameController(GameInputBoundary userSignupUseCaseInteractor) {
-        this.userSignupUseCaseInteractor = userSignupUseCaseInteractor;
+    final GameInputBoundary gameUseCaseInteractor;
+    public GameController(GameInputBoundary gameUseCaseInteractor) {
+        this.gameUseCaseInteractor = gameUseCaseInteractor;
     }
 
-    public void execute(String username, String password1, String password2) {
-        GameInputData signupInputData = new GameInputData(
-                username, password1, password2);
-
-        userSignupUseCaseInteractor.execute(signupInputData);
+    public void executeGame() {
+        GameInputData data = new GameInputData("", "");
+        gameUseCaseInteractor.executeGame(data);
     }
 }

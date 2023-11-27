@@ -2,16 +2,16 @@ package use_case.Game;
 
 public class GameOutputData {
 
-    private final String username;
-    private boolean useCaseFailed;
+    private final String hint;
+    private boolean guess;
 
-    public GameOutputData(String username, boolean useCaseFailed) {
-        this.username = username;
-        this.useCaseFailed = useCaseFailed;
+    public GameOutputData(String hint, boolean guess) {
+        this.hint = hint;
+        this.guess = guess;
     }
 
-    public String getUsername() {
-        return username;
+    public String getHint() {
+        return hint;
     }
 
 }

@@ -1,5 +1,5 @@
 package use_case.Game;
 
 public interface GameInputBoundary {
-    void execute(GameInputData gameInputData);
+    void executeGame(GameInputData gameInputData);
 }

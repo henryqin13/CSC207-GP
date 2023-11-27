@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class OpenAI extends APIClient {
-
+//    todo: implement interfaces
     public OpenAI(String endpoint, String key) {
         super(endpoint, key);
     }
