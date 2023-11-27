@@ -8,7 +8,9 @@ import java.beans.PropertyChangeSupport;
 public class GuestViewModel extends ViewModel {
     public final String TITLE = "Guest";
 
-    public static final String Guest_BUTTON_NAME = "Log in";
+    public static final String GUEST_BUTTON_NAME = "Guest";
+
+    public static final String EXIT_BUTTON_NAME = "Exit";
 
     private GuestState state = new GuestState();
     public GuestViewModel(){
