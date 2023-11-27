@@ -3,6 +3,7 @@ package use_case;
 import data_access.OpenAI;
 import entity.City;
 
+//this is redundant now
 public class GameUseCase {
     private City currentCity;
     private OpenAI client;
