@@ -1,10 +1,12 @@
 package use_case.Game;
 
+import data_access.OpenAI;
+
 public interface GameOutputBoundary {
 
-    void guessView(GameOutputData guess);
+    void guessView(OpenAI client, GameDataAccessInterface data);
 
-    void hintView(String hint);
+    void hintView(OpenAI client, String hint, GameDataAccessInterface data);
 
-    void selectHintView();
+    void selectHintView(OpenAI client, GameDataAccessInterface data);
 }

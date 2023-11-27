@@ -25,6 +25,6 @@ public class GameInteractor implements GameInputBoundary{
         gameDataAccessObject.saveCity(new City(city, null));
 
         GameOutputData signupOutputData = new GameOutputData("", false);
-        gamePresenter.selectHintView();
+        gamePresenter.selectHintView(client, gameDataAccessObject);
     }
 }
