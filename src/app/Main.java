@@ -87,7 +87,6 @@ public class Main {
 
         GameDataAccessInterface data = new GameData();
 
-//        todo: depend on interface for api
         GameController game = GameUseCaseFactory.createGameUseCase(viewManagerModel, data, api);
         game.executeGame();
 

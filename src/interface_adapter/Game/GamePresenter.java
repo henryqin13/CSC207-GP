@@ -2,9 +2,12 @@ package interface_adapter.Game;
 
 import data_access.OpenAI;
 import interface_adapter.ViewManagerModel;
+import use_case.DataAccessInterface;
 import use_case.Game.GameDataAccessInterface;
 import use_case.Game.GameOutputBoundary;
+import use_case.GenerativeInterface;
 
+import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,7 +22,7 @@ public class GamePresenter implements GameOutputBoundary {
         this.gameViewModel = gameViewModel;
     }
     @Override
-    public void guessView(OpenAI client, GameDataAccessInterface data) {
+    public void guessView(GenerativeInterface client, GameDataAccessInterface data) {
         System.out.println("Please make a guess:");
         Scanner scanner = new Scanner(System.in);
         boolean correct = data.getCity().getName().toLowerCase().contains(scanner.nextLine().toLowerCase());
@@ -38,7 +41,7 @@ public class GamePresenter implements GameOutputBoundary {
     }
 
     @Override
-    public void hintView(OpenAI client, String hint, GameDataAccessInterface data) {
+    public void hintView(GenerativeInterface client, String hint, GameDataAccessInterface data) {
         System.out.println(hint);
         System.out.println("Would you like to guess or recieve another hint? [g/h]");
         String result = guessOrHint();
@@ -64,7 +67,7 @@ public class GamePresenter implements GameOutputBoundary {
     }
 
     @Override
-    public void selectHintView(OpenAI client, GameDataAccessInterface data) {
+    public void selectHintView(GenerativeInterface client, GameDataAccessInterface data) {
         boolean success = false;
         String hintDiff = "";
         while (!success) {

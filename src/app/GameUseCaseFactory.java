@@ -5,10 +5,12 @@ import interface_adapter.*;
 import interface_adapter.Game.GameController;
 import interface_adapter.Game.GamePresenter;
 import interface_adapter.Game.GameViewModel;
+import use_case.DataAccessInterface;
 import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInteractor;
 import use_case.Game.GameOutputBoundary;
 import use_case.Game.GameDataAccessInterface;
+import use_case.GenerativeInterface;
 
 import java.io.IOException;
 
@@ -49,7 +51,7 @@ public class GameUseCaseFactory {
 //        return null;
 //    }
 
-    public static GameController createGameUseCase(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, OpenAI client) throws IOException {
+    public static GameController createGameUseCase(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, GenerativeInterface client) throws IOException {
 
         GameOutputBoundary gameOutputBoundary = new GamePresenter(viewManagerModel, null);
 
