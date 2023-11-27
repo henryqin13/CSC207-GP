@@ -3,6 +3,7 @@ package app;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestPresenter;
 import interface_adapter.Guest.GuestViewModel;
+import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.Signup.SignupController;
 import interface_adapter.Signup.SignupPresenter;
@@ -11,6 +12,9 @@ import use_case.Guest.GuestInputBoundary;
 import use_case.Guest.GuestInteractor;
 import use_case.Guest.GuestOutputBoundary;
 import use_case.Guest.GuestUserDataAccessInterface;
+import use_case.Login.LoginInputBoundary;
+import use_case.Login.LoginInteractor;
+import use_case.Login.LoginUserDataAccessInterface;
 import use_case.Signup.SignupUserDataAccessInterface;
 import entity.CommonUserFactory;
 import entity.UserFactory;
@@ -31,11 +35,13 @@ public class SignupUseCaseFactory {
     private SignupUseCaseFactory() {}
 
     public static SignupView create(
-            ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel, SignupUserDataAccessInterface signupUserDataAccessObject, GuestUserDataAccessInterface guestUserDataAccessObject) {
+            ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel,
+            SignupUserDataAccessInterface signupUserDataAccessObject, GuestUserDataAccessInterface guestUserDataAccessObject,
+            LoggedInViewModel loggedInViewModel) {
 
         try {
             SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, signupUserDataAccessObject);
-            GuestController guestController = createUserGuestUseCase(guestUserDataAccessObject);
+            GuestController guestController = createUserGuestUseCase(viewManagerModel, guestViewModel, loggedInViewModel, guestUserDataAccessObject);
             return new SignupView(signupController, signupViewModel,guestController, guestViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -57,9 +63,13 @@ public class SignupUseCaseFactory {
         return new SignupController(userSignupInteractor);
     }
 
-    private static GuestController createUserGuestUseCase(GuestUserDataAccessInterface guestUserDataAccessInterface) {
-        GuestOutputBoundary clearOutputBoundary = new GuestPresenter();
-        GuestInputBoundary guestInputBoundary = new GuestInteractor(guestUserDataAccessInterface, clearOutputBoundary);
-        return new GuestController(guestInputBoundary);
+    private static GuestController createUserGuestUseCase(ViewManagerModel viewManagerModel,
+                                                          GuestViewModel guestViewModel,
+                                                          LoggedInViewModel loggedInViewModel,
+                                                          GuestUserDataAccessInterface userDataAccessObject) {
+        GuestOutputBoundary guestOutputBoundary = new GuestPresenter(viewManagerModel, loggedInViewModel, guestViewModel);
+        GuestInputBoundary guestInteractor = new GuestInteractor(
+                userDataAccessObject, guestOutputBoundary);
+        return new GuestController(guestInteractor);
     }
 }

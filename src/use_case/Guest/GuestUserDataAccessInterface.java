@@ -1,8 +1,8 @@
 package use_case.Guest;
 
-import entity.Player;
+import entity.User;
 
 public interface GuestUserDataAccessInterface {
 
-    Player get(String username);
+    User get(String username);
 }
