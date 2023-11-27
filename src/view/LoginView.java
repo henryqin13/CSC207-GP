@@ -1,10 +1,9 @@
-/*
 package view;
 
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupState;
+import interface_adapter.Login.LoginController;
+import interface_adapter.Login.LoginState;
+import interface_adapter.Login.LoginViewModel;
+import interface_adapter.Signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,9 +44,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 new JLabel("Password"), passwordInputField);
 
         JPanel buttons = new JPanel();
-        logIn = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
+        logIn = new JButton(loginViewModel.LOGIN_BUTTON_NAME);
         buttons.add(logIn);
-        cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
+        cancel = new JButton(loginViewModel.CANCEL_BUTTON_NAME);
         buttons.add(cancel);
 
         logIn.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -110,11 +109,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.add(passwordErrorField);
         this.add(buttons);
     }
-
-    */
 /**
      * React to a button click that results in evt.
-     *//*
+     */
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
@@ -130,4 +127,4 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         usernameInputField.setText(state.getUsername());
     }
 }
-*/
+
