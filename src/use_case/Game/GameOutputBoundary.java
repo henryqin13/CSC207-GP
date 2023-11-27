@@ -2,7 +2,9 @@ package use_case.Game;
 
 public interface GameOutputBoundary {
 
-    void prepareSuccessView(GameOutputData user);
+    void guessView(GameOutputData guess);
 
-    void prepareFailView(String error);
+    void hintView(String hint);
+
+    void selectHintView();
 }

@@ -19,7 +19,6 @@ public class ConfigLoader {
                 System.out.println("Sorry, unable to find config.properties");
                 return;
             }
-            // Load a properties file from class path
             properties.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();

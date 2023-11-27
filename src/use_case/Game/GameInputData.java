@@ -2,25 +2,20 @@ package use_case.Game;
 
 public class GameInputData {
 
-    final private String username;
-    final private String password;
-    final private String repeatPassword;
+    final private String guesses;
+    final private String hints;
 
-    public GameInputData(String username, String password, String repeatPassword) {
-        this.username = username;
-        this.password = password;
-        this.repeatPassword = repeatPassword;
+    public GameInputData(String guesses, String hints) {
+        this.guesses = guesses;
+        this.hints = hints;
     }
 
-    String getUsername() {
-        return username;
+    public String getGuesses() {
+        return guesses;
     }
 
-    String getPassword() {
-        return password;
+    public String getHints() {
+        return hints;
     }
 
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
 }

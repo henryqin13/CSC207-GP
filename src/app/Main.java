@@ -2,14 +2,18 @@ package app;
 
 import data_access.APIClient;
 import data_access.ConfigLoader;
+import data_access.GameData;
 import data_access.OpenAI;
+import interface_adapter.Game.GameController;
 import interface_adapter.ViewManagerModel;
+import use_case.Game.GameDataAccessInterface;
 import use_case.GameSessionManagerUseCase;
 import use_case.GameUseCase;
 import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
 
@@ -19,7 +23,7 @@ public class Main {
     private static String apiKey; // Replace with your actual API key
     private static final String ENDPOINT = "https://api.openai.com/v1/chat/completions"; // Adjust as needed
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         JFrame application = new JFrame("Example running");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,29 +46,29 @@ public class Main {
 
 
         OpenAI api = new OpenAI(ENDPOINT, apiKey);
-        GameUseCase game = new GameUseCase(api);
-        game.startGame();
-
-        Scanner scanner = new Scanner(System.in);
-
-        boolean hasGuessedCorrectly = false;
-        int numberOfHintsGiven = 0;
-        while (!hasGuessedCorrectly) {
-            String hint = game.getHint();
-            System.out.println("Hint #" + (numberOfHintsGiven + 1) + ": " + hint);
-
-            System.out.print("Guess the city: ");
-            String userGuess = scanner.nextLine();
-            hasGuessedCorrectly = game.guessCity(userGuess);
-            if (hasGuessedCorrectly) {
-                System.out.println("Congratulations! You guessed the city correctly!");
-            } else {
-                System.out.println("That's not correct. Try again!");
-                numberOfHintsGiven++;
-                // if (numberOfHintsGiven >= MAX_HINTS) break;
-            }
-        }
-        scanner.close();
+//        GameUseCase game = new GameUseCase(api);
+//        game.startGame();
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//        boolean hasGuessedCorrectly = false;
+//        int numberOfHintsGiven = 0;
+//        while (!hasGuessedCorrectly) {
+//            String hint = game.getHint();
+//            System.out.println("Hint #" + (numberOfHintsGiven + 1) + ": " + hint);
+//
+//            System.out.print("Guess the city: ");
+//            String userGuess = scanner.nextLine();
+//            hasGuessedCorrectly = game.guessCity(userGuess);
+//            if (hasGuessedCorrectly) {
+//                System.out.println("Congratulations! You guessed the city correctly!");
+//            } else {
+//                System.out.println("That's not correct. Try again!");
+//                numberOfHintsGiven++;
+//                // if (numberOfHintsGiven >= MAX_HINTS) break;
+//            }
+//        }
+//        scanner.close();
 
 
 //        GameView gameView = GameUseCaseFactory.create(viewManagerModel, GameModel, userDataAccessObject);
@@ -78,8 +82,15 @@ public class Main {
 
 
 //        define view manager and first active screen and set it as active
-//        ViewManagerModel viewManagerModel = new ViewManagerModel();
-//        new ViewManager(views, cardLayout, viewManagerModel);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        GameDataAccessInterface data = new GameData();
+
+//        todo: depend on interface for api
+        GameController game = GameUseCaseFactory.createGameUseCase(viewManagerModel, data, api);
+        game.executeGame();
+
 
 //        viewManagerModel.setActiveView(label);
 //        viewManagerModel.firePropertyChanged();

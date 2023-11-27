@@ -1,7 +1,6 @@
 package app;
 
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import data_access.OpenAI;
 import interface_adapter.*;
 import interface_adapter.Game.GameController;
 import interface_adapter.Game.GamePresenter;
@@ -9,9 +8,8 @@ import interface_adapter.Game.GameViewModel;
 import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInteractor;
 import use_case.Game.GameOutputBoundary;
-import use_case.Game.GameUserDataAccessInterface;
+import use_case.Game.GameDataAccessInterface;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class GameUseCaseFactory {
@@ -36,18 +34,6 @@ public class GameUseCaseFactory {
 //        return null;
 //    }
 
-    private static GameController createGameUseCase(ViewManagerModel viewManagerModel) throws IOException {
-
-        // Notice how we pass this method's parameters to the Presenter.
-//        GameOutputBoundary signupOutputBoundary = new GamePresenter(viewManagerModel);
-
-//        UserFactory userFactory = new CommonUserFactory();
-
-//        GameOutputBoundary gameInteractor = new GameInteractor(signupOutputBoundary);
-
-        return new GameController(null);
-    }
-
 //    public static GameView create(
 //            ViewManagerModel viewManagerModel,
 //            GameViewModel signupViewModel,
@@ -63,14 +49,14 @@ public class GameUseCaseFactory {
 //        return null;
 //    }
 
-    private static GameController createUserSignupUseCase(ViewManagerModel viewManagerModel, GameViewModel gameViewModel, GameUserDataAccessInterface userDataAccessObject) throws IOException {
+    public static GameController createGameUseCase(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, OpenAI client) throws IOException {
 
-        GameOutputBoundary gameOutputBoundary = new GamePresenter(viewManagerModel, gameViewModel);
+        GameOutputBoundary gameOutputBoundary = new GamePresenter(viewManagerModel, null);
 
-        UserFactory userFactory = new CommonUserFactory();
+
 
         GameInputBoundary gameInteractor = new GameInteractor(
-                userDataAccessObject, gameOutputBoundary, userFactory);
+                userDataAccessObject, gameOutputBoundary, client);
 
         return new GameController(gameInteractor);
     }
