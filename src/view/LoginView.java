@@ -3,7 +3,6 @@ package view;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
-import interface_adapter.Signup.SignupState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +48,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         cancel = new JButton(loginViewModel.CANCEL_BUTTON_NAME);
         buttons.add(cancel);
 
-        logIn.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
+        logIn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logIn)) {

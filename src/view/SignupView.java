@@ -79,15 +79,13 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        // TODO Add the body to the actionPerformed method of the action listener below
-        //      for the "guest" button. You'll need to write the controller before
-        //      you can complete this.
         guest.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        guestController.execute();
-
+                        if (e.getSource().equals(guest)) {
+                            guestController.execute();
+                        }
                     }
                 }
         );
@@ -144,7 +142,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     public void keyTyped(KeyEvent e) {
                         SignupState currentState = signupViewModel.getState();
                         currentState.setRepeatPassword(repeatPasswordInputField.getText() + e.getKeyChar());
-                        signupViewModel.setState(currentState); // Hmm, is this necessary?
+                        signupViewModel.setState(currentState);
                     }
 
                     @Override
