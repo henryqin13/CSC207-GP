@@ -32,6 +32,6 @@ public class GameOverUseCase {
 //        player.setScore(score);
 //        // display the results to the user using the presenter
 //        presenter.displayResults(match, player, isCorrect);
-    }
+//  }
 
 }
