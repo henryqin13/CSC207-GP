@@ -16,9 +16,9 @@ public class ConsolePresenter implements Presenter {
 
     public void displayFeedback(int score) {
         // print some feedback based on the score
-        if (score >= 80) {
+        if (score >= 80) { //arbitrary
             System.out.println("You are awesome!");
-        } else if (score >= 50) {
+        } else if (score >= 50) { //arbitrary
             System.out.println("You are good!");
         } else {
             System.out.println("You can do better!");
