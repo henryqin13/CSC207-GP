@@ -1,5 +1,7 @@
 package data_access;
 
+import use_case.DataAccessInterface;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -7,7 +9,7 @@ import java.net.http.HttpResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class APIClient {
+public class APIClient implements DataAccessInterface {
 
     private final HttpClient httpClient;
     private final String baseUrl;
@@ -20,18 +22,17 @@ public class APIClient {
         this.key = key;
     }
 
-    public HttpResponse<String> getData(String body) {
-//        String url = baseUrl + body;
+    @Override
+    public HttpResponse<String> getData(String requestBody) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + key)
-                .POST(HttpRequest.BodyPublishers.ofString(body, StandardCharsets.UTF_8))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                 .build();
 
         try {
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return response;
+            return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
