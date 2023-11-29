@@ -1,37 +1,37 @@
 package use_case;
+
 import entity.Match;
 import entity.Player;
-import entity.PlayerAnswer;
+import interface_adapter.ConsolePresenter;
 import interface_adapter.Presenter;
 
-public class GameOver {
+public class GameOverUseCase {
 
     private Match match; // the current match
     private Player player; // the current player
     private Presenter presenter; // the presenter to display the results
 
-    public GameOver(Match match, Player player, Presenter presenter) {
+    public GameOverUseCase(Match match, Player player, Presenter presenter) {
         this.match = match;
         this.player = player;
         this.presenter = presenter;
     }
+
     public void execute() {
         // check if the player's last answer is correct
-        PlayerAnswer lastAnswer = match.getUserAnswers().get(match.getUserAnswers().size() - 1);
-        if (lastAnswer.getAnswer().equalsIgnoreCase(match.getCorrectAnswer().getName())) {
-            // if correct, update the player's score and show a congratulatory message
-            player.setScore(player.getScore() + 10); // added arbitrary # points for a correct answer (group can decide later)
-            presenter.displayMessage("You got it right! The city is " + match.getCorrectAnswer().getName() + ".");
+        boolean isCorrect = match.getCorrectAnswer().getName().equals(player.getUserAnswers().get(player.getUserAnswers().size() - 1).getAnswer());
+        // update the player's score based on the difficulty level and the number of clues used
+        int score = player.getScore();
+        int difficulty = match.getCorrectAnswer().getFacts().get("difficulty").getValue();
+        int clues = player.getUserAnswers().size();
+        if (isCorrect) {
+            score += difficulty * 10 - clues * 2;
         } else {
-            // if incorrect, show a sorry message and reveal the correct answer
-            presenter.displayMessage("Sorry, that's not correct. The city is " + match.getCorrectAnswer().getName() + ".");
+            score -= difficulty * 5 + clues;
         }
-        // show the player's final score and some feedback
-        presenter.displayMessage("Your final score is " + player.getScore() + ".");
-        presenter.displayFeedback(player.getScore());
-        // ask the player if they want to play again or quit
-        presenter.displayOptions();
+        player.setScore(score);
+        // display the results to the user using the presenter
+        presenter.displayResults(match, player, isCorrect);
     }
-}
 
-//a presenter needs to be implemented
+}
