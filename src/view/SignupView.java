@@ -1,12 +1,10 @@
-/*
 package view;
 
-import interface_adapter
-import interface_adapter.guest_users.guestState;
-import interface_adapter.guest_users.guestViewModel;
-import interface_adapter.signup.SignupController;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
+import interface_adapter.Guest.GuestViewModel;
+import interface_adapter.Guest.GuestController;
+import interface_adapter.Signup.SignupController;
+import interface_adapter.Signup.SignupState;
+import interface_adapter.Signup.SignupViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,12 +19,12 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     public final String viewName = "Sign Up";
 
     private final SignupViewModel signupViewModel;
-    private final guestViewModel guestViewModel;
+    private final GuestViewModel guestViewModel;
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final SignupController signupController;
-    private final guestController guestController;
+    private final GuestController guestController;
 
     private final JButton signUp;
     private final JButton cancel;
@@ -34,7 +32,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     // TODO Note: this is the new JButton for guesting the users file
     private final JButton guest;
 
-    public SignupView(SignupController controller, SignupViewModel signupViewModel, guestController guestController, guestViewModel guestViewModel) {
+    public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel) {
 
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
@@ -61,7 +59,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         // TODO Note: the following line instantiates the "guest" button; it uses
         //      a guest_BUTTON_LABEL constant which is defined in the SignupViewModel class.
         //      You need to add this "guest" button to the "buttons" panel.
-        guest = new JButton(SignupViewModel.guest_BUTTON_LABEL);
+        guest = new JButton(SignupViewModel.GUEST_BUTTON_LABEL);
         buttons.add(guest);
 
         signUp.addActionListener(
@@ -81,17 +79,13 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        // TODO Add the body to the actionPerformed method of the action listener below
-        //      for the "guest" button. You'll need to write the controller before
-        //      you can complete this.
         guest.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(guest)){
+                        if (e.getSource().equals(guest)) {
                             guestController.execute();
                         }
-
                     }
                 }
         );
@@ -148,7 +142,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                     public void keyTyped(KeyEvent e) {
                         SignupState currentState = signupViewModel.getState();
                         currentState.setRepeatPassword(repeatPasswordInputField.getText() + e.getKeyChar());
-                        signupViewModel.setState(currentState); // Hmm, is this necessary?
+                        signupViewModel.setState(currentState);
                     }
 
                     @Override
@@ -172,10 +166,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(buttons);
     }
 
-    */
-/**
-     * React to a button click that results in evt.
-     *//*
 
     public void actionPerformed(ActionEvent evt) {
         JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
@@ -189,4 +179,3 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         }
     }
 }
-*/
