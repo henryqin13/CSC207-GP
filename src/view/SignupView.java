@@ -193,7 +193,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     }
 
     private void handleCancel() {
-        cancelController.cancel();
+        cancelController.cancelSignUp();
     }
 
     public void actionPerformed(ActionEvent evt) {
