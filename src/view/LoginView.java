@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import interface_adapter.CancelController;
 
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -26,12 +27,14 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton logIn;
     final JButton cancel;
     private final LoginController loginController;
+    private final CancelController cancelController;
 
-    public LoginView(LoginViewModel loginViewModel, LoginController controller) {
+    public LoginView(LoginViewModel loginViewModel, LoginController controller, CancelController cancelController) {
 
         this.loginController = controller;
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
+        this.cancelController = cancelController;
 
         JLabel title = new JLabel("Login Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -63,6 +66,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         );
 
         cancel.addActionListener(this);
+        cancel.addActionListener(e -> handleCancel());
 
         usernameInputField.addKeyListener(new KeyListener() {
             @Override
@@ -108,9 +112,16 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.add(buttons);
     }
 
+    private void handleCancel() {
+        cancelController.cancelLogIn();
+    }
 
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
+        if (evt.getSource().equals(cancel)) {
+            handleCancel();
+            usernameInputField.setText("");
+            passwordInputField.setText("");
+        }
     }
 
     @Override
