@@ -16,7 +16,7 @@ public class LoggedInController {
         LoggedInState currentState = loggedInViewModel.getState();
         currentState.setUsername(null);
         loggedInViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView("sign up");
+        viewManagerModel.setActiveView("the city game");
         viewManagerModel.firePropertyChanged();
     }
 }
