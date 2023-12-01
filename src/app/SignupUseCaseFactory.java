@@ -70,6 +70,6 @@ public class SignupUseCaseFactory {
         GuestOutputBoundary guestOutputBoundary = new GuestPresenter(viewManagerModel, guestViewModel);
         GuestInputBoundary guestInteractor = new GuestInteractor(
                 userDataAccessObject, guestOutputBoundary);
-        return new GuestController(guestInteractor);
+        return new GuestController(guestInteractor, viewManagerModel);
     }
 }
