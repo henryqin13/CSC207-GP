@@ -11,6 +11,8 @@ import interface_adapter.Guest.GuestViewModel;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
+import use_case.Guest.GuestInteractor;
+import use_case.Guest.GuestUserDataAccessInterface;
 import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
@@ -23,7 +25,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class TemporaryMain {
-    private static GuestController guestController;
+
 
     public static void main(String[] args) {
         // Build the main program window, the main panel containing the
@@ -56,6 +58,8 @@ public class TemporaryMain {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        //Not yet set up
+        GuestUserDataAccessInterface guestUserDataAccessInterface;
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, userDataAccessObject, loggedInViewModel);
         views.add(signupView, signupView.viewName);
@@ -66,7 +70,7 @@ public class TemporaryMain {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController);
         views.add(loggedInView, loggedInView.viewName);
 
-        GuestView guestView = new GuestView(guestViewModel);
+        GuestView guestView = GuestUseCaseFactory.create(viewManagerModel,guestViewModel,userDataAccessObject);
         views.add(guestView, guestView.viewName);
 
         MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, mainMenuController, signupViewModel,
