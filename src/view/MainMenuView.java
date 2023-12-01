@@ -1,10 +1,14 @@
-/*
+
 package view;
 
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupState;
+import interface_adapter.Guest.GuestViewModel;
+import interface_adapter.Login.LoginController;
+import interface_adapter.Login.LoginState;
+import interface_adapter.Login.LoginViewModel;
+import interface_adapter.Signup.SignupState;
+import interface_adapter.Signup.SignupViewModel;
+import interface_adapter.MainMenu.MainMenuViewModel;
+import interface_adapter.MainMenu.MainMenuController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,36 +22,66 @@ import java.beans.PropertyChangeListener;
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String gameName = "the city game";
-    private final mainViewModel mainViewModel;
+    private final MainMenuViewModel mainMenuViewModel;
+
+    private final LoginViewModel loginViewModel;
+    private final SignupViewModel signUpViewModel;
+    private final GuestViewModel guestViewModel;
 
     final JButton signUp;
     final JButton logIn;
     final JButton guest;
-    private final mainMenuController loginController;
+    private final MainMenuController mainMenuController;
 
-    public MainMenuView(mainMenuViewModel loginViewModel, mainMenuController controller) {
+    public MainMenuView(MainMenuViewModel mainMenuViewModel, MainMenuController mainMenucontroller,
+                        SignupViewModel signUpViewModel, LoginViewModel loginViewModel, GuestViewModel guestViewModel) {
 
-        this.mainMenuController = controller;
-        this.mainMenuViewModel = loginViewModel;
+        this.mainMenuController = mainMenucontroller;
+        this.mainMenuViewModel = mainMenuViewModel;
+        this.signUpViewModel = signUpViewModel;
+        this.loginViewModel = loginViewModel;
+        this.guestViewModel = guestViewModel;
         this.mainMenuViewModel.addPropertyChangeListener(this);
+
 
         JLabel title = new JLabel("Sign up, Log in or join as a guest");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
         JPanel buttons = new JPanel();
-        logIn = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
-        buttons.add(logIn);
-        cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
-        buttons.add(cancel);
-
         signUp = new JButton(signUpViewModel.SIGNUP_BUTTON_LABEL);
         buttons.add(signUp);
-        guest = new JButton(guestViewModel.GUEST_BUTTON_LABEL);
+        logIn = new JButton(loginViewModel.LOGIN_BUTTON_NAME);
+        buttons.add(logIn);
+        guest = new JButton(signUpViewModel.GUEST_BUTTON_LABEL);
         buttons.add(guest);
 
-        cancel.addActionListener(this);
-        });
+        signUp.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(signUp)) {
+                            mainMenuController.signup();
+                        }
+                    }
+                }
+        );
+        logIn.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(logIn)) {
+                            mainMenuController.login();
+                        }
+                    }
+                });
+
+        guest.addActionListener(
+                new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            if (evt.getSource().equals(guest)) {
+                mainMenuController.guest();
+            }
+        }});
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 
@@ -55,15 +89,14 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
     }
 
-    */
-/**
-     * React to a button click that results in evt.
-     *//*
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
 
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
 
-}*/
+    }
+}
