@@ -5,6 +5,7 @@ import interface_adapter.Guest.GuestController;
 import interface_adapter.Signup.SignupController;
 import interface_adapter.Signup.SignupState;
 import interface_adapter.Signup.SignupViewModel;
+import interface_adapter.CancelController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,19 +26,20 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final SignupController signupController;
     private final GuestController guestController;
+    private final CancelController cancelController;
 
     private final JButton signUp;
     private final JButton cancel;
 
     // TODO Note: this is the new JButton for guesting the users file
-    private final JButton guest;
 
-    public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel) {
+    public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel, CancelController cancelController) {
 
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
         this.guestController = guestController;
         this.guestViewModel = guestViewModel;
+        this.cancelController = cancelController;
         signupViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
@@ -59,8 +61,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         // TODO Note: the following line instantiates the "guest" button; it uses
         //      a guest_BUTTON_LABEL constant which is defined in the SignupViewModel class.
         //      You need to add this "guest" button to the "buttons" panel.
-        guest = new JButton(SignupViewModel.GUEST_BUTTON_LABEL);
-        buttons.add(guest);
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -79,18 +79,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        guest.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(guest)) {
-                            guestController.execute();
-                        }
-                    }
-                }
-        );
 
         cancel.addActionListener(this);
+        cancel.addActionListener(e -> handleCancel());
 
         // This makes a new KeyListener implementing class, instantiates it, and
         // makes it listen to keystrokes in the usernameInputField.
@@ -188,9 +179,17 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(buttons);
     }
 
+    private void handleCancel() {
+        cancelController.cancelSignUp();
+    }
 
     public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showConfirmDialog(this, "Cancel not implemented yet.");
+        if (evt.getSource().equals(cancel)) {
+            handleCancel();
+            usernameInputField.setText("");
+            passwordInputField.setText("");
+            repeatPasswordInputField.setText("");
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.CancelController;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Login.LoginController;
@@ -29,7 +30,7 @@ public class LoginUseCaseFactory {
 
         try {
             LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-            return new LoginView(loginViewModel, loginController);
+            return new LoginView(loginViewModel, loginController, new CancelController(loginViewModel, viewManagerModel));
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
