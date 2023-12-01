@@ -5,6 +5,7 @@ import entity.CommonUserFactory;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.Guest.GuestViewModel;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
@@ -12,6 +13,7 @@ import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
+import view.GuestView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +41,7 @@ public class TemporaryMain {
         LoginViewModel loginViewModel = new LoginViewModel();
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
+        GuestViewModel guestViewModel = new GuestViewModel();
 
         LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
 
@@ -57,6 +60,9 @@ public class TemporaryMain {
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController);
         views.add(loggedInView, loggedInView.viewName);
+
+        GuestView guestView = new GuestView(guestViewModel);
+        views.add(guestView, guestView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();
