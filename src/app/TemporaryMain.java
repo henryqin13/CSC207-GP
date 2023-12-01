@@ -3,6 +3,7 @@ package app;
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
 import interface_adapter.Guest.GuestController;
+import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Signup.SignupViewModel;
@@ -39,6 +40,8 @@ public class TemporaryMain {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
+        LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
+
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -52,7 +55,7 @@ public class TemporaryMain {
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController);
         views.add(loggedInView, loggedInView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
