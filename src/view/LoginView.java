@@ -3,7 +3,6 @@ package view;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

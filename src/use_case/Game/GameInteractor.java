@@ -2,16 +2,18 @@ package use_case.Game;
 
 import data_access.OpenAI;
 import entity.City;
+import use_case.DataAccessInterface;
+import use_case.GenerativeInterface;
 
 public class GameInteractor implements GameInputBoundary{
 
     final GameDataAccessInterface gameDataAccessObject;
     final GameOutputBoundary gamePresenter;
-    final OpenAI client;
+    final GenerativeInterface client;
 
     public GameInteractor(GameDataAccessInterface gameDataAccessObject,
                           GameOutputBoundary gameOutputBoundary,
-                          OpenAI client) {
+                          GenerativeInterface client) {
         this.gameDataAccessObject = gameDataAccessObject;
         this.gamePresenter = gameOutputBoundary;
         this.client = client;

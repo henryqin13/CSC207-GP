@@ -21,7 +21,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     final JButton logOut;
 
-
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -45,7 +44,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(username);
         this.add(buttons);
     }
-
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());

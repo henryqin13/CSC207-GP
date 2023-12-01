@@ -1,5 +1,7 @@
 package data_access;
 
+import use_case.GenerativeInterface;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -8,12 +10,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class OpenAI extends APIClient {
+public class OpenAI extends APIClient implements GenerativeInterface {
 //    todo: implement interfaces
     public OpenAI(String endpoint, String key) {
         super(endpoint, key);
     }
 
+    @Override
     public String getResponse(String prompt) {
         String requestBody = String.format("{"
                 + "\"model\": \"gpt-4\","
