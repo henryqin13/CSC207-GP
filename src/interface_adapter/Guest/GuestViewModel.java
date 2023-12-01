@@ -6,15 +6,14 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class GuestViewModel extends ViewModel {
-    public final String TITLE = "Guest";
-
-    public static final String GUEST_BUTTON_NAME = "Guest";
+    public final String TITLE_LABEL = "You're logged in as a guest";
 
     public static final String EXIT_BUTTON_NAME = "Exit";
 
+    public String guestUser;
     private GuestState state = new GuestState();
     public GuestViewModel(){
-        super("Log in");
+        super("playing as guest");
     }
     public void setState(GuestState state) {
         this.state = state;
@@ -28,5 +27,13 @@ public class GuestViewModel extends ViewModel {
     }
     public GuestState getState(){
         return state;
+    }
+
+    public String getGuestUser() {
+        return guestUser;
+    }
+
+    public void setGuestUser(String guestUser) {
+        this.guestUser = guestUser;
     }
 }

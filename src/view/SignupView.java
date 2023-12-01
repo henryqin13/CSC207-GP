@@ -16,7 +16,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "Sign Up";
+    public final String viewName = "sign up";
 
     private final SignupViewModel signupViewModel;
     private final GuestViewModel guestViewModel;
@@ -108,6 +108,15 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
                     @Override
                     public void keyPressed(KeyEvent e) {
+                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                            SignupState currentState = signupViewModel.getState();
+                            String oldUsername = usernameInputField.getText();
+                            String newUsername = oldUsername.substring(0, oldUsername.length() - 1);
+                            currentState.setUsername(newUsername);
+                            signupViewModel.setState(currentState);
+                        }
+
+
                     }
 
                     @Override
@@ -126,7 +135,12 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
                     @Override
                     public void keyPressed(KeyEvent e) {
-
+                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                            SignupState currentState = signupViewModel.getState();
+                            String oldPassword = passwordInputField.getText();
+                            String newPassword = oldPassword.substring(0, oldPassword.length()- 1);
+                            currentState.setPassword(newPassword);
+                            signupViewModel.setState(currentState);}
                     }
 
                     @Override
@@ -147,13 +161,21 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
                     @Override
                     public void keyPressed(KeyEvent e) {
-
+                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                            SignupState currentState = signupViewModel.getState();
+                            String oldRepeatedPassword = repeatPasswordInputField.getText();
+                            String newRepeatedPassword = repeatPasswordInputField.getText().substring(0,
+                                    oldRepeatedPassword.length() - 1);
+                            currentState.setRepeatPassword(newRepeatedPassword);
+                            signupViewModel.setState(currentState);
+                        }
                     }
 
                     @Override
                     public void keyReleased(KeyEvent e) {
+                        }
 
-                    }
+
                 }
         );
 
