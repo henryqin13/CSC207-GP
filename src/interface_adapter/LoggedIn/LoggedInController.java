@@ -14,10 +14,10 @@ public class LoggedInController {
 
     public void logout() {
         LoggedInState currentState = loggedInViewModel.getState();
+        loggedInViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView("Login Example");
+        viewManagerModel.firePropertyChanged();
         currentState.setUsername(null);
         loggedInViewModel.setState(currentState);
-        loggedInViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView("login");
-        viewManagerModel.firePropertyChanged();
     }
 }
