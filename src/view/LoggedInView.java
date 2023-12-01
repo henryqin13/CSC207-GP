@@ -1,8 +1,9 @@
 package view;
 
+import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.LoggedIn.LoggedInState;
 import interface_adapter.LoggedIn.LoggedInViewModel;
-import interface_adapter.Login.LoginState;
+import interface_adapter.Login.LoginViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,13 +17,15 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
+    private final LoggedInController loggedInController;
 
     JLabel username;
 
     final JButton logOut;
 
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, LoggedInController loggedInController) {
         this.loggedInViewModel = loggedInViewModel;
+        this.loggedInController = loggedInController;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(loggedInViewModel.TITLE_LABEL);
@@ -34,8 +37,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         JPanel buttons = new JPanel();
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
-
         logOut.addActionListener(this);
+        logOut.addActionListener(e -> handleLogOut());
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -45,8 +48,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
     }
 
+    private void handleLogOut() {
+        loggedInController.logout();
+    }
+
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
+        if (evt.getSource().equals(logOut)) {
+            handleLogOut();
+        }
     }
 
     @Override
