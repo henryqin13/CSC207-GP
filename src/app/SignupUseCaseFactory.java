@@ -23,6 +23,7 @@ import use_case.Signup.SignupInputBoundary;
 import use_case.Signup.SignupInteractor;
 import use_case.Signup.SignupOutputBoundary;
 import view.SignupView;
+import view.GuestView;
 
 import javax.swing.*;
 import java.io.IOException;

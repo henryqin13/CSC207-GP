@@ -4,7 +4,7 @@ public class GuestOutputData {
 
     private boolean useCaseFailed;
 
-    public GuestOutputData(boolean useCaseFailed) {
+    public GuestOutputData(String guest, boolean useCaseFailed) {
         this.useCaseFailed = useCaseFailed;
     }
 
