@@ -22,7 +22,7 @@ public class GuestController {
         guestUseCaseInteractor.execute(guestInputData);
     }
     public void exit(){
-        viewManagerModel.setActiveView("guest");
+        viewManagerModel.setActiveView("the city game");
         viewManagerModel.firePropertyChanged();
     }
 }
