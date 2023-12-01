@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestViewModel;
 import interface_adapter.Guest.GuestState;
 
@@ -14,14 +15,16 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
 
     public final String viewName = "playing as guest";
     private final GuestViewModel guestViewModel;
+    private final GuestController guestController;
 
     JLabel username;
 
     final JButton exit;
 
 
-    public GuestView(GuestViewModel guestViewModel) {
+    public GuestView(GuestViewModel guestViewModel, GuestController guestController) {
         this.guestViewModel = guestViewModel;
+        this.guestController = guestController;
         this.guestViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(guestViewModel.TITLE_LABEL);
@@ -40,6 +43,16 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(title);
         this.add(buttons);
+        exit.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(exit)){
+                            guestController.exit();
+                        }
+                    }
+                }
+        );
     }
 
 
