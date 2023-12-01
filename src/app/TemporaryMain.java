@@ -2,9 +2,11 @@ package app;
 
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adapter.MainMenu.MainMenuController;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.Login.LoginViewModel;
+import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.Guest.GuestViewModel;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Signup.SignupViewModel;
@@ -14,6 +16,7 @@ import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
 import view.GuestView;
+import view.MainMenuView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +30,7 @@ public class TemporaryMain {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        JFrame application = new JFrame("Login Example");
+        JFrame application = new JFrame("our game demo");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -42,9 +45,11 @@ public class TemporaryMain {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         GuestViewModel guestViewModel = new GuestViewModel();
+        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
 
         LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
-
+        MainMenuController mainMenuController = new MainMenuController(viewManagerModel, signupViewModel, loginViewModel,
+                guestViewModel);
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
@@ -64,7 +69,11 @@ public class TemporaryMain {
         GuestView guestView = new GuestView(guestViewModel);
         views.add(guestView, guestView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, mainMenuController, signupViewModel,
+                loginViewModel, guestViewModel);
+        views.add(mainMenuView, mainMenuView.gameName);
+
+        viewManagerModel.setActiveView(mainMenuView.gameName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
