@@ -29,8 +29,8 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class SignupUseCaseFactory {
+    private static GuestViewModel guestViewModel = new GuestViewModel();
 
-    private static GuestViewModel guestViewModel;
 
     /** Prevent instantiation. */
     private SignupUseCaseFactory() {}
@@ -42,7 +42,7 @@ public class SignupUseCaseFactory {
 
         try {
             SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, signupUserDataAccessObject);
-            GuestController guestController = createUserGuestUseCase(viewManagerModel, guestViewModel, loggedInViewModel, guestUserDataAccessObject);
+            GuestController guestController = createUserGuestUseCase(viewManagerModel, guestViewModel, guestUserDataAccessObject);
             return new SignupView(signupController, signupViewModel,guestController, guestViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -66,9 +66,8 @@ public class SignupUseCaseFactory {
 
     private static GuestController createUserGuestUseCase(ViewManagerModel viewManagerModel,
                                                           GuestViewModel guestViewModel,
-                                                          LoggedInViewModel loggedInViewModel,
                                                           GuestUserDataAccessInterface userDataAccessObject) {
-        GuestOutputBoundary guestOutputBoundary = new GuestPresenter(viewManagerModel, loggedInViewModel, guestViewModel);
+        GuestOutputBoundary guestOutputBoundary = new GuestPresenter(viewManagerModel, guestViewModel);
         GuestInputBoundary guestInteractor = new GuestInteractor(
                 userDataAccessObject, guestOutputBoundary);
         return new GuestController(guestInteractor);

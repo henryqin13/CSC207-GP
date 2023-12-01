@@ -24,7 +24,7 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         this.guestViewModel = guestViewModel;
         this.guestViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Guest Screen");
+        JLabel title = new JLabel(guestViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel usernameInfo = new JLabel("Currently logged in as guest");
@@ -39,8 +39,6 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(usernameInfo);
-        this.add(username);
         this.add(buttons);
     }
 
@@ -50,7 +48,5 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        GuestState state = (GuestState) evt.getNewValue();
-    }
+    public void propertyChange(PropertyChangeEvent evt){};
 }
