@@ -1,6 +1,7 @@
 package interface_adapter.MainMenu;
 
 import interface_adapter.Guest.GuestViewModel;
+import interface_adapter.Guest.GuestController;
 import interface_adapter.LoggedIn.LoggedInState;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.Login.LoginViewModel;
