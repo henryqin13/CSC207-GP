@@ -12,12 +12,21 @@ public class LoggedInController {
         this.viewManagerModel = viewManagerModel;
     }
 
+//    public void logout() {
+//        LoggedInState currentState = loggedInViewModel.getState();
+//        loggedInViewModel.firePropertyChanged();
+//        viewManagerModel.setActiveView("Login Example");
+//        viewManagerModel.firePropertyChanged();
+//        currentState.setUsername(null);
+//        loggedInViewModel.setState(currentState);
+//    }
+//}
+
     public void logout() {
         LoggedInState currentState = loggedInViewModel.getState();
-        loggedInViewModel.firePropertyChanged();
-        viewManagerModel.setActiveView("Login Example");
-        viewManagerModel.firePropertyChanged();
         currentState.setUsername(null);
-        loggedInViewModel.setState(currentState);
+        loggedInViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView("sign Up");
+        viewManagerModel.firePropertyChanged();
     }
 }
