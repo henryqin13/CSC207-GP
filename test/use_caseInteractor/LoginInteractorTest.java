@@ -73,4 +73,26 @@ public class LoginInteractorTest {
         verify(loginPresenter).prepareFailView("Incorrect password for " + username + ".");
     }
 
+    @Test
+    public void testLoginWithNonExistentUsername() {
+        // Arrange
+        String username = "nonExistentUser";
+        when(userDataAccessObject.existsByName(username)).thenReturn(false);
+
+        LoginInputData inputData = new LoginInputData(username, "anyPassword");
+
+        // Act
+        loginInteractor.execute(inputData);
+
+        // Assert
+        verify(loginPresenter).prepareFailView(username + ": Account does not exist.");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testLoginWithNullInputData() {
+        // Act
+        loginInteractor.execute(null);
+
+        // The NullPointerException is expected to be thrown
+    }
 }
