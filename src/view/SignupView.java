@@ -44,7 +44,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
         ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
         Image oldSize = pic1.getImage();
-        Image newSize = oldSize.getScaledInstance(1300, 550, 1);
+        Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
 
         JLabel gamePic = new JLabel(pic);
@@ -52,7 +52,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
         title.setPreferredSize(new Dimension(1300, 400));
-        title.setFont(new Font("Serif", Font.BOLD, 24));
+        title.setFont(new Font("Serif", Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel usernameLabel = new JLabel(SignupViewModel.USERNAME_LABEL);
@@ -198,6 +198,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        this.add(gamePic);
         this.add(title);
         this.add(usernameInfo);
         this.add(passwordInfo);
