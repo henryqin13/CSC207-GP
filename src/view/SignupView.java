@@ -33,8 +33,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JButton signUp;
     private final JButton cancel;
 
-    // TODO Note: this is the new JButton for guesting the users file
-
     public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel, CancelController cancelController) {
 
         this.signupController = controller;
@@ -59,10 +57,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(signUp);
         cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-
-        // TODO Note: the following line instantiates the "guest" button; it uses
-        //      a guest_BUTTON_LABEL constant which is defined in the SignupViewModel class.
-        //      You need to add this "guest" button to the "buttons" panel.
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
