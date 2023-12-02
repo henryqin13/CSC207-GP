@@ -1,22 +1,32 @@
 package interface_adapter.Game;
 
+import entity.City;
+
 public class GameState {
 
     private String hintDiff;
-
     private String hint;
-
     private String guess;
-
     private boolean guessCorrect;
 
+    private City city;
+
+    // Copy constructor
     public GameState(GameState copy) {
+        if (copy != null) {
+            this.hintDiff = copy.hintDiff;
+            this.hint = copy.hint;
+            this.guess = copy.guess;
+            this.guessCorrect = copy.guessCorrect;
+            this.city = copy.city;
+        }
     }
 
+    // Default constructor
     public GameState() {
-
     }
 
+    // Getters
     public String getHintDiff() {
         return hintDiff;
     }
@@ -29,13 +39,36 @@ public class GameState {
         return guess;
     }
 
-    public boolean getGuessCorrect() {
+    public boolean isGuessCorrect() {
         return guessCorrect;
     }
 
+    public City getCity() {return city;}
 
+    // Setters
     public void setHintDiff(String hintDiff) {
         this.hintDiff = hintDiff;
     }
 
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public void setGuess(String guess) {
+        this.guess = guess;
+    }
+
+    public void setGuessCorrect(boolean guessCorrect) {
+        this.guessCorrect = guessCorrect;
+    }
+
+    public void setCity(City city) {this.city = city;}
+
+//    public void addPropertyChangeListener(PropertyChangeListener listener) {
+//        support.addPropertyChangeListener(listener);
+//    }
+//
+//    public void removePropertyChangeListener(PropertyChangeListener listener) {
+//        support.removePropertyChangeListener(listener);
+//    }
 }
