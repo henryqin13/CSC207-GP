@@ -39,18 +39,42 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.loginViewModel.addPropertyChangeListener(this);
         this.cancelController = cancelController;
 
-        JLabel title = new JLabel("Login Screen");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        Image oldSize = pic1.getImage();
+        Image newSize = oldSize.getScaledInstance(900, 450, 1);
+        ImageIcon pic = new ImageIcon(newSize);
+
+        JLabel gamePic = new JLabel(pic);
+        gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel title = new JLabel("Please enter your username and password");
+        title.setPreferredSize(new Dimension(1300, 150));
+        title.setFont(new Font("Serif", Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
-                new JLabel("Username"), usernameInputField);
-        LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel("Password"), passwordInputField);
+        JLabel usernameLabel = new JLabel("Username");
+        usernameLabel.setPreferredSize(new Dimension(140,50));
+        usernameLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        JLabel passwordLabel = new JLabel("Password");
+        passwordLabel.setPreferredSize(new Dimension(140,50));
+        passwordLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        LabelTextPanel usernameInfo = new LabelTextPanel(usernameLabel, usernameInputField);
+        usernameInfo.setPreferredSize(new Dimension(600, 50));
+
+        LabelTextPanel passwordInfo = new LabelTextPanel(passwordLabel, passwordInputField);
+        passwordInfo.setPreferredSize(new Dimension(600, 50));
 
         JPanel buttons = new JPanel();
         logIn = new JButton(loginViewModel.LOGIN_BUTTON_NAME);
+        logIn.setFont(new Font("Serif", Font.PLAIN, 25));
+        logIn.setPreferredSize(new Dimension(125, 40));
         buttons.add(logIn);
+
         cancel = new JButton(loginViewModel.CANCEL_BUTTON_NAME);
+        cancel.setFont(new Font("Serif", Font.PLAIN, 25));
+        cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
 
         logIn.addActionListener(
@@ -126,6 +150,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             }
         });
 
+        this.add(gamePic);
         this.add(title);
         this.add(usernameInfo);
         this.add(usernameErrorField);
