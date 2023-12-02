@@ -1,4 +1,4 @@
-package Game.GameInteractor;
+package use_caseInteractor;
 
 import entity.City;
 import entity.User;
