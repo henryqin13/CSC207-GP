@@ -43,19 +43,41 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         signupViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
+        title.setPreferredSize(new Dimension(1300, 400));
+        title.setFont(new Font("Serif", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.USERNAME_LABEL), usernameInputField);
-        LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.PASSWORD_LABEL), passwordInputField);
-        LabelTextPanel repeatPasswordInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.REPEAT_PASSWORD_LABEL), repeatPasswordInputField);
+        JLabel usernameLabel = new JLabel(SignupViewModel.USERNAME_LABEL);
+        usernameLabel.setPreferredSize(new Dimension(250,50));
+        usernameLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        JLabel passwordLabel = new JLabel(SignupViewModel.PASSWORD_LABEL);
+        passwordLabel.setPreferredSize(new Dimension(250,50));
+        passwordLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        JLabel repeatPasswordLabel = new JLabel(SignupViewModel.REPEAT_PASSWORD_LABEL);
+        repeatPasswordLabel.setPreferredSize(new Dimension(250,50));
+        repeatPasswordLabel.setFont(new Font("Serif", Font.BOLD, 18));
+
+        LabelTextPanel usernameInfo = new LabelTextPanel(usernameLabel, usernameInputField);
+        usernameInfo.setPreferredSize(new Dimension(600, 150));
+
+
+        LabelTextPanel passwordInfo = new LabelTextPanel(passwordLabel, passwordInputField);
+        passwordInfo.setPreferredSize(new Dimension(600, 150));
+
+
+        LabelTextPanel repeatPasswordInfo = new LabelTextPanel(repeatPasswordLabel, repeatPasswordInputField);
+        repeatPasswordInfo.setPreferredSize(new Dimension(600, 150));
 
         JPanel buttons = new JPanel();
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
+        signUp.setFont(new Font("Serif", Font.PLAIN, 25));
+        signUp.setPreferredSize(new Dimension(125, 40));
         buttons.add(signUp);
         cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
+        cancel.setFont(new Font("Serif", Font.PLAIN, 25));
+        cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
 
         // TODO Note: the following line instantiates the "guest" button; it uses
