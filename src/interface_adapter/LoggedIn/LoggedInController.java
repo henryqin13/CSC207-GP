@@ -19,4 +19,12 @@ public class LoggedInController {
         viewManagerModel.setActiveView("the city game");
         viewManagerModel.firePropertyChanged();
     }
+
+    public void playgame() {
+        LoggedInState currentState = loggedInViewModel.getState();
+        currentState.setUsername(currentState.getUsername());
+        loggedInViewModel.firePropertyChanged();
+        viewManagerModel.setActiveView("game");
+        viewManagerModel.firePropertyChanged();
+    }
 }
