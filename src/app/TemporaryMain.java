@@ -1,5 +1,6 @@
 package app;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import data_access.*;
 import entity.CommonUserFactory;
 import interface_adapter.MainMenu.MainMenuController;
@@ -27,11 +28,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import javax.swing.UIManager;
+import com.formdev.flatlaf.*;
+
 public class TemporaryMain {
 
     private static String apiKey; // Replace with your actual API key
     private static final String ENDPOINT = "https://api.openai.com/v1/chat/completions"; // Adjust as needed
     public static void main(String[] args) throws IOException{
+        try {
+            UIManager.setLookAndFeel( new FlatMacDarkLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 
