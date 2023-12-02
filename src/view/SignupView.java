@@ -8,6 +8,8 @@ import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.CancelController;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,8 +32,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private final JButton signUp;
     private final JButton cancel;
-
-    // TODO Note: this is the new JButton for guesting the users file
 
     public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel, CancelController cancelController) {
 
@@ -80,10 +80,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
 
-        // TODO Note: the following line instantiates the "guest" button; it uses
-        //      a guest_BUTTON_LABEL constant which is defined in the SignupViewModel class.
-        //      You need to add this "guest" button to the "buttons" panel.
-
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
@@ -105,92 +101,92 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         cancel.addActionListener(this);
         cancel.addActionListener(e -> handleCancel());
 
-        // This makes a new KeyListener implementing class, instantiates it, and
-        // makes it listen to keystrokes in the usernameInputField.
-        //
-        // Notice how it has access to instance variables in the enclosing class!
-        usernameInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        SignupState currentState = signupViewModel.getState();
-                        String text = usernameInputField.getText() + e.getKeyChar();
-                        currentState.setUsername(text);
-                        signupViewModel.setState(currentState);
-                    }
+        usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
-                            SignupState currentState = signupViewModel.getState();
-                            String oldUsername = usernameInputField.getText();
-                            String newUsername = oldUsername.substring(0, oldUsername.length() - 1);
-                            currentState.setUsername(newUsername);
-                            signupViewModel.setState(currentState);
-                        }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    }
+            private void updateFields() {
+                String username = usernameInputField.getText();
+                String password = passwordInputField.getText();
+                String repeatPassword = repeatPasswordInputField.getText();
 
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                });
+                SignupState currentState = signupViewModel.getState();
+                currentState.setUsername(username);
+                currentState.setPassword(password);
+                currentState.setRepeatPassword(repeatPassword);
+                signupViewModel.setState(currentState);
+            }
+        });
 
-        passwordInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        SignupState currentState = signupViewModel.getState();
-                        currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
-                        signupViewModel.setState(currentState);
-                    }
+        passwordInputField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
-                            SignupState currentState = signupViewModel.getState();
-                            String oldPassword = passwordInputField.getText();
-                            String newPassword = oldPassword.substring(0, oldPassword.length()- 1);
-                            currentState.setPassword(newPassword);
-                            signupViewModel.setState(currentState);}
-                    }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyReleased(KeyEvent e) {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    }
-                }
-        );
+            private void updateFields() {
+                String username = usernameInputField.getText();
+                String password = passwordInputField.getText();
+                String repeatPassword = repeatPasswordInputField.getText();
 
-        repeatPasswordInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        SignupState currentState = signupViewModel.getState();
-                        currentState.setRepeatPassword(repeatPasswordInputField.getText() + e.getKeyChar());
-                        signupViewModel.setState(currentState);
-                    }
+                SignupState currentState = signupViewModel.getState();
+                currentState.setUsername(username);
+                currentState.setPassword(password);
+                currentState.setRepeatPassword(repeatPassword);
+                signupViewModel.setState(currentState);
+            }
+        });
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                        if(e.getKeyCode() == KeyEvent.VK_DELETE){
-                            SignupState currentState = signupViewModel.getState();
-                            String oldRepeatedPassword = repeatPasswordInputField.getText();
-                            String newRepeatedPassword = repeatPasswordInputField.getText().substring(0,
-                                    oldRepeatedPassword.length() - 1);
-                            currentState.setRepeatPassword(newRepeatedPassword);
-                            signupViewModel.setState(currentState);
-                        }
-                    }
+        repeatPasswordInputField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                }
-        );
+            private void updateFields() {
+                String username = usernameInputField.getText();
+                String password = passwordInputField.getText();
+                String repeatPassword = repeatPasswordInputField.getText();
+
+                SignupState currentState = signupViewModel.getState();
+                currentState.setUsername(username);
+                currentState.setPassword(password);
+                currentState.setRepeatPassword(repeatPassword);
+                signupViewModel.setState(currentState);
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
