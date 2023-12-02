@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class LoggedInViewModel extends ViewModel {
-    public final String TITLE_LABEL = "You are logged In";
+    public final String TITLE_LABEL = "Welcome!";
 
     private LoggedInState state = new LoggedInState();
 
