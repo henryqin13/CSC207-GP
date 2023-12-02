@@ -22,6 +22,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     JLabel username;
 
     final JButton logOut;
+    final JButton playGame;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel, LoggedInController loggedInController) {
         this.loggedInViewModel = loggedInViewModel;
@@ -35,10 +36,16 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         username = new JLabel();
 
         JPanel buttons = new JPanel();
+
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
         logOut.addActionListener(this);
         logOut.addActionListener(e -> handleLogOut());
+
+        playGame = new JButton("Play Game");
+        buttons.add(playGame);
+        playGame.addActionListener(this);
+        playGame.addActionListener(e -> handlePlayGame());
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -52,9 +59,15 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         loggedInController.logout();
     }
 
+    private void handlePlayGame() {
+        loggedInController.playgame();
+    }
+
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource().equals(logOut)) {
             handleLogOut();
+        } else if (evt.getSource().equals(playGame)) {
+            handlePlayGame();
         }
     }
 
