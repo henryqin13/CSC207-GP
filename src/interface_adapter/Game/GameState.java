@@ -1,11 +1,15 @@
 package interface_adapter.Game;
 
+import entity.City;
+
 public class GameState {
 
     private String hintDiff;
     private String hint;
     private String guess;
     private boolean guessCorrect;
+
+    private City city;
 
     // Copy constructor
     public GameState(GameState copy) {
@@ -14,6 +18,7 @@ public class GameState {
             this.hint = copy.hint;
             this.guess = copy.guess;
             this.guessCorrect = copy.guessCorrect;
+            this.city = copy.city;
         }
     }
 
@@ -38,6 +43,8 @@ public class GameState {
         return guessCorrect;
     }
 
+    public City getCity() {return city;}
+
     // Setters
     public void setHintDiff(String hintDiff) {
         this.hintDiff = hintDiff;
@@ -54,4 +61,14 @@ public class GameState {
     public void setGuessCorrect(boolean guessCorrect) {
         this.guessCorrect = guessCorrect;
     }
+
+    public void setCity(City city) {this.city = city;}
+
+//    public void addPropertyChangeListener(PropertyChangeListener listener) {
+//        support.addPropertyChangeListener(listener);
+//    }
+//
+//    public void removePropertyChangeListener(PropertyChangeListener listener) {
+//        support.removePropertyChangeListener(listener);
+//    }
 }

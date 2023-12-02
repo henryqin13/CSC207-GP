@@ -1,5 +1,11 @@
 package use_case.Game;
 
 public interface GameInputBoundary {
-    void executeGame(GameInputData gameInputData);
+    void executeGame();
+
+    void executeHint(GameInputData gameInputData);
+
+    void executeGuess(GameInputData gameInputData);
+
+    void makeGuess(GameInputData gameInputData);
 }
