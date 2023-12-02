@@ -24,6 +24,9 @@ public class GamePresenter implements GameOutputBoundary {
     public void guess(GameOutputData data) {
         GameState gameState = gameViewModel.getState();
         gameState.setGuessCorrect(data.getGuess());
+        if (!data.getGuess()) {
+            gameState.setScore(gameState.getScore() - 1);
+        }
         System.out.println(data.getGuess());
 
         this.gameViewModel.setState(gameState);
@@ -45,9 +48,15 @@ public class GamePresenter implements GameOutputBoundary {
     }
 
     @Override
-    public void hintView(GameOutputData data) {
+    public void hintView(GameOutputData data, int hintDiff) {
         GameState gameState = gameViewModel.getState();
         gameState.setHint(data.getHint());
+        int updatedScore = (int) (gameState.getScore() - hintDiff);
+        if (updatedScore >= 0) {
+            gameState.setScore(updatedScore);
+        } else {
+//            TODO: end game
+        }
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();

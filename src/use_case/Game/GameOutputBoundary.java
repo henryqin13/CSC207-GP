@@ -8,7 +8,7 @@ public interface GameOutputBoundary {
 
     void guessView(GameOutputData data);
 
-    void hintView(GameOutputData data);
+    void hintView(GameOutputData data, int hint);
 
     void gameStart(GameOutputData data);
 }

@@ -1,5 +1,7 @@
 package app;
 
+
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import data_access.*;
 import entity.CommonUserFactory;
 import interface_adapter.Game.GameController;
@@ -23,6 +25,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
+import com.formdev.flatlaf.*;
+
 
 
 public class Main {
@@ -31,6 +35,13 @@ public class Main {
     private static final String ENDPOINT = "https://api.openai.com/v1/chat/completions"; // Adjust as needed
 
     public static void main(String[] args) throws IOException {
+
+        try {
+            UIManager.setLookAndFeel( new FlatMacDarkLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
         JFrame application = new JFrame("Our Game Demo");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,22 +63,11 @@ public class Main {
 
         GameViewModel gameViewModel = new GameViewModel();
 
-//        LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
-//        MainMenuController mainMenuController = new MainMenuController(viewManagerModel, signupViewModel, loginViewModel,
-//                guestViewModel);
-//        FileUserDataAccessObject userDataAccessObject;
-//        try {
-//            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
         // Load configuration and create API client
         ConfigLoader config = new ConfigLoader();
         String apiKey = config.getApiKey();
-        OpenAI api = new OpenAI(ENDPOINT, apiKey); // Assuming OpenAI constructor takes apiKey
+        OpenAI api = new OpenAI(ENDPOINT, apiKey);
 
-//        // Data access object for game
         GameDataAccessInterface data = new GameData();
 //
 //        //Not yet set up
