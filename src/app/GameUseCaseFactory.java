@@ -2,64 +2,50 @@ package app;
 
 import data_access.OpenAI;
 import interface_adapter.*;
-import interface_adapter.Game.GameController;
-import interface_adapter.Game.GamePresenter;
-import interface_adapter.Game.GameViewModel;
+import interface_adapter.Game.*;
 import use_case.DataAccessInterface;
 import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInteractor;
 import use_case.Game.GameOutputBoundary;
 import use_case.Game.GameDataAccessInterface;
 import use_case.GenerativeInterface;
+import view.GameView;
+import view.GuessView;
+import view.HintView;
+import javax.swing.JPanel;
 
 import java.io.IOException;
 
 public class GameUseCaseFactory {
 
-    /** Prevent instantiation. */
     private GameUseCaseFactory() {}
 
-//    public static SignupView create(
-//            ViewManagerModel viewManagerModel,
-//            LoginViewModel loginViewModel,
-//            SignupViewModel signupViewModel,
-//            SignupUserDataAccessInterface userDataAccessObject,
-//            ClearController clearController) {
-//
-//        try {
-//            SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, userDataAccessObject);
-//            return new SignupView(signupController, clearController, signupViewModel); // Add clearController here
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Could not open user data file.");
-//        }
-//
-//        return null;
-//    }
+    public static JPanel[] create(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, GenerativeInterface client) throws IOException {
+        GameViewModel gameViewModel = new GameViewModel();
 
-//    public static GameView create(
-//            ViewManagerModel viewManagerModel,
-//            GameViewModel signupViewModel,
-//            GameDataAccessInterface userDataAccessObject) {
-//
-//        try {
-//            GameController gameController = ;
-//            return new GameView();
-//        } catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Could not open user data file.");
-//        }
-//
-//        return null;
-//    }
+        GameController gameController = createGameController(viewManagerModel, userDataAccessObject, client, gameViewModel);
+        gameController.executeStart();
 
-    public static GameController createGameUseCase(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, GenerativeInterface client) throws IOException {
+        GameView gameView = new GameView(gameViewModel, gameController);
+        GuessView guessView = new GuessView(gameViewModel, gameController);
+        HintView hintView = new HintView(gameViewModel, gameController);
 
-        GameOutputBoundary gameOutputBoundary = new GamePresenter(viewManagerModel, null);
+        // Create an array of JPanel and add the views to it
+        JPanel[] views = { gameView, guessView, hintView };
+
+        // Return the array
+        return views;
+    }
 
 
+    private static GameController createGameController(ViewManagerModel viewManagerModel, GameDataAccessInterface userDataAccessObject, GenerativeInterface client, GameViewModel gameViewModel) throws IOException {
+        // Create the GameOutputBoundary (Presenter)
+        GameOutputBoundary gameOutputBoundary = new GamePresenter(viewManagerModel, gameViewModel);
 
-        GameInputBoundary gameInteractor = new GameInteractor(
-                userDataAccessObject, gameOutputBoundary, client);
+        // Create the GameInputBoundary (Interactor)
+        GameInputBoundary gameInteractor = new GameInteractor(userDataAccessObject, gameOutputBoundary, client);
 
+        // Return the GameController
         return new GameController(gameInteractor);
     }
 }
