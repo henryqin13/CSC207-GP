@@ -45,7 +45,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
         ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
         Image oldSize = pic1.getImage();
-        Image newSize = oldSize.getScaledInstance(1300, 550, 1);
+        Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
 
         JLabel gamePic = new JLabel(pic);
@@ -53,13 +53,13 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
 
         JLabel gameName = new JLabel("the city game");
-        gameName.setPreferredSize(new Dimension(1300, 400));
+        gameName.setPreferredSize(new Dimension(900, 400));
         gameName.setAlignmentX(Component.CENTER_ALIGNMENT);
         gameName.setFont(new Font("Serif", Font.BOLD, 50));
 
         JLabel title = new JLabel("Sign up, Log in or join as a guest.");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setPreferredSize(new Dimension(1300, 100));
+        title.setPreferredSize(new Dimension(900, 100));
         title.setFont(new Font("Serif", Font.PLAIN, 20));
 
         JPanel buttons = new JPanel();
@@ -75,7 +75,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         guest.setFont(new Font("Serif", Font.PLAIN, 25));
         guest.setPreferredSize(new Dimension(125, 40));
         buttons.add(guest);
-        buttons.setPreferredSize(new Dimension(1300, 600));
+        buttons.setPreferredSize(new Dimension(900, 300));
 
 
 
