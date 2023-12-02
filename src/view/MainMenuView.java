@@ -52,7 +52,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        JLabel gameName = new JLabel("the city game");
+        JLabel gameName = new JLabel("CityGuesser");
         gameName.setPreferredSize(new Dimension(900, 400));
         gameName.setAlignmentX(Component.CENTER_ALIGNMENT);
         gameName.setFont(new Font("Serif", Font.BOLD, 50));
