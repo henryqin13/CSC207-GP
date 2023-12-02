@@ -85,37 +85,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         cancel.addActionListener(this);
         cancel.addActionListener(e -> handleCancel());
 
-        // This makes a new KeyListener implementing class, instantiates it, and
-        // makes it listen to keystrokes in the usernameInputField.
-        //
-        // Notice how it has access to instance variables in the enclosing class!
-//        usernameInputField.addKeyListener(
-//                new KeyListener() {
-//                    @Override
-//                    public void keyTyped(KeyEvent e) {
-//                        SignupState currentState = signupViewModel.getState();
-//                        String text = usernameInputField.getText() + e.getKeyChar();
-//                        currentState.setUsername(text);
-//                        signupViewModel.setState(currentState);
-//                    }
-//
-//                    @Override
-//                    public void keyPressed(KeyEvent e) {
-//                        if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-//                            SignupState currentState = signupViewModel.getState();
-//                            String oldUsername = usernameInputField.getText();
-//                            String newUsername = oldUsername.substring(0, oldUsername.length() - 1);
-//                            currentState.setUsername(newUsername);
-//                            signupViewModel.setState(currentState);
-//                        }
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void keyReleased(KeyEvent e) {
-//                    }
-//                });
         usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -145,29 +114,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
             }
         });
 
-//        passwordInputField.addKeyListener(
-//                new KeyListener() {
-//                    @Override
-//                    public void keyTyped(KeyEvent e) {
-//                        SignupState currentState = signupViewModel.getState();
-//                        currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
-//                        signupViewModel.setState(currentState);
-//                    }
-//
-//                    @Override
-//                    public void keyPressed(KeyEvent e) {
-//                        if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-//                            handleDeleteKey(passwordInputField, signupViewModel, true);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void keyReleased(KeyEvent e) {
-//
-//                    }
-//                }
-//        );
-
         passwordInputField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -196,30 +142,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 signupViewModel.setState(currentState);
             }
         });
-
-//        repeatPasswordInputField.addKeyListener(
-//                new KeyListener() {
-//                    @Override
-//                    public void keyTyped(KeyEvent e) {
-//                        SignupState currentState = signupViewModel.getState();
-//                        currentState.setRepeatPassword(repeatPasswordInputField.getText() + e.getKeyChar());
-//                        signupViewModel.setState(currentState);
-//                    }
-//
-//                    @Override
-//                    public void keyPressed(KeyEvent e) {
-//                        if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-//                            handleDeleteKey(repeatPasswordInputField, signupViewModel, false);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void keyReleased(KeyEvent e) {
-//                    }
-//
-//
-//                }
-//        );
 
         repeatPasswordInputField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -257,23 +179,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.add(passwordInfo);
         this.add(repeatPasswordInfo);
         this.add(buttons);
-    }
-
-    private void handleDeleteKey(JTextField textField, SignupViewModel signupViewModel, boolean isPassword) {
-        SignupState currentState = signupViewModel.getState();
-        String oldText = textField.getText();
-
-        if (!oldText.isEmpty()) {
-            String newText = oldText.substring(0, oldText.length() - 1);
-
-            if (isPassword) {
-                currentState.setPassword(newText);
-            } else {
-                currentState.setRepeatPassword(newText);
-            }
-
-            signupViewModel.setState(currentState);
-        }
     }
 
     private void handleCancel() {
