@@ -25,4 +25,9 @@ public class GuestController {
         viewManagerModel.setActiveView("the city game");
         viewManagerModel.firePropertyChanged();
     }
+
+    public void startGame(){
+        viewManagerModel.setActiveView("game");
+        viewManagerModel.firePropertyChanged();
+    }
 }
