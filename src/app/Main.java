@@ -4,8 +4,6 @@ import data_access.*;
 import entity.CommonUserFactory;
 import interface_adapter.Game.GameController;
 import interface_adapter.Game.GameViewModel;
-import interface_adapter.Game.GuessViewModel;
-import interface_adapter.Game.HintViewModel;
 import interface_adapter.Guest.GuestViewModel;
 import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.LoggedIn.LoggedInViewModel;
