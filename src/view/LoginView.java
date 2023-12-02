@@ -4,6 +4,8 @@ import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import interface_adapter.CancelController;
+import interface_adapter.Signup.SignupState;
 
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -68,41 +71,60 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         cancel.addActionListener(this);
         cancel.addActionListener(e -> handleCancel());
 
-        usernameInputField.addKeyListener(new KeyListener() {
+        usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void insertUpdate(DocumentEvent e) {
+                updateFields();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFields();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFields();
+            }
+
+            private void updateFields() {
+                String username = usernameInputField.getText();
+                String password = passwordInputField.getText();
+
                 LoginState currentState = loginViewModel.getState();
-                currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
+                currentState.setUsername(username);
+                currentState.setPassword(password);
                 loginViewModel.setState(currentState);
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
             }
         });
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        passwordInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        LoginState currentState = loginViewModel.getState();
-                        currentState.setPassword(passwordInputField.getText() + e.getKeyChar());
-                        loginViewModel.setState(currentState);
-                    }
+        passwordInputField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-                    }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFields();
+            }
 
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                    }
-                });
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFields();
+            }
+
+            private void updateFields() {
+                String username = usernameInputField.getText();
+                String password = passwordInputField.getText();
+
+                LoginState currentState = loginViewModel.getState();
+                currentState.setUsername(username);
+                currentState.setPassword(password);
+                loginViewModel.setState(currentState);
+            }
+        });
 
         this.add(title);
         this.add(usernameInfo);
