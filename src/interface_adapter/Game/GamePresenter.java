@@ -28,7 +28,7 @@ public class GamePresenter implements GameOutputBoundary {
         boolean correct = data.getCity().getName().toLowerCase().contains(scanner.nextLine().toLowerCase());
 
         if (correct) {
-            System.out.println("Your guess was correct, congragulations!");
+            System.out.println("Your guess was correct, congratulations!");
         } else {
             System.out.println("That was incorrect, would you like another hint or guess? [g/h]");
             String result = guessOrHint();
@@ -43,7 +43,7 @@ public class GamePresenter implements GameOutputBoundary {
     @Override
     public void hintView(GenerativeInterface client, String hint, GameDataAccessInterface data) {
         System.out.println(hint);
-        System.out.println("Would you like to guess or recieve another hint? [g/h]");
+        System.out.println("Would you like to guess or receive another hint? [g/h]");
         String result = guessOrHint();
         if (result.equals("g")) {
             guessView(client, data);
