@@ -42,6 +42,14 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.cancelController = cancelController;
         signupViewModel.addPropertyChangeListener(this);
 
+        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        Image oldSize = pic1.getImage();
+        Image newSize = oldSize.getScaledInstance(1300, 550, 1);
+        ImageIcon pic = new ImageIcon(newSize);
+
+        JLabel gamePic = new JLabel(pic);
+        gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
         title.setPreferredSize(new Dimension(1300, 400));
         title.setFont(new Font("Serif", Font.BOLD, 24));
