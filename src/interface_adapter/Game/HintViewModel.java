@@ -1,24 +1,23 @@
 package interface_adapter.Game;
 
 import interface_adapter.ViewModel;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GameViewModel extends ViewModel {
+public class HintViewModel extends ViewModel {
 
-    // Labels and button texts for the game view
-    public static final String TITLE_LABEL = "City Guessing Game";
+    // Labels and button texts for the hint view
+    public static final String TITLE_LABEL = "Hint Screen";
+    public static final String HINT_TEXT_LABEL = "Hint: ";
     public static final String GUESS_BUTTON_LABEL = "Guess";
-    public static final String HINT_BUTTON_LABEL = "Get Hint";
-    public static final String HINT_DIFFICULTY_LABEL = "Hint Difficulty (1-3)";
+    public static final String ANOTHER_HINT_BUTTON_LABEL = "Get Another Hint";
 
-    // Game state
+    // Game state related to hint
     private GameState state = new GameState();
 
     // Constructor
-    public GameViewModel() {
-        super("game");
+    public HintViewModel() {
+        super("hint");
     }
 
     // Setter for game state
@@ -40,5 +39,10 @@ public class GameViewModel extends ViewModel {
     // Getter for game state
     public GameState getState() {
         return state;
+    }
+
+    // Get the current hint for display
+    public String getCurrentHint() {
+        return state.getHint();
     }
 }
