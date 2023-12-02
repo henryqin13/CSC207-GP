@@ -9,7 +9,7 @@ public class GuestViewModel extends ViewModel {
     public final String TITLE_LABEL = "You're logged in as a guest";
 
     public static final String EXIT_BUTTON_NAME = "Exit";
-
+    public static final String GAME_BUTTON_NAME = "Start Game";
     public String guestUser;
     private GuestState state = new GuestState();
     public GuestViewModel(){

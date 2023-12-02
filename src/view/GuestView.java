@@ -21,6 +21,8 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
 
     final JButton exit;
 
+    final JButton startGame;
+
 
     public GuestView(GuestViewModel guestViewModel, GuestController guestController) {
         this.guestViewModel = guestViewModel;
@@ -36,6 +38,8 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         JPanel buttons = new JPanel();
         exit = new JButton(GuestViewModel.EXIT_BUTTON_NAME);
         buttons.add(exit);
+        startGame = new JButton(GuestViewModel.GAME_BUTTON_NAME);
+        buttons.add(startGame);
 
         exit.addActionListener(this);
 
@@ -53,6 +57,14 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
                     }
                 }
         );
+        startGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(startGame)){
+                    guestController.startGame();
+                }
+            }
+        });
     }
 
 
