@@ -21,4 +21,56 @@ public class LoginInteractorTest {
         loginPresenter = mock(LoginOutputBoundary.class);
         loginInteractor = new LoginInteractor(userDataAccessObject, loginPresenter);
     }
+
+    @Test
+    public void testSuccessfulLogin() {
+        // Arrange
+        String username = "testUser";
+        String password = "testPass";
+        User mockUser = mock(User.class);
+        when(mockUser.getName()).thenReturn(username);
+        when(mockUser.getPassword()).thenReturn(password);
+        when(userDataAccessObject.existsByName(username)).thenReturn(true);
+        when(userDataAccessObject.get(username)).thenReturn(mockUser);
+
+        LoginInputData inputData = new LoginInputData(username, password);
+
+        // Act
+        loginInteractor.execute(inputData);
+
+        // Assert
+        ArgumentCaptor<LoginOutputData> argument = ArgumentCaptor.forClass(LoginOutputData.class);
+        verify(loginPresenter).prepareSuccessView(argument.capture());
+        assertEquals(username, argument.getValue().getUsername());
+    }
+
+    @Test
+    public void testLoginWithIncorrectPassword() {
+        // Arrange
+        String username = "testUser";
+        String correctPassword = "correctPass";
+        String wrongPassword = "wrongPass";
+        User mockUser = new User() {
+            @Override
+            public String getName() {
+                return null;
+            }
+
+            @Override
+            public String getPassword() {
+                return null;
+            }
+        };
+        when(userDataAccessObject.existsByName(username)).thenReturn(true);
+        when(userDataAccessObject.get(username)).thenReturn(mockUser);
+
+        LoginInputData inputData = new LoginInputData(username, wrongPassword);
+
+        // Act
+        loginInteractor.execute(inputData);
+
+        // Assert
+        verify(loginPresenter).prepareFailView("Incorrect password for " + username + ".");
+    }
+
 }
