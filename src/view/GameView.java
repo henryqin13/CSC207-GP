@@ -25,6 +25,7 @@ public class GameView extends JPanel implements ActionListener {
     private final JButton hintButton = new JButton(GameViewModel.HINT_BUTTON_LABEL);
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JLabel feedbackLabel = new JLabel();
+    private final JButton returnToMainButton = new JButton(" Return to Main Menu");
 
     public GameView(GameViewModel gameViewModel, GameController gameController) {
         this.setName("game");
@@ -66,6 +67,9 @@ public class GameView extends JPanel implements ActionListener {
         guessButton.setPreferredSize(new Dimension(guessInputField.getPreferredSize().width, guessButton.getPreferredSize().height));
         inputPanel.add(guessButton, gbc);
 
+        returnToMainButton.setPreferredSize(new Dimension(guessInputField.getPreferredSize().width, returnToMainButton.getPreferredSize().height));
+        inputPanel.add(returnToMainButton);
+
         add(inputPanel, BorderLayout.CENTER);
 
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,6 +94,14 @@ public class GameView extends JPanel implements ActionListener {
         guessPanel.add(guessButton);
         guessPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         return guessPanel;
+    }
+
+    private JPanel createReturnPanel() {
+        JPanel returnPanel = new JPanel();
+        returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.Y_AXIS));
+        returnPanel.add(returnToMainButton);
+        returnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return returnPanel;
     }
 
     private void setupListeners() {
@@ -118,6 +130,14 @@ public class GameView extends JPanel implements ActionListener {
                     currentState.setHintDiff(selectedDifficulty);
                     gameViewModel.setState(currentState);
                     gameController.executeHint(selectedDifficulty, currentState.getCity());
+                }
+            }
+        });
+
+        returnToMainButton.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(returnToMainButton)) {
+                    gameController.returnToMain();
                 }
             }
         });
