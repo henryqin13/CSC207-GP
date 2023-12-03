@@ -30,13 +30,14 @@ public class GameController {
         gameUseCaseInteractor.makeGuess(data);
     }
 
-    public void returnToMain() {gameUseCaseInteractor.returnToMain();
-    }
-
     public void exit(){
         gameUseCaseInteractor.exit();
         gameUseCaseInteractor.executeGame();
     }
 
     public void backToMain(){gameUseCaseInteractor.backToMain();}
+
+    public void returnToMain (){
+        gameUseCaseInteractor.returnToMain();
+    }
 }
