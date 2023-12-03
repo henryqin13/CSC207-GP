@@ -53,4 +53,14 @@ public class GameInteractor implements GameInputBoundary{
         gamePresenter.guess(gameOutputData);
     }
 
+    @Override
+    public void exit(){
+        gamePresenter.exit();
+    }
+
+    @Override
+    public void backToMain(){
+        gamePresenter.backToMain();
+    }
+
 }

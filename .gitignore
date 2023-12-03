@@ -49,3 +49,6 @@ build/
 
 ### Our API TOKEN! ###
 username.txt
+
+resource_directory
+resource_directory/config.properties

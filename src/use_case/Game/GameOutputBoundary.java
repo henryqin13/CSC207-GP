@@ -11,4 +11,8 @@ public interface GameOutputBoundary {
     void hintView(GameOutputData data, int hint);
 
     void gameStart(GameOutputData data);
+
+    void exit();
+
+    void backToMain();
 }

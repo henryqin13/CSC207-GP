@@ -13,6 +13,18 @@ public class GameViewModel extends ViewModel {
     public static final String HINT_BUTTON_LABEL = "Get Hint";
     public static final String HINT_DIFFICULTY_LABEL = "Hint Difficulty (1-3)";
 
+    public static final String GAME_OVER_LABEL = "This round is over!";
+
+    public static final String START_OVER_LABEL = "Another Game";
+
+    public static final String CORRECT_GUESS_COMMENT_LABEL = ("Congratulations! You're so knowledgeable! " +
+            "Do you want another round?");
+
+    public static final String WRONG_GUESS_COMMENT_LABEl = ("Oh no...... what a pity! You were so close!" +
+            " Maybe try for another around?");
+
+    public static final String BACK_LABEL = "Back to Main Menu";
+
     // Game state
     private GameState state = new GameState();
 
