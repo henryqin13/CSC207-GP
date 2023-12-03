@@ -37,7 +37,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,password,creation_time");
+                assert header.equals("username,password");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -70,7 +70,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.newLine();
 
             for (User user: accounts.values()) {
-                String line = "%s,%s,%s"+ user.getName() + user.getPassword();
+                String line = String.format("%s,%s", user.getName(),user.getPassword());
                 writer.write(line);
                 writer.newLine();
             }
