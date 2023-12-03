@@ -29,6 +29,8 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     private final JLabel feedbackLabel = new JLabel();
     private final JLabel score = new JLabel();
 
+    private final JTextField hintInputField = new JTextField();
+
     public GameView(GameViewModel gameViewModel, GameController gameController) {
         this.setName("game");
         this.gameViewModel = gameViewModel;
@@ -65,6 +67,11 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         hintDifficultyComboBox.setMaximumSize(hintDifficultyComboBox.getPreferredSize());
         hintDifficultyComboBox.setMinimumSize(hintDifficultyComboBox.getPreferredSize());
 
+        hintInputField.setPreferredSize(preferredSize);
+        hintInputField.setMinimumSize(hintInputField.getPreferredSize());
+        hintInputField.setMaximumSize(hintInputField.getPreferredSize());
+        hintInputField.setToolTipText("keyword");
+
         hintButton.setPreferredSize(preferredSize);
         hintButton.setMaximumSize(hintButton.getPreferredSize());
         hintButton.setMinimumSize(hintButton.getPreferredSize());
@@ -86,6 +93,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
 
         inputPanel.add(new JLabel(GameViewModel.HINT_DIFFICULTY_LABEL), gbc);
         inputPanel.add(hintDifficultyComboBox, gbc);
+        inputPanel.add(hintInputField, gbc);
         inputPanel.add(hintButton, gbc);
         inputPanel.add(new JLabel("Enter your guess:"), gbc);
         inputPanel.add(guessButton, gbc);
@@ -142,7 +150,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
                     String selectedDifficulty = (String) hintDifficultyComboBox.getSelectedItem();
                     currentState.setHintDiff(selectedDifficulty);
                     gameViewModel.setState(currentState);
-                    gameController.executeHint(selectedDifficulty, currentState.getCity());
+                    gameController.executeHint(selectedDifficulty, currentState.getCity(), hintInputField.getText());
                 }
             }
         });

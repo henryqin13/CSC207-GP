@@ -25,6 +25,7 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
 
     private final JLabel score = new JLabel();
 
+    private final JTextField hintInputField = new JTextField();
 
     public HintView(GameViewModel gameViewModel, GameController gameController) {
         this.setName("hint");
@@ -87,6 +88,11 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
         guessSubPanel.setLayout(new BoxLayout(guessSubPanel, BoxLayout.Y_AXIS));
 
 
+        hintInputField.setPreferredSize((new Dimension(125, 40)));
+        hintInputField.setMinimumSize(hintInputField.getPreferredSize());
+        hintInputField.setMaximumSize(hintInputField.getPreferredSize());
+        hintInputField.setToolTipText("keyword");
+
 
         hintDifficultyComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         getHintButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,6 +101,8 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
         makeGuessButton.setSize(new Dimension(125, 40));
 
         hintSubPanel.add(hintDifficultyComboBox);
+        hintSubPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        hintSubPanel.add(hintInputField);
         hintSubPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         hintSubPanel.add(getHintButton);
         contentPanel.add(hintSubPanel);
@@ -128,7 +136,7 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
                     String selectedDifficulty = (String) hintDifficultyComboBox.getSelectedItem();
                     currentState.setHintDiff(selectedDifficulty);
                     gameViewModel.setState(currentState);
-                    gameController.executeHint(selectedDifficulty, currentState.getCity());
+                    gameController.executeHint(selectedDifficulty, currentState.getCity(), hintInputField.getText());
                 }
             }
         });
