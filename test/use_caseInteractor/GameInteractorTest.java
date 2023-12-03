@@ -97,7 +97,7 @@ public class GameInteractorTest {
         }
 
         @Override
-        public void hintView(GameOutputData data) {
+        public void hintView(GameOutputData data, int hint) {
             hintDisplayed = true;
         }
 
@@ -113,6 +113,11 @@ public class GameInteractorTest {
 
         @Override
         public void backToMain() {
+
+        }
+
+        @Override
+        public void returnToMain() {
 
         }
 
