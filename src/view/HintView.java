@@ -70,7 +70,7 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
         hintLabel.setFont(new Font("Arial", Font.ITALIC, 20));
         hintLabel.setAlignmentX(SwingConstants.CENTER);
         hintLabel.setLineWrap(true);
-        hintLabel.setPreferredSize(new Dimension(600, 200));
+        hintLabel.setPreferredSize(new Dimension(800, 300));
         updateHintLabel(gameViewModel.getState().getHint());
         hintLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         centerPanel.add(hintLabel, gbc);
