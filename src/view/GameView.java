@@ -13,7 +13,6 @@ import java.awt.event.KeyListener;
 
 public class GameView extends JPanel implements ActionListener {
 
-    public final String viewName = "guess";
 
     private final GameViewModel gameViewModel;
     private final GameController gameController;
@@ -21,7 +20,6 @@ public class GameView extends JPanel implements ActionListener {
     private final JLabel titleLabel = new JLabel(GameViewModel.TITLE_LABEL);
     private final JLabel hintLabel = new JLabel("Hint: ");
     private final JTextField guessInputField = new JTextField(15);
-    private final JButton guessButton = new JButton(GameViewModel.GUESS_BUTTON_LABEL);
     private final JButton hintButton = new JButton(GameViewModel.HINT_BUTTON_LABEL);
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JLabel feedbackLabel = new JLabel();
@@ -60,11 +58,6 @@ public class GameView extends JPanel implements ActionListener {
         hintButton.setPreferredSize(new Dimension(hintDifficultyComboBox.getPreferredSize().width, hintButton.getPreferredSize().height));
         inputPanel.add(hintButton, gbc);
 
-        // Guess components
-        inputPanel.add(new JLabel("Enter your guess:"), gbc);
-        inputPanel.add(guessInputField, gbc);
-        guessButton.setPreferredSize(new Dimension(guessInputField.getPreferredSize().width, guessButton.getPreferredSize().height));
-        inputPanel.add(guessButton, gbc);
 
         add(inputPanel, BorderLayout.CENTER);
 
@@ -82,33 +75,8 @@ public class GameView extends JPanel implements ActionListener {
         return hintPanel;
     }
 
-    private JPanel createGuessPanel() {
-        JPanel guessPanel = new JPanel();
-        guessPanel.setLayout(new BoxLayout(guessPanel, BoxLayout.Y_AXIS));
-        guessPanel.add(new JLabel("Enter your guess:"));
-        guessPanel.add(guessInputField);
-        guessPanel.add(guessButton);
-        guessPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        return guessPanel;
-    }
-
     private void setupListeners() {
-        guessButton.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                if (evt.getSource().equals(guessButton)) {
-                    GameState currentState = gameViewModel.getState();
 
-                    // TODO: guess screen and set state
-
-                    String guess = guessInputField.getText();
-                    if (!guess.isEmpty()) {
-                        currentState.setGuess(guess);
-                        gameViewModel.setState(currentState);
-                        gameController.executeGuess(currentState.getCity());
-                    }
-                }
-            }
-        });
         hintButton.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(hintButton)) {
