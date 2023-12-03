@@ -36,73 +36,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        try {
-            UIManager.setLookAndFeel( new FlatMacDarkLaf());
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-
-        JFrame application = new JFrame("Our Game Demo");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        // Initialize ViewManager and ViewModels
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-//        // Initialize other ViewModels (for login, signup, etc.)
-//        LoginViewModel loginViewModel = new LoginViewModel();
-//        LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
-//        SignupViewModel signupViewModel = new SignupViewModel();
-//        GuestViewModel guestViewModel = new GuestViewModel();
-//        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
-
-
-        GameViewModel gameViewModel = new GameViewModel();
-
         // Load configuration and create API client
         ConfigLoader config = new ConfigLoader();
         String apiKey = config.getApiKey();
-        OpenAI api = new OpenAI(ENDPOINT, apiKey);
+        System.out.println(apiKey);
 
-        GameDataAccessInterface data = new GameData();
-//
-//        //Not yet set up
-//        GuestUserDataAccessInterface guestUserDataAccessInterface;
-//
-//        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject, userDataAccessObject, loggedInViewModel);
-//        views.add(signupView, signupView.viewName);
-//
-//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-//        views.add(loginView, loginView.viewName);
-//
-//        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController);
-//        views.add(loggedInView, loggedInView.viewName);
-//
-//        GuestView guestView = GuestUseCaseFactory.create(viewManagerModel,guestViewModel,userDataAccessObject);
-//        views.add(guestView, guestView.viewName);
-//
-//        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, mainMenuController, signupViewModel,
-//                loginViewModel, guestViewModel);
-//        views.add(mainMenuView, mainMenuView.gameName);
-
-//        GameView gameController = GameUseCaseFactory.create(viewManagerModel, data, api);
-
-        JPanel[] gameViews = GameUseCaseFactory.create(viewManagerModel, data, api);
-        for (JPanel gameView : gameViews) {
-            views.add(gameView, gameView.getName());
-            System.out.println(gameView.getName());
-        }
-
-
-        viewManagerModel.setActiveView("game");
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setSize(400, 400);
-        application.setVisible(true);
     }
 }

@@ -26,6 +26,25 @@ public class ConfigLoader {
     }
 
     public String getApiKey() {
-        return properties.getProperty("openai.api.key");
+        return ConfigLoader.decrypt(properties.getProperty("openai.api.key"), 4);
+    }
+
+    public static String encrypt(String text, int s) {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+
+            if (Character.isLetter(c)) {
+                char base = Character.isLowerCase(c) ? 'a' : 'A';
+                c = (char) ((c - base + s) % 26 + base);
+            }
+            result.append(c);
+        }
+        return result.toString();
+    }
+
+    public static String decrypt(String text, int s) {
+        return encrypt(text, 26 - s);
     }
 }
