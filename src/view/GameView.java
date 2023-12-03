@@ -27,8 +27,6 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton returnButton = new JButton("Return to Main Menu");
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JLabel feedbackLabel = new JLabel();
-    private final JButton returnToMainButton = new JButton(" Return to Main Menu");
-
     private final JLabel score = new JLabel();
 
     public GameView(GameViewModel gameViewModel, GameController gameController) {
@@ -152,14 +150,6 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(returnButton)) {
-                    gameController.returnToMain();
-                }
-            }
-        });
-
-        returnToMainButton.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                if (evt.getSource().equals(returnToMainButton)) {
                     gameController.returnToMain();
                 }
             }
