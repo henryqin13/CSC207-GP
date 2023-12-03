@@ -24,4 +24,18 @@ public class GuestInteractorTest {
         guestInteractor = new GuestInteractor(userDataAccessObject, guestOutputBoundary);
     }
 
+    @Test
+    public void testExecute() {
+        // Arrange
+        GuestInputData inputData = new GuestInputData();
+        ArgumentCaptor<GuestOutputData> captor = ArgumentCaptor.forClass(GuestOutputData.class);
+
+        // Act
+        guestInteractor.execute(inputData);
+
+        // Assert
+        verify(guestOutputBoundary).prepareSuccessView(captor.capture());
+        GuestOutputData outputData = captor.getValue();
+
+    }
 }

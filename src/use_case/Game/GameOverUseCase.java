@@ -52,9 +52,8 @@ public class GameOverUseCase {
     }
 
     private int calculateFinalScore() {
-        // Implement your logic for calculating the final score here
+        // Implement logic for calculating the final score here
         // For example, you might sum up scores from different aspects of the game
-        // Replace this with your actual scoring logic
         return 0;
     }
 }
