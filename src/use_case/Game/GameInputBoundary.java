@@ -8,4 +8,8 @@ public interface GameInputBoundary {
     void executeGuess(GameInputData gameInputData);
 
     void makeGuess(GameInputData gameInputData);
+
+    void exit();
+
+    void backToMain();
 }

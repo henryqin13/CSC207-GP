@@ -9,6 +9,7 @@ import use_case.Game.GameInteractor;
 import use_case.Game.GameOutputBoundary;
 import use_case.Game.GameDataAccessInterface;
 import use_case.GenerativeInterface;
+import view.GameOverView;
 import view.GameView;
 import view.GuessView;
 import view.HintView;
@@ -29,9 +30,10 @@ public class GameUseCaseFactory {
         GameView gameView = new GameView(gameViewModel, gameController);
         GuessView guessView = new GuessView(gameViewModel, gameController);
         HintView hintView = new HintView(gameViewModel, gameController);
+        GameOverView gameOverView = new GameOverView(gameViewModel, gameController);
 
         // Create an array of JPanel and add the views to it
-        JPanel[] views = { gameView, guessView, hintView };
+        JPanel[] views = { gameView, guessView, hintView, gameOverView };
 
         // Return the array
         return views;

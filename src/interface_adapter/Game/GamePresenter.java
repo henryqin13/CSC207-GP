@@ -28,6 +28,12 @@ public class GamePresenter implements GameOutputBoundary {
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged(); // Notify observers about the state change
+        if (data.getGuess()){
+            this.viewManagerModel.setActiveView("game over");
+            this.viewManagerModel.firePropertyChanged();
+        }
+
+//        if (score == 0){}
 
         if (!data.getGuess()) {
             this.viewManagerModel.setActiveView("game");
@@ -65,5 +71,17 @@ public class GamePresenter implements GameOutputBoundary {
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void exit(){
+        this.viewManagerModel.setActiveView("game");
+        this.viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void backToMain(){
+        this.viewManagerModel.setActiveView("the city game");
+        this.viewManagerModel.firePropertyChanged();
     }
 }
