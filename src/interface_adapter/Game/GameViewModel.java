@@ -8,7 +8,7 @@ import java.beans.PropertyChangeSupport;
 public class GameViewModel extends ViewModel {
 
     // Labels and button texts for the game view
-    public static final String TITLE_LABEL = "City Guessing Game";
+    public static final String TITLE_LABEL = "CityGuesser";
     public static final String GUESS_BUTTON_LABEL = "Guess";
     public static final String HINT_BUTTON_LABEL = "Get Hint";
     public static final String HINT_DIFFICULTY_LABEL = "Hint Difficulty (1-3)";

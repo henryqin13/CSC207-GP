@@ -27,6 +27,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton returnButton = new JButton("Return to Main Menu");
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JLabel feedbackLabel = new JLabel();
+    private final JButton returnToMainButton = new JButton(" Return to Main Menu");
 
     private final JLabel score = new JLabel();
 
@@ -45,10 +46,12 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     private void setupComponents() {
+
         // North panel that uses BorderLayout to place title and score
         JPanel northPanel = new JPanel(new BorderLayout());
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 72));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setPreferredSize(new Dimension(900, 300));
         northPanel.add(titleLabel, BorderLayout.CENTER); // Title in the center
 
         score.setText("" + gameViewModel.getState().getScore());
@@ -149,6 +152,14 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
             @Override
             public void actionPerformed(ActionEvent evt) {
                 if (evt.getSource().equals(returnButton)) {
+                    gameController.returnToMain();
+                }
+            }
+        });
+
+        returnToMainButton.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(returnToMainButton)) {
                     gameController.returnToMain();
                 }
             }
