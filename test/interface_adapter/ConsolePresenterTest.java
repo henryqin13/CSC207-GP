@@ -41,4 +41,24 @@ public class ConsolePresenterTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
+    @Test
+    public void testDisplayFeedbackScoreAbove80() {
+        ConsolePresenter presenter = new ConsolePresenter();
+        presenter.displayFeedback(85);
+        assertEquals("You are awesome!\n", outContent.toString());
+    }
+
+    @Test
+    public void testDisplayFeedbackScoreAbove50() {
+        ConsolePresenter presenter = new ConsolePresenter();
+        presenter.displayFeedback(75);
+        assertEquals("You are good!\n", outContent.toString());
+    }
+
+    @Test
+    public void testDisplayFeedbackScoreBelow50() {
+        ConsolePresenter presenter = new ConsolePresenter();
+        presenter.displayFeedback(45);
+        assertEquals("You can do better!\n", outContent.toString());
+    }
 }
