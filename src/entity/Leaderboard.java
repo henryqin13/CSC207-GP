@@ -1,27 +1,33 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class Leaderboard {
-    private List<Player> players;
+    private final ArrayList<Player> players;
 
     public Leaderboard() {
-        players = new ArrayList<>();
+        players = new ArrayList<Player>();
     }
 
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
-
-    public void displayLeaderboard() {
-        Collections.sort(players, Comparator.comparingInt(Player::getScore).reversed());
-        System.out.println("Leaderboard:");
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            System.out.println((i + 1) + ". " + player.getName() + " - Score: " + player.getScore());
+    public void fillBoard(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    Player player = new Player(parts[0], parts[1]);
+                    int score = Integer.parseInt(parts[2].trim());
+                    player.setScore(score);
+                    players.add(player);
+                }
+            }
+            players.sort(Comparator.comparing(Player::getScore));
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
         }
     }
+    public ArrayList<Player> getPlayers(){return this.players;}
 }
