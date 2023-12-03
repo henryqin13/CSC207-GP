@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 public class LeaderboardViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Leaderboard";
     public static final String EXIT_BUTTON_LABEL = "Exit";
+
     private LeaderboardState state = new LeaderboardState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public LeaderboardViewModel(){super("Leaderboard");}
