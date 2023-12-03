@@ -26,6 +26,38 @@ public class GameMockTest {
     }
 
     @Test
+    public void testExecuteGame() {
+        // Arrange
+        String cityName = "TestCity";
+        when(client.getResponse(anyString())).thenReturn(cityName);
+        ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+
+        // Act
+        gameInteractor.executeGame();
+
+        // Assert
+        verify(gameOutputBoundary).gameStart(captor.capture());
+        assertEquals(cityName, captor.getValue().getCity().getName());
+    }
+
+    @Test
+    public void testExecuteHint() {
+        // Arrange
+        City testCity = new City("TestCity", null);
+        GameInputData inputData = new GameInputData("", "2", testCity);
+        String hint = "This is a hint";
+        when(client.getResponse(anyString())).thenReturn(hint);
+        ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+
+        // Act
+        gameInteractor.executeHint(inputData);
+
+        // Assert
+        verify(gameOutputBoundary).hintView(captor.capture());
+        assertEquals(hint, captor.getValue().getHint());
+    }
+
+    @Test
     public void testExit() {
         // Act
         gameInteractor.exit();
