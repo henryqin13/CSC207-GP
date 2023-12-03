@@ -106,6 +106,16 @@ public class GameInteractorTest {
             gameStarted = true;
         }
 
+        @Override
+        public void exit() {
+
+        }
+
+        @Override
+        public void backToMain() {
+
+        }
+
         public boolean isGameStarted() {
             return gameStarted;
         }
