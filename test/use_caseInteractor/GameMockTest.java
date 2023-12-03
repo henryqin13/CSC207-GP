@@ -48,13 +48,15 @@ public class GameMockTest {
         String hint = "This is a hint";
         when(client.getResponse(anyString())).thenReturn(hint);
         ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+        ArgumentCaptor<Integer> intCaptor = ArgumentCaptor.forClass(Integer.class);
 
         // Act
         gameInteractor.executeHint(inputData);
 
         // Assert
-        verify(gameOutputBoundary).hintView(captor.capture());
+        verify(gameOutputBoundary).hintView(captor.capture(), intCaptor.capture());
         assertEquals(hint, captor.getValue().getHint());
+        assertEquals(Integer.valueOf(2), intCaptor.getValue()); // Ensure the second argument is 2
     }
 
     @Test
@@ -119,4 +121,15 @@ public class GameMockTest {
         // Assert
         verify(gameOutputBoundary).backToMain();
     }
+
+    @Test
+    public void returnToMain() {
+        // Act
+        gameInteractor.returnToMain();
+
+        // Assert
+        verify(gameOutputBoundary).returnToMain();
+    }
 }
+
+
