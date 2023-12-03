@@ -29,4 +29,10 @@ public class GameController {
         GameInputData data = new GameInputData(guess, "", city);
         gameUseCaseInteractor.makeGuess(data);
     }
+
+    public void exit(){
+        gameUseCaseInteractor.exit();
+    }
+
+    public void backToMain(){gameUseCaseInteractor.backToMain();}
 }
