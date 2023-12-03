@@ -24,4 +24,22 @@ public class GameMockTest {
         client = mock(GenerativeInterface.class);
         gameInteractor = new GameInteractor(gameDataAccessObject, gameOutputBoundary, client);
     }
+
+    @Test
+    public void testExit() {
+        // Act
+        gameInteractor.exit();
+
+        // Assert
+        verify(gameOutputBoundary).exit();
+    }
+
+    @Test
+    public void testBackToMain() {
+        // Act
+        gameInteractor.backToMain();
+
+        // Assert
+        verify(gameOutputBoundary).backToMain();
+    }
 }
