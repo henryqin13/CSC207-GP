@@ -87,7 +87,12 @@ public class GamePresenter implements GameOutputBoundary {
     }
 
     @Override
-    public void backToMain(){
+    public void backToMain(){ //from after guess screen
+        this.viewManagerModel.setActiveView("the city game");
+        this.viewManagerModel.firePropertyChanged();
+    }
+
+    public void returnToMain(){ //from the main game screen
         this.viewManagerModel.setActiveView("the city game");
         this.viewManagerModel.firePropertyChanged();
     }

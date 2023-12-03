@@ -71,12 +71,7 @@ public class GameOverView extends JPanel implements ActionListener{
         backButton.setFont(new Font("Serif", Font.BOLD, 26));
         backButton.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(backButton);
-
-
-
-
     }
-
 
     private void setupListeners() {
         startOverButton.addActionListener( new ActionListener() {
@@ -95,10 +90,6 @@ public class GameOverView extends JPanel implements ActionListener{
             }
 
         });
-
-
-
-
     }
 
 

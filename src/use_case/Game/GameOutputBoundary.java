@@ -15,4 +15,6 @@ public interface GameOutputBoundary {
     void exit();
 
     void backToMain();
+
+    void returnToMain();
 }
