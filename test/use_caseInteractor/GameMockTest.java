@@ -46,15 +46,15 @@ public class GameMockTest {
         City testCity = new City("TestCity", null);
         GameInputData inputData = new GameInputData("", "2", testCity);
         String hint = "This is a hint";
-        int someIntValue = 0; // Replace with the appropriate int value expected by hintView
         when(client.getResponse(anyString())).thenReturn(hint);
         ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+        int expectedHintLevel = 2; // This should match the hint level in inputData
 
         // Act
         gameInteractor.executeHint(inputData);
 
         // Assert
-        verify(gameOutputBoundary).hintView(captor.capture(), eq(someIntValue));
+        verify(gameOutputBoundary).hintView(captor.capture(), eq(expectedHintLevel)); // Use eq() to specify the expected value
         assertEquals(hint, captor.getValue().getHint());
     }
 
@@ -120,4 +120,15 @@ public class GameMockTest {
         // Assert
         verify(gameOutputBoundary).backToMain();
     }
+
+    @Test
+    public void returnToMain() {
+        // Act
+        gameInteractor.returnToMain();
+
+        // Assert
+        verify(gameOutputBoundary).returnToMain();
+    }
 }
+
+
