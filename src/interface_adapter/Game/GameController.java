@@ -35,6 +35,7 @@ public class GameController {
 
     public void exit(){
         gameUseCaseInteractor.exit();
+        gameUseCaseInteractor.executeGame();
     }
 
     public void backToMain(){gameUseCaseInteractor.backToMain();}
