@@ -87,7 +87,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         inputPanel.add(new JLabel("Enter your guess:"), gbc);
         inputPanel.add(guessButton, gbc);
 
-        returnToMainButton.setPreferredSize(new Dimension(guessInputField.getPreferredSize().width, returnToMainButton.getPreferredSize().height));
+        returnToMainButton.setPreferredSize(new Dimension(guessButton.getPreferredSize().width, returnToMainButton.getPreferredSize().height));
         inputPanel.add(returnToMainButton);
         add(inputPanel, BorderLayout.CENTER);
 
