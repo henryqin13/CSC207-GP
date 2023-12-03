@@ -19,7 +19,9 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
     private final JTextField guessInputField = new JTextField(15);
     private final JButton submitGuessButton = new JButton("Submit Guess");
 
-    private final JButton exitButton = new JButton("Back");
+    private final JButton exitButton = new JButton("Exit");
+
+    private final JButton backToHintButton = new JButton("Back");
     private final JLabel feedbackLabel = new JLabel();
 
     private final JLabel score = new JLabel();
@@ -33,6 +35,7 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
         this.gameViewModel.addPropertyChangeListener(this);
         setupLayout();
         styleSubmitButton(submitGuessButton);
+        styleBackButton(backToHintButton);
         styleExitButton(exitButton);
         setupListeners();
     }
@@ -79,6 +82,8 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
         feedbackLabel.setPreferredSize(fieldButtonSize);
         feedbackLabel.setMinimumSize(fieldButtonSize);
         feedbackLabel.setMaximumSize(fieldButtonSize);
+        backToHintButton.setPreferredSize(guessInputField.getPreferredSize());
+        centerPanel.add(backToHintButton, gbc);
         exitButton.setPreferredSize(guessInputField.getPreferredSize());
         centerPanel.add(exitButton, gbc);
 
@@ -105,6 +110,25 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(new Color(34, 139, 34)); // Original shade of green
+            }
+        });
+    }
+    private void styleBackButton(JButton button) {
+        button.setBackground(new Color(255, 255, 255)); // A shade of green
+        button.setForeground(Color.BLACK); // Text color
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setFocusPainted(false); // Removes focus ring around text
+        button.setBorder(BorderFactory.createRaisedBevelBorder()); // Gives a 3D effect
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Changes the cursor to a hand on hover
+
+        // Optional: Add a hover effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 80, 20));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(34, 120, 40));
             }
         });
     }
@@ -152,6 +176,16 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
             public void actionPerformed(ActionEvent evt){
                 if (evt.getSource().equals(exitButton)){
                    gameController.exit();
+                }
+            }
+        });
+
+        backToHintButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if (evt.getSource().equals(backToHintButton)){
+                    GameState currentState = gameViewModel.getState();
+                    gameViewModel.setState(currentState);
+                    gameController.backToHint();
                 }
             }
         });

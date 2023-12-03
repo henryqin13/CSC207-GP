@@ -72,4 +72,7 @@ public class GameInteractor implements GameInputBoundary{
         gamePresenter.returnToMain();
     }
 
+    @Override
+    public void backToHint(){gamePresenter.backToHint();}
+
 }

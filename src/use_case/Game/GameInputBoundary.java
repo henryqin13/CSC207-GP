@@ -14,4 +14,6 @@ public interface GameInputBoundary {
     void backToMain();
 
     void returnToMain();
+
+    void backToHint();
 }

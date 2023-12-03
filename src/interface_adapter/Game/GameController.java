@@ -40,4 +40,6 @@ public class GameController {
     public void returnToMain (){
         gameUseCaseInteractor.returnToMain();
     }
+
+    public void backToHint(){gameUseCaseInteractor.backToHint();}
 }
