@@ -40,8 +40,9 @@ public class GameView extends JPanel implements ActionListener {
     }
 
     private void setupComponents() {
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 72));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setPreferredSize(new Dimension(900, 300));
         add(titleLabel, BorderLayout.NORTH);
 
         // Hint and Guess panel with GridBagLayout for more control
