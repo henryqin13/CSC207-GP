@@ -1,6 +1,7 @@
 package interface_adapter.Game;
 
 import entity.City;
+import entity.Hint;
 import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInputData;
 
@@ -11,13 +12,12 @@ public class GameController {
     }
 
     public void executeGuess(City city) {
-        GameInputData data = new GameInputData("", "", city);
+        GameInputData data = new GameInputData("", null, city);
         gameUseCaseInteractor.executeGuess(data);
     }
 
-    public void executeHint(String hintDiff, City city) {
-        GameInputData data = new GameInputData("", hintDiff, city);
-        System.out.println("Hint " + city.getName());
+    public void executeHint(String hintDiff, City city, String keyword) {
+        GameInputData data = new GameInputData("", new Hint(hintDiff, keyword), city);
         gameUseCaseInteractor.executeHint(data);
     }
 
@@ -26,7 +26,7 @@ public class GameController {
     }
 
     public void makeGuess(String guess, City city) {
-        GameInputData data = new GameInputData(guess, "", city);
+        GameInputData data = new GameInputData(guess, null, city);
         gameUseCaseInteractor.makeGuess(data);
     }
 
