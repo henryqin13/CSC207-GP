@@ -58,6 +58,51 @@ public class GameMockTest {
     }
 
     @Test
+    public void testExecuteGuess() {
+        // Arrange
+        City testCity = new City("TestCity", null);
+        GameInputData inputData = new GameInputData("", "", testCity);
+        ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+
+        // Act
+        gameInteractor.executeGuess(inputData);
+
+        // Assert
+        verify(gameOutputBoundary).guessView(captor.capture());
+        assertEquals(testCity, captor.getValue().getCity());
+    }
+
+    @Test
+    public void testMakeGuessCorrect() {
+        // Arrange
+        City testCity = new City("TestCity", null);
+        GameInputData inputData = new GameInputData("testcity", "", testCity);
+        ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+
+        // Act
+        gameInteractor.makeGuess(inputData);
+
+        // Assert
+        verify(gameOutputBoundary).guess(captor.capture());
+        assertTrue(captor.getValue().getGuess());
+    }
+
+    @Test
+    public void testMakeGuessIncorrect() {
+        // Arrange
+        City testCity = new City("TestCity", null);
+        GameInputData inputData = new GameInputData("wrongguess", "", testCity);
+        ArgumentCaptor<GameOutputData> captor = ArgumentCaptor.forClass(GameOutputData.class);
+
+        // Act
+        gameInteractor.makeGuess(inputData);
+
+        // Assert
+        verify(gameOutputBoundary).guess(captor.capture());
+        assertFalse(captor.getValue().getGuess());
+    }
+
+    @Test
     public void testExit() {
         // Act
         gameInteractor.exit();
