@@ -11,7 +11,7 @@ public class GameState {
 
     private City city;
 
-    private int score;
+    private int score = 10;
 
     // Copy constructor
     public GameState(GameState copy) {

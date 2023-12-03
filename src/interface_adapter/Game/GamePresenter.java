@@ -30,7 +30,7 @@ public class GamePresenter implements GameOutputBoundary {
         System.out.println(data.getGuess());
 
         this.gameViewModel.setState(gameState);
-        this.gameViewModel.firePropertyChanged(); // Notify observers about the state change
+        this.gameViewModel.firePropertyChanged();
 
         if (!data.getGuess()) {
             this.viewManagerModel.setActiveView("game");
@@ -51,7 +51,8 @@ public class GamePresenter implements GameOutputBoundary {
     public void hintView(GameOutputData data, int hintDiff) {
         GameState gameState = gameViewModel.getState();
         gameState.setHint(data.getHint());
-        int updatedScore = (int) (gameState.getScore() - hintDiff);
+        int updatedScore = gameState.getScore() - hintDiff;
+        System.out.println(updatedScore);
         if (updatedScore >= 0) {
             gameState.setScore(updatedScore);
         } else {
