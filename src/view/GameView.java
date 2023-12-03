@@ -24,6 +24,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     private final JLabel hintLabel = new JLabel("Hint: ");
     private final JButton guessButton = new JButton(GameViewModel.GUESS_BUTTON_LABEL);
     private final JButton hintButton = new JButton(GameViewModel.HINT_BUTTON_LABEL);
+    private final JButton returnButton = new JButton("Return to Main Menu");
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JLabel feedbackLabel = new JLabel();
 
@@ -71,6 +72,10 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         guessButton.setMaximumSize(guessButton.getPreferredSize());
         guessButton.setMinimumSize(guessButton.getPreferredSize());
 
+        returnButton.setPreferredSize(preferredSize);
+        returnButton.setMaximumSize(guessButton.getPreferredSize());
+        returnButton.setMinimumSize(guessButton.getPreferredSize());
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -83,6 +88,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         inputPanel.add(hintButton, gbc);
         inputPanel.add(new JLabel("Enter your guess:"), gbc);
         inputPanel.add(guessButton, gbc);
+        inputPanel.add(returnButton);
         add(inputPanel, BorderLayout.CENTER);
 
         feedbackLabel.setPreferredSize(new Dimension(getWidth(), 40)); // Assuming you want the feedback label to match the height of the other components
@@ -109,6 +115,15 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         return guessPanel;
     }
 
+    private JPanel createReturnPanel() {
+        JPanel returnPanel = new JPanel();
+        returnPanel.setLayout(new BoxLayout(returnPanel, BoxLayout.Y_AXIS));
+        returnPanel.add(new JLabel("Enter your Guess"));
+        returnPanel.add(returnButton);
+        returnPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return returnPanel;
+    }
+
     private void setupListeners() {
         guessButton.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -127,6 +142,14 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
                     currentState.setHintDiff(selectedDifficulty);
                     gameViewModel.setState(currentState);
                     gameController.executeHint(selectedDifficulty, currentState.getCity());
+                }
+            }
+        });
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(returnButton)) {
+                    gameController.returnToMain();
                 }
             }
         });

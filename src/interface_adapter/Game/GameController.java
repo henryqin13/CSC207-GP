@@ -35,4 +35,8 @@ public class GameController {
     }
 
     public void backToMain(){gameUseCaseInteractor.backToMain();}
+
+    public void returnToMain (){
+        gameUseCaseInteractor.returnToMain();
+    }
 }

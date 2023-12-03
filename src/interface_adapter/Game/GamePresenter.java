@@ -91,4 +91,10 @@ public class GamePresenter implements GameOutputBoundary {
         this.viewManagerModel.setActiveView("the city game");
         this.viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void returnToMain() {
+        this.viewManagerModel.setActiveView("the city game");
+        this.viewManagerModel.firePropertyChanged();
+    }
 }
