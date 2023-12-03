@@ -33,8 +33,9 @@ public class GameInteractor implements GameInputBoundary{
     public void executeHint(GameInputData gameInputData) {
         String hint = client.getResponse("Give a small piece of information about " + gameInputData.getCity().getName() + ", do not mention the name of the city in your response. do not use any special characters or formatters. On a scale of 1-3 with 3 being the most vague or difficult hint and 1 being the easiest, this hint should be " + gameInputData.getHints() + " difficulty.");
         System.out.println(hint);
+
         GameOutputData gameOutputData = new GameOutputData(hint, false, gameInputData.getCity());
-        gamePresenter.hintView(gameOutputData);
+        gamePresenter.hintView(gameOutputData, Integer.parseInt(gameInputData.getHints()));
     }
 
     @Override

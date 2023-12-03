@@ -16,12 +16,14 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
     private final GameViewModel gameViewModel;
     private final GameController gameController;
 
-    private final JLabel hintLabel = new JLabel();
+    private final JTextArea hintLabel = new JTextArea();
     private final JButton getHintButton = new JButton("Get Hint");
 
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JButton makeGuessButton = new JButton("Make Guess");
     private final JLabel titleLabel = new JLabel("Hint Screen");
+
+    private final JLabel score = new JLabel();
 
 
     public HintView(GameViewModel gameViewModel, GameController gameController) {
@@ -39,46 +41,84 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     private void setupComponents() {
-        // Title label centered horizontally
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // North panel for the title and score
+        JPanel northPanel = new JPanel(new BorderLayout());
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setHorizontalAlignment(JLabel.CENTER); // Ensure the label text is centered
-        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Use FlowLayout for auto centering
-        titlePanel.add(titleLabel);
-        add(titlePanel, BorderLayout.NORTH);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        northPanel.add(titleLabel, BorderLayout.CENTER); // Title in the center
 
-        hintLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        score.setText("" + gameViewModel.getState().getScore());
+        score.setFont(new Font("Arial", Font.BOLD, 24));
+        score.setHorizontalAlignment(SwingConstants.RIGHT);
+        northPanel.add(score, BorderLayout.EAST); // Score in the top right
+        add(northPanel, BorderLayout.NORTH);
 
-        // Use HTML to enable word wrap for the hint text
+
+        // Central panel for the hint difficulty, hint text, and buttons
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.weightx = 1.0; // Allow hint label to expand horizontally
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        // Hint label
+        hintLabel.setFont(new Font("Arial", Font.ITALIC, 20));
+        hintLabel.setAlignmentX(SwingConstants.CENTER);
+        hintLabel.setLineWrap(true);
+        hintLabel.setPreferredSize(new Dimension(600, 200));
         updateHintLabel(gameViewModel.getState().getHint());
-
-        // Create a panel with BorderLayout for the hint label
-        JPanel hintPanel = new JPanel(new BorderLayout());
-        hintPanel.add(hintLabel, BorderLayout.CENTER);
-        hintPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Padding around the hint
-
-        add(hintPanel, BorderLayout.CENTER); // Add the hint panel to the center of the main panel
+        hintLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        centerPanel.add(hintLabel, gbc);
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
 
 
-        // Buttons and ComboBox at the bottom
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
-        hintDifficultyComboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, hintDifficultyComboBox.getPreferredSize().height));
-        getHintButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, getHintButton.getPreferredSize().height));
-        makeGuessButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, makeGuessButton.getPreferredSize().height));
+        bottomPanel.setLayout(new BorderLayout());
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.LINE_AXIS));
+        contentPanel.add(Box.createHorizontalGlue());
+        JPanel hintSubPanel = new JPanel();
+        hintSubPanel.setLayout(new BoxLayout(hintSubPanel, BoxLayout.Y_AXIS));
+        JPanel guessSubPanel = new JPanel();
+        guessSubPanel.setLayout(new BoxLayout(guessSubPanel, BoxLayout.Y_AXIS));
 
-        bottomPanel.add(hintDifficultyComboBox);
-        bottomPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        bottomPanel.add(getHintButton);
-        bottomPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        bottomPanel.add(makeGuessButton);
 
-        // Aligning bottom panel components
+
         hintDifficultyComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         getHintButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        makeGuessButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        hintDifficultyComboBox.setPreferredSize(new Dimension(75, 40));
+        getHintButton.setPreferredSize(new Dimension(125, 40));
+        makeGuessButton.setSize(new Dimension(125, 40));
 
-        add(bottomPanel, BorderLayout.SOUTH);
+        hintSubPanel.add(hintDifficultyComboBox);
+        hintSubPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        hintSubPanel.add(getHintButton);
+        contentPanel.add(hintSubPanel);
+        contentPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        guessSubPanel.add(makeGuessButton);
+        contentPanel.add(guessSubPanel);
+        contentPanel.add(Box.createHorizontalGlue());
+
+        bottomPanel.add(contentPanel, BorderLayout.PAGE_START);
+
+        int topPadding = 10;
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(topPadding, 0, 0, 0));
+        centerPanel.add(bottomPanel, gbc);
+
+
+        add(centerPanel, BorderLayout.CENTER);
     }
+
+    private void updateHintLabel(String hint) {
+        String wrappedText = "<html><body style='width: %1spx; text-align: center;'>%2s</body></html>";
+        hintLabel.setText(String.format(wrappedText, this.getWidth() - 40, hint)); // Adjust width as needed
+    }
+
+
 
     private void setupListeners() {
         getHintButton.addActionListener(new ActionListener() {
@@ -103,24 +143,19 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
 
     }
 
-    public void updateHintLabel(String text) {
-        String wrappedText = "<html><body style='width: " + this.getWidth() * 0.7 + "px;'><p>" + text + "</p></body></html>";
-        hintLabel.setText(wrappedText);
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("state".equals(evt.getPropertyName())) {
             updateHintDisplay(gameViewModel.getState().getHint());
+            updateScore("" + gameViewModel.getState().getScore());
         }
     }
 
-    // Override the 'addNotify' method to know when the label is actually added to a container
     @Override
     public void addNotify() {
         super.addNotify();
-        // Call updateHintLabel here with the actual text to be displayed
-        updateHintLabel("This city is the capital of Japan and is renowned for its beauty.");
+        updateHintLabel(gameViewModel.getState().getHint());
     }
 
     private void updateHintDisplay(String newHint) {
@@ -130,5 +165,9 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    private void updateScore(String feedback) {
+        score.setText(feedback);
     }
 }

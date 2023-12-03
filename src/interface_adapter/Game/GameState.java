@@ -11,6 +11,8 @@ public class GameState {
 
     private City city;
 
+    private int score = 10;
+
     // Copy constructor
     public GameState(GameState copy) {
         if (copy != null) {
@@ -19,6 +21,7 @@ public class GameState {
             this.guess = copy.guess;
             this.guessCorrect = copy.guessCorrect;
             this.city = copy.city;
+            this.score = copy.score;
         }
     }
 
@@ -45,6 +48,8 @@ public class GameState {
 
     public City getCity() {return city;}
 
+    public int getScore() {return score;}
+
     // Setters
     public void setHintDiff(String hintDiff) {
         this.hintDiff = hintDiff;
@@ -63,6 +68,8 @@ public class GameState {
     }
 
     public void setCity(City city) {this.city = city;}
+
+    public void setScore(int score) {this.score = score;}
 
 //    public void addPropertyChangeListener(PropertyChangeListener listener) {
 //        support.addPropertyChangeListener(listener);

@@ -22,6 +22,8 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton exitButton = new JButton("Back");
     private final JLabel feedbackLabel = new JLabel();
 
+    private final JLabel score = new JLabel();
+
     public GuessView(GameViewModel gameViewModel, GameController gameController) {
         this.setName("guess");
         this.gameViewModel = gameViewModel;
@@ -39,37 +41,53 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Title at the top
+        JPanel northPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel("Guess the City", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 24));
-        add(title, BorderLayout.NORTH);
+        northPanel.add(title, BorderLayout.CENTER);
 
-        // Center panel to hold input field and guess button
+        score.setText("" + gameViewModel.getState().getScore());
+        score.setFont(new Font("Arial", Font.BOLD, 24));
+        score.setHorizontalAlignment(SwingConstants.RIGHT);
+        northPanel.add(score, BorderLayout.EAST);
+        add(northPanel, BorderLayout.NORTH);
+
+        // Set up the center panel with GridBagLayout
         JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Fill horizontally
+        gbc.insets = new Insets(10, 0, 10, 0); // Consistent vertical padding
 
-        // Input field setup
-        guessInputField.setPreferredSize(new Dimension(200, 24)); // Set the preferred size
-        gbc.insets = new Insets(5, 0, 5, 0);
+        Dimension fieldButtonSize = new Dimension(300, 40);
+
+        guessInputField.setPreferredSize(fieldButtonSize);
+        guessInputField.setMinimumSize(fieldButtonSize);
+        guessInputField.setMaximumSize(fieldButtonSize);
+
         centerPanel.add(guessInputField, gbc);
 
-        // Guess button setup to match the input field size
-        submitGuessButton.setPreferredSize(guessInputField.getPreferredSize());
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 15)), gbc);
+
+        submitGuessButton.setPreferredSize(fieldButtonSize);
+        submitGuessButton.setMinimumSize(fieldButtonSize);
+        submitGuessButton.setMaximumSize(fieldButtonSize);
+
         centerPanel.add(submitGuessButton, gbc);
 
+        centerPanel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
+        feedbackLabel.setPreferredSize(fieldButtonSize);
+        feedbackLabel.setMinimumSize(fieldButtonSize);
+        feedbackLabel.setMaximumSize(fieldButtonSize);
         exitButton.setPreferredSize(guessInputField.getPreferredSize());
         centerPanel.add(exitButton, gbc);
 
-        // Feedback label at the bottom
         feedbackLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Add center panel and feedback label to the main layout
+        centerPanel.add(feedbackLabel, gbc);
         add(centerPanel, BorderLayout.CENTER);
-        add(feedbackLabel, BorderLayout.SOUTH);
     }
+
 
     private void styleSubmitButton(JButton button) {
         button.setBackground(new Color(34, 139, 34)); // A shade of green
@@ -146,12 +164,19 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
         if ("state".equals(evt.getPropertyName())) {
             boolean isCorrect = gameViewModel.getState().isGuessCorrect();
             updateFeedbackDisplay(isCorrect ? "Correct guess!" : "");
+            updateScore("" + gameViewModel.getState().getScore());
         }
     }
 
     private void updateFeedbackDisplay(String feedback) {
         feedbackLabel.setText(feedback);
     }
+
+    private void updateScore(String feedback) {
+        score.setText(feedback);
+    }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

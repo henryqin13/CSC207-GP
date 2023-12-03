@@ -1,7 +1,8 @@
 .idea
 .idea/
 
-resources/
+resources_dir/
+resources_dir/
 src/prod/
 
 out/
