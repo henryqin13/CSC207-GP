@@ -37,5 +37,9 @@ public class GuestInteractorTest {
         verify(guestOutputBoundary).prepareSuccessView(captor.capture());
         GuestOutputData outputData = captor.getValue();
 
+        // Since there are no getters in GuestOutputData, we cannot directly assert its state.
+        // We need to rely on the behavior of the GuestInteractor and the interactions with its dependencies.
+        // If the GuestInteractor is supposed to change the state of the system or call other methods,
+        // those interactions should be verified here.
     }
 }
