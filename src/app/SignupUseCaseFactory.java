@@ -1,5 +1,6 @@
 package app;
 
+import entity.PlayerFactory;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestPresenter;
 import interface_adapter.Guest.GuestViewModel;
@@ -12,18 +13,13 @@ import use_case.Guest.GuestInputBoundary;
 import use_case.Guest.GuestInteractor;
 import use_case.Guest.GuestOutputBoundary;
 import use_case.Guest.GuestUserDataAccessInterface;
-import use_case.Login.LoginInputBoundary;
-import use_case.Login.LoginInteractor;
-import use_case.Login.LoginUserDataAccessInterface;
 import use_case.Signup.SignupUserDataAccessInterface;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.PlayerFactory;
 import interface_adapter.*;
 import use_case.Signup.SignupInputBoundary;
 import use_case.Signup.SignupInteractor;
 import use_case.Signup.SignupOutputBoundary;
 import view.SignupView;
-import view.GuestView;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -56,10 +52,10 @@ public class SignupUseCaseFactory {
         // Notice how we pass this method's parameters to the Presenter.
         SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel, signupViewModel, loginViewModel);
 
-        UserFactory userFactory = new CommonUserFactory();
+        PlayerFactory playerFactory = new PlayerFactory();
 
         SignupInputBoundary userSignupInteractor = new SignupInteractor(
-                userDataAccessObject, signupOutputBoundary, userFactory);
+                userDataAccessObject, signupOutputBoundary, playerFactory);
 
         return new SignupController(userSignupInteractor);
     }

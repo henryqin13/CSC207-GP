@@ -15,7 +15,7 @@ public class LeaderBoardView extends JPanel implements ActionListener, PropertyC
     private final String viewName = "Leaderboard";
     private final LeaderboardViewModel leaderBoardViewModel;
     private final LeaderboardController leaderboardController;
-    final JButton exit;
+    final JButton back;
     public LeaderBoardView(LeaderboardViewModel leaderBoardViewModel, LeaderboardController leaderboardController){
         this.leaderBoardViewModel = leaderBoardViewModel;
         this.leaderboardController = leaderboardController;
@@ -27,19 +27,19 @@ public class LeaderBoardView extends JPanel implements ActionListener, PropertyC
         JPanel buttons = new JPanel();
         buttons.setPreferredSize(new Dimension(500, 400));
         buttons.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        exit = new JButton(GuestViewModel.EXIT_BUTTON_NAME);
-        exit.setFont(new Font("Serif", Font.PLAIN, 25));
-        exit.setPreferredSize(new Dimension(125, 40));
-        exit.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        buttons.add(exit);
-        exit.addActionListener(this);
+        back = new JButton(GuestViewModel.BACK_BUTTON_NAME);
+        back.setFont(new Font("Serif", Font.PLAIN, 25));
+        back.setPreferredSize(new Dimension(125, 40));
+        back.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        buttons.add(back);
+        back.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(exit)){
+        if (e.getSource().equals(back)){
             //Need to figure out how to pass in the previous view as an argument.
             //leaderboardController.exit()
         }

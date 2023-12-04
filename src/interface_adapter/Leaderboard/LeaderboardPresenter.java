@@ -14,7 +14,7 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
     @Override
     public void prepareSuccessView(SignupOutputData user) {
         LeaderboardState leaderboardState = leaderboardViewModel.getState();
-        leaderboardState.
+
 
     }
 

@@ -1,7 +1,6 @@
 package use_caseInteractor;
 
 import entity.City;
-import entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.Game.*;

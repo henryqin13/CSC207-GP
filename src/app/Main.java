@@ -3,7 +3,7 @@ package app;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import data_access.*;
-import entity.CommonUserFactory;
+import entity.PlayerFactory;
 import interface_adapter.Game.GameController;
 import interface_adapter.Game.GameViewModel;
 import interface_adapter.Guest.GuestViewModel;

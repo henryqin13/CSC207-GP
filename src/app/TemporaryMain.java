@@ -2,7 +2,10 @@ package app;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import data_access.*;
-import entity.CommonUserFactory;
+import entity.PlayerFactory;
+import entity.PlayerFactory;
+import interface_adapter.Leaderboard.LeaderboardController;
+import interface_adapter.Leaderboard.LeaderboardViewModel;
 import interface_adapter.MainMenu.MainMenuController;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.LoggedIn.LoggedInController;
@@ -16,13 +19,7 @@ import interface_adapter.ViewManagerModel;
 import use_case.Guest.GuestInteractor;
 import use_case.Guest.GuestUserDataAccessInterface;
 import use_case.Game.GameDataAccessInterface;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
-import view.GuestView;
-import view.MainMenuView;
-import view.GameView;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,13 +59,14 @@ public class TemporaryMain {
         GuestViewModel guestViewModel = new GuestViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         GameViewModel gameViewModel = new GameViewModel();
+        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
 
         LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
         MainMenuController mainMenuController = new MainMenuController(viewManagerModel, signupViewModel, loginViewModel,
                 guestViewModel);
         FileUserDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
+            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new PlayerFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

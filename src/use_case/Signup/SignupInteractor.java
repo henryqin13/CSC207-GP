@@ -1,21 +1,21 @@
 package use_case.Signup;
 
-import entity.User;
-import entity.UserFactory;
+import entity.Player;
+import entity.PlayerFactory;
 
 import java.time.LocalDateTime;
 
 public class SignupInteractor implements SignupInputBoundary {
     final SignupUserDataAccessInterface userDataAccessObject;
     final SignupOutputBoundary userPresenter;
-    final UserFactory userFactory;
+    final PlayerFactory playerFactory;
 
     public SignupInteractor(SignupUserDataAccessInterface signupDataAccessInterface,
                             SignupOutputBoundary signupOutputBoundary,
-                            UserFactory userFactory) {
+                            PlayerFactory playerFactory) {
         this.userDataAccessObject = signupDataAccessInterface;
         this.userPresenter = signupOutputBoundary;
-        this.userFactory = userFactory;
+        this.playerFactory = playerFactory;
     }
 
     @Override
@@ -28,12 +28,12 @@ public class SignupInteractor implements SignupInputBoundary {
             userPresenter.prepareFailView("Passwords don't match.");
         } else {
             LocalDateTime now = LocalDateTime.now();
-            User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword());
-            if (user == null) {
+            Player player = playerFactory.create(signupInputData.getUsername(), signupInputData.getPassword());
+            if (player == null) {
                 userPresenter.prepareFailView("User could not be created.");
             } else {
-                userDataAccessObject.save(user);
-                SignupOutputData signupOutputData = new SignupOutputData(user.getName(), now.toString(), false);
+                userDataAccessObject.save(player);
+                SignupOutputData signupOutputData = new SignupOutputData(player.getName(), now.toString(), false);
                 userPresenter.prepareSuccessView(signupOutputData);
             }
         }
