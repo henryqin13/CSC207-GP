@@ -65,8 +65,9 @@ public class GamePresenter implements GameOutputBoundary {
     @Override
     public void gameStart(GameOutputData data) {
 
-        GameState gameState = gameViewModel.getState();
+        GameState gameState = new GameState();
         gameState.setCity(data.getCity());
+        gameViewModel.setState(gameState);
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();

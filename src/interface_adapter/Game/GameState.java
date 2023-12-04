@@ -11,7 +11,7 @@ public class GameState {
 
     private City city;
 
-    private int score = 10;
+    private int score;
 
     // Copy constructor
     public GameState(GameState copy) {
@@ -27,6 +27,8 @@ public class GameState {
 
     // Default constructor
     public GameState() {
+        score = 10;
+        guessCorrect = false;
     }
 
     // Getters
