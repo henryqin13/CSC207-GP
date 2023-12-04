@@ -18,6 +18,12 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     private final GameViewModel gameViewModel;
     private final GameController gameController;
 
+    ImageIcon pic1 = new ImageIcon("pictures/logo_transparent.png");
+    Image oldSize = pic1.getImage();
+    Image newSize = oldSize.getScaledInstance(700, 500, 1);
+    ImageIcon pic = new ImageIcon(newSize);
+    JLabel gamePic = new JLabel(pic);
+
     private final JLabel titleLabel = new JLabel(GameViewModel.TITLE_LABEL);
     private final JLabel hintLabel = new JLabel("Hint: ");
     private final JButton guessButton = new JButton(GameViewModel.GUESS_BUTTON_LABEL);
@@ -41,16 +47,18 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
 
         setupComponents();
         setupListeners();
+
     }
 
     private void setupComponents() {
 
         // North panel that uses BorderLayout to place title and score
         JPanel northPanel = new JPanel(new BorderLayout());
+        gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setFont(new Font("Serif", Font.BOLD, 72));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setPreferredSize(new Dimension(900, 300));
-        northPanel.add(titleLabel, BorderLayout.CENTER); // Title in the center
+        northPanel.add(gamePic, BorderLayout.CENTER); // Title in the center
 
         score.setText("" + gameViewModel.getState().getScore());
         score.setFont(new Font("Arial", Font.BOLD, 24));
@@ -178,12 +186,4 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     public void actionPerformed(ActionEvent e) {
 
     }
-
-
-    // Method to update the view based on changes in the game state
-//    public void updateView(GameState gameState) {
-//        hintLabel.setText("Hint: " + gameState.getHint());
-//        feedbackLabel.setText(gameState.isGuessCorrect() ? "Correct Guess!" : "Try again!");
-//        guessInputField.setText("");
-//    }
 }
