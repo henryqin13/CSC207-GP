@@ -1,52 +1,33 @@
 # CSC207GP
-#### Domain: 
-interactive logic game design/ city database  analysis
-#### Software Specification:
-
-#### Uer Stories:
-(Core): Eddie chooses to be a guesser for this round and picks the category of information he wants his clue to be based on- he picks "Geography". Then the computer gives him the clue "This city located near the border of Asia, Europe and Africa". Eddie thinks he needs one more clue, and he picks the "Pictures" category this time. Then a picture of the city is shown and now Eddie is ready to guess. He enters "Istanbul" on his keyboard and it turns out he is correct.  
-
-#### Entities
-I. Player
-- Attributes:
-  1. Name: String
-  2. Score: int
-  3. Roles: Arraylist[Role]
-
-II. Role (Interface)
-1. Guesser
-2. Chooser
-
-III. PlayerAnswer
-- Attributes:
-  1. Answer: String
-
-IV. Match
-- Attributes:
-  1. CorrectAnswer: City
-  2. UserAnswers: List[PlayerAnswer]
-
-V. City
-- Attributes
-  1. Name: String
-  2. Facts: HashMap[String, Fact]
-
-VI. Fact (Interface)
-1. WordFact
-    1. Category: String
-   2. Value: String
-2. NumFact
-    1. Category: String
-   2. Value: Integer
+# CityGuesser
+#### Overview: 
+CityGuesser is a Java-based game designed for players to 
+test their knowledge by guessing the correct city using a variety of hints. 
+Leveraging the OpenAI API, this game generates random cities and provides players 
+with hints of varying difficulty levels to aid their guesses. Players earn points 
+based on the difficulty of the hint chosen and the number of guesses it takes to 
+correctly identify the city.
 
 
-## for the group
-We need to finish four things before the next lab:
-- [X] A git repository shared with everyone and uploaded on quercus. 
-- [X] An UI for the core use case.
-- [ ] An UML diagram for the core use case. 
-- [ ] A sequence diagram for the core use case.
-- [ ] We need to actually divide the work among the group now and actually start coding.
+#### User Stories:
+Eddie signs up for an account and logs in. He clicks "Play Game"
+and is given a dropdown of the level of difficulty of hint he wants.
+Eddie clicks level 3 as he's quite smart.  Then the computer gives him 
+the hint, "This city is where Starbucks was founded". Luckily, Eddie 
+is a huge Starbucks fan, and he knows that this is Seattle. He guesses Seattle  
+and is awarded with a congratulations screen and a perfect 10 points. 
+Eddie is now addicted to the game and hits "Play Again" to continue playing
+CityGuesser.
 
-Notice I deliberately leave out some features to focus on the core and most basic things an user should be able to do, and postpone features like choosing a difficulty level or multiplayer or letting the computer guess. This user interaction will be the basis of our codes and we start from there. 
-
+### Features
+1. Random City Generation: 
+The game utilizes the OpenAI API to randomly select cities for each 
+round of gameplay.
+2. Hint System: Offers players hints categorized into difficulty levels 
+to assist in guessing the city.
+3. Scoring Mechanism: Points are awarded to players based on the selected 
+hint difficulty and the number of attempts taken.
+4. User Authentication: Provides options for users to log in, 
+sign up, or play as a guest.
+5. Leaderboard: Displays a leaderboard ranking all players based on 
+their performance in the game.
