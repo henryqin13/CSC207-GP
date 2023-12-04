@@ -31,10 +31,6 @@ public class GameState {
         guessCorrect = false;
     }
 
-    // Getters
-    public String getHintDiff() {
-        return hintDiff;
-    }
 
     public String getHint() {
         return hint;

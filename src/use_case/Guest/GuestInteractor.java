@@ -1,9 +1,5 @@
 package use_case.Guest;
 
-import entity.User;
-import interface_adapter.Guest.GuestPresenter;
-import use_case.Login.LoginOutputData;
-
 public class GuestInteractor implements GuestInputBoundary {
     final GuestUserDataAccessInterface userDataAccessObject;
     final GuestOutputBoundary guestPresenter;

@@ -1,7 +1,6 @@
 package interface_adapter.LoggedIn;
 
 import interface_adapter.ViewManagerModel;
-import view.SignupView;
 
 public class LoggedInController {
     private final LoggedInViewModel loggedInViewModel;

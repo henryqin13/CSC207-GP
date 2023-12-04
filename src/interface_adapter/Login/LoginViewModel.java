@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class LoginViewModel extends ViewModel {
-    public final String TITLE = "Log in";
+    public final String TITLE = "log in";
     public final String USERNAME_FIELD = "Enter Username";
     public final String PASSWORD_FIELD = "Enter Password";
 

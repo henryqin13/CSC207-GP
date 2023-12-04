@@ -19,11 +19,4 @@ public class City {
         return this.name;
     }
 
-    public void setFacts(HashMap<String, Fact> facts){
-        this.facts = facts;
-    }
-
-    public HashMap<String, Fact> getFacts(){
-        return this.facts;
-    }
 }
