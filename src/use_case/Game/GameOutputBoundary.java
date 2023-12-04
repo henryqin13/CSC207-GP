@@ -17,4 +17,6 @@ public interface GameOutputBoundary {
     void backToMain();
 
     void returnToMain();
+
+    void backToHint();
 }

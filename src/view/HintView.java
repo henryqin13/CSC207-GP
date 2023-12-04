@@ -17,7 +17,7 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
     private final GameController gameController;
 
     private final JTextArea hintLabel = new JTextArea();
-    private final JButton getHintButton = new JButton("Get Hint");
+    private final JButton getHintButton = new JButton("Get Another Hint");
 
     private final JComboBox<String> hintDifficultyComboBox = new JComboBox<>(new String[]{"1", "2", "3"});
     private final JButton makeGuessButton = new JButton("Make Guess");
@@ -97,7 +97,7 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
         hintDifficultyComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         getHintButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         hintDifficultyComboBox.setPreferredSize(new Dimension(75, 40));
-        getHintButton.setPreferredSize(new Dimension(125, 40));
+        getHintButton.setPreferredSize(new Dimension(180, 40));
         makeGuessButton.setSize(new Dimension(125, 40));
 
         hintSubPanel.add(hintDifficultyComboBox);
