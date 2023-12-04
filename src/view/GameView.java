@@ -52,14 +52,6 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
 
     private void setupComponents() {
 
-//        ImageIcon pic1 = new ImageIcon("pictures/logo_transparent.png");
-//        Image oldSize = pic1.getImage();
-//        Image newSize = oldSize.getScaledInstance(500, 300, 1);
-//        ImageIcon pic = new ImageIcon(newSize);
-//
-//        JLabel gamePic = new JLabel(pic);
-//        gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         // North panel that uses BorderLayout to place title and score
         JPanel northPanel = new JPanel(new BorderLayout());
         gamePic.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,7 +97,6 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
 
         JPanel inputPanel = new JPanel(new GridBagLayout());
 
-//        inputPanel.add(gamePic);
         inputPanel.add(new JLabel(GameViewModel.HINT_DIFFICULTY_LABEL), gbc);
         inputPanel.add(hintDifficultyComboBox, gbc);
         inputPanel.add(hintInputField, gbc);
@@ -195,12 +186,4 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
     public void actionPerformed(ActionEvent e) {
 
     }
-
-
-    // Method to update the view based on changes in the game state
-//    public void updateView(GameState gameState) {
-//        hintLabel.setText("Hint: " + gameState.getHint());
-//        feedbackLabel.setText(gameState.isGuessCorrect() ? "Correct Guess!" : "Try again!");
-//        guessInputField.setText("");
-//    }
 }
