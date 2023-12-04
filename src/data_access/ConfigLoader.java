@@ -45,6 +45,6 @@ public class ConfigLoader {
     }
 
     public static String decrypt(String text, int s) {
-        return encrypt(text, 26 - s);
+        return ConfigLoader.encrypt(text, 26 - s);
     }
 }
