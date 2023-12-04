@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.Leaderboard;
 import entity.Player;
 import entity.PlayerFactory;
 import use_case.Guest.GuestUserDataAccessInterface;
@@ -20,6 +21,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     private final Map<String, Player> accounts = new HashMap<>();
 
     private PlayerFactory playerFactory;
+
 
     public FileUserDataAccessObject(String csvPath, PlayerFactory playerFactory) throws IOException {
         this.playerFactory = playerFactory;
@@ -48,6 +50,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     Player player = playerFactory.create(username, password);
                     player.setScore(score);
                     accounts.put(username, player);
+
+
                 }
             }
         }
@@ -71,8 +75,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (Player player: accounts.values()) {
-                String line = String.format("%s,%s,%s", player.getName(),player.getPassword(),player.getScore());
+            for (Player player : accounts.values()) {
+                String line = String.format("%s,%s,%s", player.getName(), player.getPassword(), player.getScore());
                 writer.write(line);
                 writer.newLine();
             }
@@ -89,5 +93,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.containsKey(identifier);
     }
 
+    public Leaderboard createLeaderboard() {
+        Leaderboard leaderboard = new Leaderboard();
+        leaderboard.updateLeaderboard(accounts);
+        return leaderboard;
 
+
+    }
 }

@@ -3,7 +3,7 @@ package use_case.Leaderboard;
 import use_case.Signup.SignupOutputData;
 
 public interface LeaderboardOutputBoundary {
-    void prepareSuccessView(SignupOutputData user);
+    void prepareSuccessView(LeaderboardOutputData leaderboard);
 
     void prepareFailView(String error);
 }
