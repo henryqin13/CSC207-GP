@@ -20,7 +20,7 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
 
     ImageIcon pic1 = new ImageIcon("pictures/logo_transparent.png");
     Image oldSize = pic1.getImage();
-    Image newSize = oldSize.getScaledInstance(700, 500, 1);
+    Image newSize = oldSize.getScaledInstance(550, 390, 1);
     ImageIcon pic = new ImageIcon(newSize);
     JLabel gamePic = new JLabel(pic);
 
