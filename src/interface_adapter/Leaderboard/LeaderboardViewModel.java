@@ -36,15 +36,16 @@ public class LeaderboardViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public void initializeUI(JFrame frame) {
+    public void initializeUI(JPanel panel) {
+        int size = this.state.getLeaderboard().getPlayers().size();
         String[] columnNames = {"Username", "Score"};
-        Object[][] list = new Object[10][2];
-        for(int i = 0; i<10; i++){
+        Object[][] list = new Object[size][2];
+        for(int i = 0; i<size; i++){
             list[i][0] = this.state.getLeaderboard().getPlayers().get(i).getName();
             list[i][1] = this.state.getLeaderboard().getPlayers().get(i).getScore();
 
         }
         JTable table = new JTable(list, columnNames);
-        frame.add(table);
+        panel.add(new JScrollPane(table));
     }
 }

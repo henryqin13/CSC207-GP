@@ -64,6 +64,7 @@ public class TemporaryMain {
         LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
         MainMenuController mainMenuController = new MainMenuController(viewManagerModel, signupViewModel, loginViewModel,
                 guestViewModel);
+
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new PlayerFactory());
@@ -86,7 +87,11 @@ public class TemporaryMain {
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController);
+        LeaderboardController leaderboardController = LeaderboardUseCaseFactory.createController(viewManagerModel,userDataAccessObject, leaderboardViewModel);
+        LeaderBoardView leaderBoardView = new LeaderBoardView(leaderboardViewModel);
+        views.add(leaderBoardView, leaderBoardView.viewName);
+
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController, leaderboardController, viewManagerModel);
         views.add(loggedInView, loggedInView.viewName);
 
         GuestView guestView = GuestUseCaseFactory.create(viewManagerModel,guestViewModel,userDataAccessObject);

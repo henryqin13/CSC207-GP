@@ -11,14 +11,12 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class LeaderBoardView extends JFrame implements ActionListener, PropertyChangeListener {
-    private final String viewName = "Leaderboard";
+public class LeaderBoardView extends JPanel implements ActionListener, PropertyChangeListener {
+    public final String viewName = "Leaderboard";
     private final LeaderboardViewModel leaderBoardViewModel;
-    private final LeaderboardController leaderboardController;
     final JButton back;
-    public LeaderBoardView(LeaderboardViewModel leaderBoardViewModel, LeaderboardController leaderboardController){
+    public LeaderBoardView(LeaderboardViewModel leaderBoardViewModel){
         this.leaderBoardViewModel = leaderBoardViewModel;
-        this.leaderboardController = leaderboardController;
         this.leaderBoardViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(leaderBoardViewModel.TITLE_LABEL);

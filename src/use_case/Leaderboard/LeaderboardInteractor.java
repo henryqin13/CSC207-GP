@@ -5,9 +5,9 @@ import entity.Leaderboard;
 public class LeaderboardInteractor implements LeaderboardInputBoundary {
     final LeaderboardDataAccessInterface leaderboardDataAccessObject;
     final LeaderboardOutputData leaderboardOutputData;
-    public LeaderboardInteractor(LeaderboardDataAccessInterface leaderboardDataAccessObject, LeaderboardOutputData leaderboardOutputData){
+    public LeaderboardInteractor(LeaderboardDataAccessInterface leaderboardDataAccessObject){
         this.leaderboardDataAccessObject = leaderboardDataAccessObject;
-        this.leaderboardOutputData = leaderboardOutputData;
+        this.leaderboardOutputData = new LeaderboardOutputData();
     }
     @Override
     public void execute() {
@@ -15,4 +15,6 @@ public class LeaderboardInteractor implements LeaderboardInputBoundary {
         leaderboardOutputData.setLeaderboard(leaderboard);
 
     }
+    public LeaderboardOutputData getLeaderboardOutputData(){return this.leaderboardOutputData;}
 }
+

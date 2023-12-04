@@ -4,6 +4,7 @@ import entity.Leaderboard;
 import entity.Player;
 import entity.PlayerFactory;
 import use_case.Guest.GuestUserDataAccessInterface;
+import use_case.Leaderboard.LeaderboardDataAccessInterface;
 import use_case.Login.LoginUserDataAccessInterface;
 import use_case.Signup.SignupUserDataAccessInterface;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GuestUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GuestUserDataAccessInterface, LeaderboardDataAccessInterface {
 
     private final File csvFile;
 

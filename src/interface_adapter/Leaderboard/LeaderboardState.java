@@ -5,8 +5,9 @@ import entity.Leaderboard;
 public class LeaderboardState {
 
     private Leaderboard leaderboard;
-    public LeaderboardState(LeaderboardState copy){this.leaderboard = copy.leaderboard;}
-    public LeaderboardState(){}
+    public LeaderboardState(){
+        this.leaderboard = new Leaderboard();
+    }
     public Leaderboard getLeaderboard(){return this.leaderboard;}
     public void setLeaderboard(Leaderboard leaderboard){this.leaderboard = leaderboard;}
 
