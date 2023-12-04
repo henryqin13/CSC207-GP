@@ -20,13 +20,14 @@ public class GameViewModel extends ViewModel {
     public static final String CORRECT_GUESS_COMMENT_LABEL = ("Congratulations! You're so knowledgeable! " +
             "Do you want another round?");
 
-    public static final String WRONG_GUESS_COMMENT_LABEl = ("Oh no...... what a pity! You were so close!" +
+    public static final String WRONG_GUESS_COMMENT_LABEL = ("Oh no...... what a pity! You were so close!" +
             " Maybe try for another around?");
 
     public static final String BACK_LABEL = "Back to Main Menu";
 
     // Game state
     private GameState state = new GameState();
+
 
     // Constructor
     public GameViewModel() {

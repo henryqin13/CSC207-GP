@@ -26,6 +26,11 @@ public class GamePresenter implements GameOutputBoundary {
         gameState.setGuessCorrect(data.getGuess());
         if (!data.getGuess()) {
             gameState.setScore(gameState.getScore() - 1);
+            if (gameState.getScore() <= 0){
+                this.gameViewModel.firePropertyChanged();
+                this.viewManagerModel.firePropertyChanged();
+                this.viewManagerModel.setActiveView("game over");
+            }
         }
         System.out.println(data.getGuess());
 
@@ -33,6 +38,8 @@ public class GamePresenter implements GameOutputBoundary {
 
         this.gameViewModel.firePropertyChanged(); // Notify observers about the state change
         if (data.getGuess()){
+            gameState.setGuessCorrect(true);
+            this.gameViewModel.firePropertyChanged();
             this.viewManagerModel.setActiveView("game over");
             this.viewManagerModel.firePropertyChanged();
         } else {

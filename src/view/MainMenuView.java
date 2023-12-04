@@ -45,7 +45,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
         ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
         Image oldSize = pic1.getImage();
-        Image newSize = oldSize.getScaledInstance(900, 450, 1);
+        Image newSize = oldSize.getScaledInstance(900, 500, 1);
         ImageIcon pic = new ImageIcon(newSize);
 
         JLabel gamePic = new JLabel(pic);
