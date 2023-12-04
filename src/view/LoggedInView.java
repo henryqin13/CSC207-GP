@@ -66,6 +66,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         playGame.addActionListener(this);
         playGame.addActionListener(e -> handlePlayGame());
 
+        JButton leaderboard = new JButton("LeaderBoard");
+
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(gamePic);

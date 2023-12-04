@@ -1,3 +1,2 @@
-username,password,creation_time
-%s,%s,%sbaen123
-%s,%s,%s%s%s
+username,password,score
+123,123,0

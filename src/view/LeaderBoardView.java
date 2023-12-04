@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class LeaderBoardView extends JPanel implements ActionListener, PropertyChangeListener {
+public class LeaderBoardView extends JFrame implements ActionListener, PropertyChangeListener {
     private final String viewName = "Leaderboard";
     private final LeaderboardViewModel leaderBoardViewModel;
     private final LeaderboardController leaderboardController;
@@ -35,6 +35,7 @@ public class LeaderBoardView extends JPanel implements ActionListener, PropertyC
         back.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
+        this.leaderBoardViewModel.initializeUI(this);
     }
 
     @Override
