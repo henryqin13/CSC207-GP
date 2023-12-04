@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class OpenAI extends APIClient implements GenerativeInterface {
-//    todo: implement interfaces
     public OpenAI(String endpoint, String key) {
         super(endpoint, key);
     }
@@ -24,7 +23,7 @@ public class OpenAI extends APIClient implements GenerativeInterface {
                 + "    {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},"
                 + "    {\"role\": \"user\", \"content\": \"%s\"}"
                 + "]"
-//                + "\"max_tokens\": 50"
+//                + "\"max_tokens\": 150"
                 + "}", prompt);
 
         HttpResponse<String> response = super.getData(requestBody);
@@ -55,8 +54,5 @@ public class OpenAI extends APIClient implements GenerativeInterface {
 
         return content;
     }
-
-
-
 }
 
