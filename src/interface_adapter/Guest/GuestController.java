@@ -3,8 +3,6 @@ package interface_adapter.Guest;
 import interface_adapter.ViewManagerModel;
 import use_case.Guest.GuestInputData;
 import use_case.Guest.GuestInputBoundary;
-import use_case.Signup.SignupInputBoundary;
-import use_case.Signup.SignupInputData;
 
 public class GuestController {
 

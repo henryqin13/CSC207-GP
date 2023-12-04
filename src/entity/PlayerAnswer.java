@@ -7,14 +7,6 @@ public class PlayerAnswer {
         this.answer = answer;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
     public String toString () {
         return "PlayerAnswer{" + "answer='" + answer + '\'' + '}';
     }

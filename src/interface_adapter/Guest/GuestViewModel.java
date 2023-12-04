@@ -10,30 +10,16 @@ public class GuestViewModel extends ViewModel {
 
     public static final String EXIT_BUTTON_NAME = "Exit";
     public static final String GAME_BUTTON_NAME = "Start Game";
-    public String guestUser;
-    private GuestState state = new GuestState();
     public GuestViewModel(){
         super("playing as guest");
     }
-    public void setState(GuestState state) {
-        this.state = state;
-    }
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    public void firePropertyChanged(){
-        support.firePropertyChange("state", null, this.state);
-    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener){
         support.addPropertyChangeListener(listener);
     }
-    public GuestState getState(){
-        return state;
-    }
 
-    public String getGuestUser() {
-        return guestUser;
-    }
-
-    public void setGuestUser(String guestUser) {
-        this.guestUser = guestUser;
+    @Override
+    public void firePropertyChanged(){
     }
 }

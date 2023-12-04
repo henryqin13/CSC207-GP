@@ -1,12 +1,8 @@
 package interface_adapter.Game;
 
-import use_case.Game.GameDataAccessInterface;
 import use_case.Game.GameOutputBoundary;
 import use_case.Game.GameOutputData;
 import interface_adapter.ViewManagerModel;
-import use_case.GenerativeInterface;
-
-import java.util.Arrays;
 
 public class GamePresenter implements GameOutputBoundary {
 

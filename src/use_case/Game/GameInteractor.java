@@ -9,6 +9,7 @@ public class GameInteractor implements GameInputBoundary{
     final GameDataAccessInterface gameDataAccessObject;
     final GameOutputBoundary gamePresenter;
     final GenerativeInterface client;
+    private GameState gameState;
 
     public GameInteractor(GameDataAccessInterface gameDataAccessObject,
                           GameOutputBoundary gameOutputBoundary,
@@ -20,7 +21,9 @@ public class GameInteractor implements GameInputBoundary{
 
     @Override
     public void executeGame() {
-        String city = client.getResponse("Give a random city. GIVE ONLY THE NAME OF THE CITY.");
+        String city = client.getResponse("Give a random city");
+        System.out.println(city);
+        gameState = new GameState();
 
         GameOutputData gameOutputData = new GameOutputData("", false, new City(city, null));
         gamePresenter.gameStart(gameOutputData);

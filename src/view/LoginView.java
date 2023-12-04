@@ -9,18 +9,15 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import interface_adapter.CancelController;
-import interface_adapter.Signup.SignupState;
 
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "log in";
-    private final LoginViewModel loginViewModel;
 
+    private final LoginViewModel loginViewModel;
+    public final String viewName = "log in";
     final JTextField usernameInputField = new JTextField(15);
     private final JLabel usernameErrorField = new JLabel();
 
@@ -39,7 +36,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.loginViewModel.addPropertyChangeListener(this);
         this.cancelController = cancelController;
 
-        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto.jpeg");
         Image oldSize = pic1.getImage();
         Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
@@ -52,11 +49,11 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         title.setFont(new Font("Serif", Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel usernameLabel = new JLabel("Username");
+        JLabel usernameLabel = new JLabel(loginViewModel.USERNAME_FIELD);
         usernameLabel.setPreferredSize(new Dimension(140,50));
         usernameLabel.setFont(new Font("Serif", Font.BOLD, 18));
 
-        JLabel passwordLabel = new JLabel("Password");
+        JLabel passwordLabel = new JLabel(loginViewModel.PASSWORD_FIELD);
         passwordLabel.setPreferredSize(new Dimension(140,50));
         passwordLabel.setFont(new Font("Serif", Font.BOLD, 18));
 

@@ -1,9 +1,7 @@
 package app;
 
-import data_access.OpenAI;
 import interface_adapter.*;
 import interface_adapter.Game.*;
-import use_case.DataAccessInterface;
 import use_case.Game.GameInputBoundary;
 import use_case.Game.GameInteractor;
 import use_case.Game.GameOutputBoundary;
