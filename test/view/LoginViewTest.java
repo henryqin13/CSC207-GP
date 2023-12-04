@@ -1,37 +1,25 @@
 package view;
 
-import app.SignupUseCaseFactory;
-import data_access.FileUserDataAccessObject;
-import entity.CommonUserFactory;
 import interface_adapter.CancelController;
-import interface_adapter.Game.GameViewModel;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestViewModel;
-import interface_adapter.LoggedIn.LoggedInController;
-import interface_adapter.LoggedIn.LoggedInViewModel;
+import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginViewModel;
-import interface_adapter.MainMenu.MainMenuController;
-import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.Signup.SignupController;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
-import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.swing.*;
 
-import java.io.IOException;
+public class LoginViewTest extends AssertJSwingJUnitTestCase {
 
-import static org.assertj.swing.launcher.ApplicationLauncher.application;
-
-public class SignupViewTest extends AssertJSwingJUnitTestCase {
     private FrameFixture window;
-    private SignupViewModel signupViewModel;
-    private SignupController signupController;
+    private LoginViewModel loginViewModel;
+    private LoginController loginController;
     private GuestViewModel guestViewModel;
     private GuestController guestController;
     private CancelController cancelController;
@@ -42,14 +30,14 @@ public class SignupViewTest extends AssertJSwingJUnitTestCase {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
 
 
-        SignupViewModel signupViewModel = new SignupViewModel();
+        LoginViewModel loginViewModel = new LoginViewModel();
 
         JFrame frame = GuiActionRunner.execute(() -> {
-            SignupView signupView = new SignupView(
-                    signupController, signupViewModel, guestController, guestViewModel, cancelController
+            LoginView loginView = new LoginView(
+                    loginViewModel, loginController, cancelController
             );
             JFrame newFrame = new JFrame("Test Frame");
-            newFrame.add(signupView);
+            newFrame.add(loginView);
             newFrame.pack();
             return newFrame;
         });

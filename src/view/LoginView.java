@@ -74,6 +74,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
 
+        usernameInputField.setName("usernameInputField");
+        passwordInputField.setName("passwordInputField");
+
         logIn.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
