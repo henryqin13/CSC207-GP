@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import use_case.Guest.*;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class GuestInteractorTest {
 
@@ -23,6 +23,7 @@ public class GuestInteractorTest {
         // Initialize the GuestInteractor with the mocked dependencies
         guestInteractor = new GuestInteractor(userDataAccessObject, guestOutputBoundary);
     }
+
 
     @Test
     public void testExecute() {

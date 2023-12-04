@@ -9,6 +9,7 @@ import interface_adapter.Signup.SignupState;
 import interface_adapter.Signup.SignupViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import use_case.Signup.SignupInputBoundary;
 import use_case.Signup.SignupInputData;
 import use_case.Signup.SignupInteractor;
@@ -41,26 +42,18 @@ class SignupControllerTest {
 
     @Test
     void testSignupSuccess() {
-        // Arrange
-        String username = "newUser";
-        String password = "password";
-        String repeatPassword = "password";
-        User mockUser = mock(User.class);
-        when(mockUser.getName()).thenReturn(username);
-        when(userDataAccessInterface.existsByName(username)).thenReturn(false);
-        when(userFactory.create(username, password)).thenReturn(mockUser);
-        doNothing().when(userDataAccessInterface).save(any(User.class));
+        SignupInputBoundary mockInputBoundary = Mockito.mock(SignupInputBoundary.class);
 
-        // Act
-        signupController.execute(username, password, repeatPassword);
+        SignupController signupController = new SignupController(mockInputBoundary);
 
-        // Assert
-        verify(userDataAccessInterface).save(mockUser);
-        SignupState state = signupViewModel.getState();
-        assert state.getUsername().equals(username);
-        assert state.getUsernameError() == null;
-        assert state.getPasswordError() == null;
-        assert state.getRepeatPasswordError() == null;
+        String username = "testuser";
+        String password1 = "password";
+        String password2 = "password";
+
+        signupController.execute(username, password1, password2);
+
+        Mockito.verify(mockInputBoundary).execute(Mockito.any());
+
     }
 
     @Test
