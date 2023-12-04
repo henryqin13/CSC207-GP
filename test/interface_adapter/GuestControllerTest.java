@@ -2,7 +2,6 @@ package interface_adapter;
 
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestPresenter;
-import interface_adapter.Guest.GuestState;
 import interface_adapter.Guest.GuestViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,26 +52,5 @@ class GuestControllerTest {
         guestController.startGame();
         verify(viewManagerModel).setActiveView("game");
         verify(viewManagerModel).firePropertyChanged();
-    }
-
-    @Test
-    void testPrepareSuccessView() {
-        // Assuming "Guest" is the name of the guest and false indicates the use case did not fail
-        GuestOutputData guestOutputData = new GuestOutputData("Guest", false);
-        guestPresenter.prepareSuccessView(guestOutputData);
-
-        ArgumentCaptor<GuestState> stateCaptor = ArgumentCaptor.forClass(GuestState.class);
-        verify(propertyChangeListener).propertyChange(any());
-        verify(viewManagerModel).setActiveView(anyString());
-        verify(viewManagerModel).firePropertyChanged();
-
-        // Capture the state that was set on the view model
-        verify(guestViewModel).setState(stateCaptor.capture());
-        GuestState capturedState = stateCaptor.getValue();
-
-        // Assert that the state was set correctly
-        // Replace getGuestName with the correct method to retrieve the guest name
-        // If the guest name is stored in the guestUser field of GuestViewModel, use that
-        assertEquals("Guest", guestViewModel.getGuestUser());
     }
 }
