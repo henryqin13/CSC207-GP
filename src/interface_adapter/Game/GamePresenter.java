@@ -27,19 +27,14 @@ public class GamePresenter implements GameOutputBoundary {
         if (!data.getGuess()) {
             gameState.setScore(gameState.getScore() - 1);
         }
-        System.out.println(data.getGuess());
-
         this.gameViewModel.setState(gameState);
-
-        this.gameViewModel.firePropertyChanged(); // Notify observers about the state change
-        if (data.getGuess()){
+        this.gameViewModel.firePropertyChanged();
+        if (gameState.isGuessCorrect() || gameState.getScore() < 0){
             this.viewManagerModel.setActiveView("game over");
-            this.viewManagerModel.firePropertyChanged();
         } else {
             this.viewManagerModel.setActiveView("game");
-            this.viewManagerModel.firePropertyChanged();
         }
-
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -55,18 +50,15 @@ public class GamePresenter implements GameOutputBoundary {
         GameState gameState = gameViewModel.getState();
         gameState.setHint(data.getHint());
         int updatedScore = gameState.getScore() - hintDiff;
-        System.out.println(updatedScore);
-        if (updatedScore >= 0) {
-            gameState.setScore(updatedScore);
-        } else {
-//            TODO: end game
-        }
+        gameState.setScore(updatedScore);
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();
-
-        // Change to the hint view
-        this.viewManagerModel.setActiveView("hint");
+        if (gameState.getScore() > 0) {
+            this.viewManagerModel.setActiveView("hint");
+        } else {
+            this.viewManagerModel.setActiveView("game over");
+        }
         this.viewManagerModel.firePropertyChanged();
     }
 

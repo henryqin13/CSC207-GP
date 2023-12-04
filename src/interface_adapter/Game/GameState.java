@@ -69,13 +69,9 @@ public class GameState {
 
     public void setCity(City city) {this.city = city;}
 
-    public void setScore(int score) {this.score = score;}
-
-//    public void addPropertyChangeListener(PropertyChangeListener listener) {
-//        support.addPropertyChangeListener(listener);
-//    }
-//
-//    public void removePropertyChangeListener(PropertyChangeListener listener) {
-//        support.removePropertyChangeListener(listener);
-//    }
+    public void setScore(int score) {
+        if (score >= 0) {
+            this.score = score;
+        }
+    }
 }
