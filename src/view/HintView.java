@@ -120,6 +120,10 @@ public class HintView extends JPanel implements ActionListener, PropertyChangeLi
 
 
         add(centerPanel, BorderLayout.CENTER);
+
+        hintInputField.setName("hintInputField");
+        getHintButton.setName("getHintButton");
+        makeGuessButton.setName("makeGuessButton");
     }
 
     private void updateHintLabel(String hint) {

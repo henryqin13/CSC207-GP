@@ -91,6 +91,9 @@ public class GuessView extends JPanel implements ActionListener, PropertyChangeL
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
         centerPanel.add(feedbackLabel, gbc);
         add(centerPanel, BorderLayout.CENTER);
+
+        guessInputField.setName("guessInputField");
+        submitGuessButton.setName("submitGuessButton");
     }
 
 
