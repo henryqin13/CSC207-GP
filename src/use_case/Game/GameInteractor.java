@@ -61,6 +61,7 @@ public class GameInteractor implements GameInputBoundary{
 
     @Override
     public void exit(){
+        gameState = new GameState();
         gamePresenter.exit();
     }
 
