@@ -86,6 +86,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
 
+        usernameInputField.setName("usernameInputField");
+        passwordInputField.setName("passwordInputField");
+
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
