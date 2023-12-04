@@ -1,8 +1,10 @@
 package data_access;
 
-import entity.User;
-import entity.UserFactory;
+import entity.Leaderboard;
+import entity.Player;
+import entity.PlayerFactory;
 import use_case.Guest.GuestUserDataAccessInterface;
+import use_case.Leaderboard.LeaderboardDataAccessInterface;
 import use_case.Login.LoginUserDataAccessInterface;
 import use_case.Signup.SignupUserDataAccessInterface;
 
@@ -11,23 +13,24 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GuestUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, GuestUserDataAccessInterface, LeaderboardDataAccessInterface {
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
-    private final Map<String, User> accounts = new HashMap<>();
+    private final Map<String, Player> accounts = new HashMap<>();
 
-    private UserFactory userFactory;
+    private PlayerFactory playerFactory;
 
-    public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
-        this.userFactory = userFactory;
+
+    public FileUserDataAccessObject(String csvPath, PlayerFactory playerFactory) throws IOException {
+        this.playerFactory = playerFactory;
 
         csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);
-        headers.put("creation_time", 2);
+        headers.put("score", 2);
 
         if (csvFile.length() == 0) {
             save();
@@ -37,28 +40,32 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,password");
+                assert header.equals("username,password,score");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
-                    User user = userFactory.create(username, password);
-                    accounts.put(username, user);
+                    int score = Integer.parseInt(String.valueOf(col[headers.get("score")]));
+                    Player player = playerFactory.create(username, password);
+                    player.setScore(score);
+                    accounts.put(username, player);
+
+
                 }
             }
         }
     }
 
     @Override
-    public void save(User user) {
+    public void save(Player user) {
         accounts.put(user.getName(), user);
         this.save();
     }
 
     @Override
-    public User get(String username) {
+    public Player get(String username) {
         return accounts.get(username);
     }
 
@@ -69,8 +76,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (User user: accounts.values()) {
-                String line = String.format("%s,%s", user.getName(),user.getPassword());
+            for (Player player : accounts.values()) {
+                String line = String.format("%s,%s,%s", player.getName(), player.getPassword(), player.getScore());
                 writer.write(line);
                 writer.newLine();
             }
@@ -87,5 +94,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.containsKey(identifier);
     }
 
+    public Leaderboard createLeaderboard() {
+        Leaderboard leaderboard = new Leaderboard();
+        leaderboard.updateLeaderboard(accounts);
+        return leaderboard;
 
+
+    }
 }

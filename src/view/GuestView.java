@@ -48,7 +48,7 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         JPanel buttons = new JPanel();
         buttons.setPreferredSize(new Dimension(500, 400));
         buttons.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        exit = new JButton(GuestViewModel.EXIT_BUTTON_NAME);
+        exit = new JButton(GuestViewModel.BACK_BUTTON_NAME);
         exit.setFont(new Font("Serif", Font.PLAIN, 25));
         exit.setPreferredSize(new Dimension(125, 40));
         exit.setAlignmentY(Component.BOTTOM_ALIGNMENT);

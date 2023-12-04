@@ -1,11 +1,11 @@
 package use_case.Login;
 
-import entity.User;
+import entity.Player;
 
 public interface LoginUserDataAccessInterface {
     boolean existsByName(String identifier);
 
-    void save(User user);
+    void save(Player user);
 
-    User get(String username);
+    Player get(String username);
 }

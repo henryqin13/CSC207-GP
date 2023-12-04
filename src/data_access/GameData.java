@@ -1,7 +1,7 @@
 package data_access;
 
 import entity.City;
-import entity.User;
+import entity.Player;
 import use_case.Game.GameDataAccessInterface;
 
 public class GameData implements GameDataAccessInterface {
@@ -18,7 +18,7 @@ public class GameData implements GameDataAccessInterface {
     }
 
     @Override
-    public void save(User user) {
+    public void save(Player player) {
 
     }
 }

@@ -1,7 +1,5 @@
 package use_caseInteractor;
 
-import entity.User;
-import entity.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

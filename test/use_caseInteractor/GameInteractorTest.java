@@ -43,6 +43,7 @@ public class GameInteractorTest {
 
     @Test
     public void testExecuteHint() {
+
         // Arrange
         City testCity = new City("TestCity", null);
         // Assuming the difficulty level is a String where '1' corresponds to 'easy'
@@ -80,6 +81,7 @@ public class GameInteractorTest {
 
     @Test
     public void testMakeGuessCorrect() {
+
         // Arrange
         City testCity = new City("TestCity", null);
         GameInputData inputData = new GameInputData("testcity", null, testCity); // Pass null for the Hint
@@ -95,6 +97,105 @@ public class GameInteractorTest {
 
     @Test
     public void testMakeGuessIncorrect() {
+        GameInputData inputData = new GameInputData("Montreal", "", new City("Toronto", null));
+        gameInteractor.makeGuess(inputData);
+        assertFalse(gameOutputBoundary.isGuessCorrect());
+    }
+
+    // Stub classes to replace actual implementations
+    public class StubGameDataAccessInterface implements GameDataAccessInterface {
+
+        @Override
+        public City getCity() {
+            // Return a dummy City object or mock behavior
+            return new City("Toronto", null);
+        }
+
+        @Override
+        public void save(User user) {
+
+        }
+
+        @Override
+        public void saveCity(City city) {
+            // Implement the saveCity method, e.g., do nothing for a stub
+        }
+    }
+
+
+
+    private static class StubGameOutputBoundary implements GameOutputBoundary {
+        private boolean gameStarted = false;
+        private boolean hintDisplayed = false;
+        private boolean guessViewDisplayed = false;
+        private boolean guessCorrect = false;
+
+        @Override
+        public void guess(GameOutputData data) {
+            guessCorrect = data.getGuess();
+        }
+
+        @Override
+        public void guessView(GameOutputData data) {
+            guessViewDisplayed = true;
+        }
+
+        @Override
+        public void hintView(GameOutputData data, int hint) {
+            hintDisplayed = true;
+        }
+
+        @Override
+        public void gameStart(GameOutputData data) {
+            gameStarted = true;
+        }
+
+        @Override
+        public void exit() {
+
+        }
+
+        @Override
+        public void backToMain() {
+
+        }
+
+        @Override
+        public void returnToMain() {
+
+        }
+
+        public boolean isGameStarted() {
+            return gameStarted;
+        }
+
+        public boolean isHintDisplayed() {
+            return hintDisplayed;
+        }
+
+        public boolean isGuessViewDisplayed() {
+            return guessViewDisplayed;
+        }
+
+        public boolean isGuessCorrect() {
+            return guessCorrect;
+        }
+    }
+
+    private static class StubGenerativeInterface implements GenerativeInterface {
+        @Override
+        public String getResponse(String prompt) {
+            if (prompt.contains("Give a random city")) {
+                return "Toronto";
+            } else if (prompt.contains("small piece of information")) {
+                return "It's located in Ontario, Canada.";
+            } else {
+                return "Congratulations! Your score is 10.";
+            }
+        }
+    }
+}
+=======
         // Arrange
         City testCity = new City("TestCity", null);
         GameInputData inputData = new GameInputData("wrongguess", null, testCity); // Pass null for the Hint

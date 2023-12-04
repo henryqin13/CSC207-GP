@@ -6,13 +6,12 @@ public class Player {
     private String name;
     private final String password;
     private int score;
-    private List<Role> roles;
 
-    public Player(String name, String password, List<Role> roles) {
+
+    public Player(String name, String password) {
         this.name = name;
         this.password = password;
         this.score = 0;
-        this.roles = roles;
     }
 
     public String getName() {
@@ -35,15 +34,8 @@ public class Player {
         return this.password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 
     public String toString() {
-        return "Player{ " + "name='" + name + '\'' + ", score=" + score + ", roles=" + roles + '}';
+        return "Player{ " + "name='" + name + '\'' + ", score=" + score  + '}';
     }
 }

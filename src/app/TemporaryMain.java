@@ -3,15 +3,11 @@ package app;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import data_access.*;
 import entity.PlayerFactory;
-import interface_adapter.Game.GameController;
-import interface_adapter.Game.GameViewModel;
-import interface_adapter.Guest.GuestViewModel;
+import entity.PlayerFactory;
 import interface_adapter.Leaderboard.LeaderboardController;
 import interface_adapter.Leaderboard.LeaderboardViewModel;
-import interface_adapter.LoggedIn.LoggedInController;
-import interface_adapter.LoggedIn.LoggedInViewModel;
-import interface_adapter.Login.LoginViewModel;
 import interface_adapter.MainMenu.MainMenuController;
+import interface_adapter.Guest.GuestController;
 import interface_adapter.LoggedIn.LoggedInController;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.MainMenu.MainMenuViewModel;
@@ -20,6 +16,8 @@ import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.Game.GameViewModel;
 import interface_adapter.ViewManagerModel;
+import use_case.Guest.GuestInteractor;
+import use_case.Guest.GuestUserDataAccessInterface;
 import use_case.Game.GameDataAccessInterface;
 import view.*;
 
@@ -28,8 +26,9 @@ import java.awt.*;
 import java.io.IOException;
 
 import javax.swing.UIManager;
+import com.formdev.flatlaf.*;
 
-public class Main {
+public class TemporaryMain {
 
     private static String apiKey; // Replace with your actual API key
     private static final String ENDPOINT = "https://api.openai.com/v1/chat/completions"; // Adjust as needed
@@ -59,21 +58,21 @@ public class Main {
         SignupViewModel signupViewModel = new SignupViewModel();
         GuestViewModel guestViewModel = new GuestViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        GameViewModel gameViewModel = new GameViewModel();
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
 
         LoggedInController loggedInController = new LoggedInController(loggedInViewModel, viewManagerModel);
         MainMenuController mainMenuController = new MainMenuController(viewManagerModel, signupViewModel, loginViewModel,
                 guestViewModel);
+
         FileUserDataAccessObject userDataAccessObject;
         try {
             userDataAccessObject = new FileUserDataAccessObject("./users.csv", new PlayerFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        LeaderboardController leaderboardController = LeaderboardUseCaseFactory.createController(viewManagerModel,userDataAccessObject, leaderboardViewModel);
-        LeaderBoardView leaderBoardView = new LeaderBoardView(leaderboardViewModel);
-        views.add(leaderBoardView, leaderBoardView.viewName);
+        //Not yet set up
+        GuestUserDataAccessInterface guestUserDataAccessInterface;
 
         ConfigLoader config = new ConfigLoader();
         String apiKey = config.getApiKey();
@@ -87,6 +86,10 @@ public class Main {
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
+
+        LeaderboardController leaderboardController = LeaderboardUseCaseFactory.createController(viewManagerModel,userDataAccessObject, leaderboardViewModel);
+        LeaderBoardView leaderBoardView = new LeaderBoardView(leaderboardViewModel);
+        views.add(leaderBoardView, leaderBoardView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel, loggedInController, leaderboardController, viewManagerModel);
         views.add(loggedInView, loggedInView.viewName);
