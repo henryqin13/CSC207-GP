@@ -24,7 +24,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     private final ViewManagerModel viewManagerModel;
 
     JLabel username;
-
     final JButton logOut;
     final JButton playGame;
     final JButton leaderboard;
@@ -38,7 +37,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.loggedInViewModel.addPropertyChangeListener(this);
 
 
-        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto.jpeg");
         Image oldSize = pic1.getImage();
         Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
@@ -84,6 +83,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        logOut.setName("logOut");
+        playGame.setName("playGame");
 
         this.add(gamePic);
         this.add(title);

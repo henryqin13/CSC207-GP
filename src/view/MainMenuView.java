@@ -1,11 +1,7 @@
-
 package view;
 
 import interface_adapter.Guest.GuestViewModel;
-import interface_adapter.Login.LoginController;
-import interface_adapter.Login.LoginState;
 import interface_adapter.Login.LoginViewModel;
-import interface_adapter.Signup.SignupState;
 import interface_adapter.Signup.SignupViewModel;
 import interface_adapter.MainMenu.MainMenuViewModel;
 import interface_adapter.MainMenu.MainMenuController;
@@ -14,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -43,7 +37,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         this.guestViewModel = guestViewModel;
         this.mainMenuViewModel.addPropertyChangeListener(this);
 
-        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto.jpeg");
         Image oldSize = pic1.getImage();
         Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
@@ -77,6 +71,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         buttons.add(guest);
         buttons.setPreferredSize(new Dimension(900, 300));
 
+        signUp.setName("signUp");
+        logIn.setName("logIn");
+        guest.setName("guest");
 
 
         signUp.addActionListener(

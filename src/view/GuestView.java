@@ -2,7 +2,6 @@ package view;
 
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestViewModel;
-import interface_adapter.Guest.GuestState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +28,7 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         this.guestController = guestController;
         this.guestViewModel.addPropertyChangeListener(this);
 
-        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto.jpeg");
         Image oldSize = pic1.getImage();
         Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
@@ -62,6 +61,9 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
         buttons.add(startGame);
 
         exit.addActionListener(this);
+
+        exit.setName("exit");
+        startGame.setName("startGame");
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

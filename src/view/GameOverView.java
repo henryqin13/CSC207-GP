@@ -2,17 +2,15 @@ package view;
 
 import interface_adapter.Game.GameController;
 import interface_adapter.Game.GameViewModel;
-import interface_adapter.Game.GameState;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class GameOverView extends JPanel implements ActionListener{
+public class GameOverView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "game over";
 
     private final GameViewModel gameViewModel;
@@ -20,9 +18,8 @@ public class GameOverView extends JPanel implements ActionListener{
 
     private final JLabel gameOverLabel = new JLabel(GameViewModel.GAME_OVER_LABEL);
 
-    private final JLabel correctGuessLabel = new JLabel(GameViewModel.CORRECT_GUESS_COMMENT_LABEL);
+    private final JLabel guessLabel = new JLabel(GameViewModel.WRONG_GUESS_COMMENT_LABEL);
 
-    private final JLabel wrongGuessLabel = new JLabel(GameViewModel.WRONG_GUESS_COMMENT_LABEl);
     private final JButton startOverButton = new JButton(GameViewModel.START_OVER_LABEL);
 
     private final JButton backButton = new JButton(GameViewModel.BACK_LABEL);
@@ -32,6 +29,7 @@ public class GameOverView extends JPanel implements ActionListener{
         this.gameViewModel = gameViewModel;
         this.gameController = gameController;
 
+        this.gameViewModel.addPropertyChangeListener(this);
 
         setupComponents();
         setupListeners();
@@ -42,25 +40,17 @@ public class GameOverView extends JPanel implements ActionListener{
 
         JPanel panels = new JPanel();
 
-
         gameOverLabel.setFont(new Font("Serif", Font.BOLD, 24));
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setPreferredSize(new Dimension(800, 100));
 
+        guessLabel.setFont(new Font("Serif", Font.BOLD, 24));
+        guessLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        guessLabel.setPreferredSize(new Dimension(800, 100));
+        panels.add(guessLabel);
 
-        correctGuessLabel.setFont(new Font("Serif", Font.BOLD, 24));
-        correctGuessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        correctGuessLabel.setPreferredSize(new Dimension(800, 100));
-
-        panels.add(gameOverLabel);
-        panels.add(correctGuessLabel);
-        panels.setPreferredSize(new Dimension(800, 500));
+        panels.setPreferredSize(new Dimension(800, 300));
         this.add(panels);
-
-//        wrongGuessLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        wrongGuessLabel.setFont(new Font("Serif", Font.BOLD, 24));
-//        add(wrongGuessLabel, BorderLayout.CENTER);
-
 
         startOverButton.setPreferredSize(new Dimension(800, 100));
         startOverButton.setFont(new Font("Serif", Font.BOLD, 26));
@@ -71,6 +61,9 @@ public class GameOverView extends JPanel implements ActionListener{
         backButton.setFont(new Font("Serif", Font.BOLD, 26));
         backButton.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(backButton);
+
+        startOverButton.setName("startOverButton");
+        backButton.setName("backButton");
     }
 
     private void setupListeners() {
@@ -92,10 +85,21 @@ public class GameOverView extends JPanel implements ActionListener{
         });
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("state".equals(evt.getPropertyName())) {
+            boolean isCorrect = gameViewModel.getState().isGuessCorrect();
+            if (isCorrect){
+                guessLabel.setText(GameViewModel.CORRECT_GUESS_COMMENT_LABEL);
+            }
+            else{
+                guessLabel.setText(GameViewModel.WRONG_GUESS_COMMENT_LABEL);
+            }
+        }
+    }
 }

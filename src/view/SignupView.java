@@ -13,8 +13,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -23,15 +21,15 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private final SignupViewModel signupViewModel;
     private final GuestViewModel guestViewModel;
-    private final JTextField usernameInputField = new JTextField(15);
-    private final JPasswordField passwordInputField = new JPasswordField(15);
-    private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
+    final JTextField usernameInputField = new JTextField(15);
+    final JPasswordField passwordInputField = new JPasswordField(15);
+    final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final SignupController signupController;
     private final GuestController guestController;
     private final CancelController cancelController;
 
-    private final JButton signUp;
-    private final JButton cancel;
+    final JButton signUp;
+    final JButton cancel;
 
     public SignupView(SignupController controller, SignupViewModel signupViewModel, GuestController guestController, GuestViewModel guestViewModel, CancelController cancelController) {
 
@@ -42,7 +40,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         this.cancelController = cancelController;
         signupViewModel.addPropertyChangeListener(this);
 
-        ImageIcon pic1 = new ImageIcon("pictures/toronto2.jpeg");
+        ImageIcon pic1 = new ImageIcon("pictures/toronto.jpeg");
         Image oldSize = pic1.getImage();
         Image newSize = oldSize.getScaledInstance(900, 450, 1);
         ImageIcon pic = new ImageIcon(newSize);
@@ -87,6 +85,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         cancel.setFont(new Font("Serif", Font.PLAIN, 25));
         cancel.setPreferredSize(new Dimension(125, 40));
         buttons.add(cancel);
+
+        usernameInputField.setName("usernameInputField");
+        passwordInputField.setName("passwordInputField");
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.

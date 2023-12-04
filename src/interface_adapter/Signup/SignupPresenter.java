@@ -24,6 +24,9 @@ public class SignupPresenter implements SignupOutputBoundary {
         // On success, switch to the login view.
 
         LoginState loginState = loginViewModel.getState();
+        if (loginState == null) {
+            throw new IllegalStateException("LoginState should not be null at this point");
+        }
         loginState.setUsername(response.getUsername());
         this.loginViewModel.setState(loginState);
         loginViewModel.firePropertyChanged();

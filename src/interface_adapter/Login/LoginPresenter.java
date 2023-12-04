@@ -3,11 +3,8 @@ package interface_adapter.Login;
 import interface_adapter.LoggedIn.LoggedInState;
 import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.Signup.SignupState;
 import use_case.Login.LoginOutputBoundary;
 import use_case.Login.LoginOutputData;
-import use_case.Signup.SignupOutputBoundary;
-import use_case.Signup.SignupOutputData;
 
 public class LoginPresenter implements LoginOutputBoundary {
 

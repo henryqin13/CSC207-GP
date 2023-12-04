@@ -1,12 +1,8 @@
 package interface_adapter.Game;
 
-import use_case.Game.GameDataAccessInterface;
 import use_case.Game.GameOutputBoundary;
 import use_case.Game.GameOutputData;
 import interface_adapter.ViewManagerModel;
-import use_case.GenerativeInterface;
-
-import java.util.Arrays;
 
 public class GamePresenter implements GameOutputBoundary {
 
@@ -27,19 +23,14 @@ public class GamePresenter implements GameOutputBoundary {
         if (!data.getGuess()) {
             gameState.setScore(gameState.getScore() - 1);
         }
-        System.out.println(data.getGuess());
-
         this.gameViewModel.setState(gameState);
-
-        this.gameViewModel.firePropertyChanged(); // Notify observers about the state change
-        if (data.getGuess()){
+        this.gameViewModel.firePropertyChanged();
+        if (gameState.isGuessCorrect() || gameState.getScore() < 0){
             this.viewManagerModel.setActiveView("game over");
-            this.viewManagerModel.firePropertyChanged();
         } else {
             this.viewManagerModel.setActiveView("game");
-            this.viewManagerModel.firePropertyChanged();
         }
-
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -55,26 +46,24 @@ public class GamePresenter implements GameOutputBoundary {
         GameState gameState = gameViewModel.getState();
         gameState.setHint(data.getHint());
         int updatedScore = gameState.getScore() - hintDiff;
-        System.out.println(updatedScore);
-        if (updatedScore >= 0) {
-            gameState.setScore(updatedScore);
-        } else {
-//            TODO: end game
-        }
+        gameState.setScore(updatedScore);
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();
-
-        // Change to the hint view
-        this.viewManagerModel.setActiveView("hint");
+        if (gameState.getScore() > 0) {
+            this.viewManagerModel.setActiveView("hint");
+        } else {
+            this.viewManagerModel.setActiveView("game over");
+        }
         this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void gameStart(GameOutputData data) {
 
-        GameState gameState = gameViewModel.getState();
+        GameState gameState = new GameState();
         gameState.setCity(data.getCity());
+        gameViewModel.setState(gameState);
 
         this.gameViewModel.setState(gameState);
         this.gameViewModel.firePropertyChanged();
@@ -92,8 +81,15 @@ public class GamePresenter implements GameOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    @Override
     public void returnToMain(){ //from the main game screen
         this.viewManagerModel.setActiveView("the city game");
+        this.viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void backToHint(){
+        this.viewManagerModel.setActiveView("hint");
         this.viewManagerModel.firePropertyChanged();
     }
 }

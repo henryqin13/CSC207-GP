@@ -1,6 +1,5 @@
 package app;
 
-import entity.PlayerFactory;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestPresenter;
 import interface_adapter.Guest.GuestViewModel;

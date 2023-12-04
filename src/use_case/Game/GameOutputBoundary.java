@@ -1,6 +1,5 @@
 package use_case.Game;
 
-import use_case.GenerativeInterface;
 
 public interface GameOutputBoundary {
 
@@ -17,4 +16,6 @@ public interface GameOutputBoundary {
     void backToMain();
 
     void returnToMain();
+
+    void backToHint();
 }

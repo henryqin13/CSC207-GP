@@ -22,6 +22,11 @@ public class GameInteractor implements GameInputBoundary{
     @Override
     public void executeGame() {
         String city = client.getResponse("Give a random city");
+        if (city.contains(",")) {
+            city = city.split(",")[0].trim();
+        } else {
+            city = city.trim();
+        }
         System.out.println(city);
         gameState = new GameState();
 
@@ -31,12 +36,14 @@ public class GameInteractor implements GameInputBoundary{
 
     @Override
     public void executeHint(GameInputData gameInputData) {
-        String prompt = "Give a small piece of information about " + gameInputData.getCity().getName() + ", do not mention the name of the city in your response. do not use any special characters or formatters. On a scale of 1-3 with 3 being the most vague or difficult hint and 1 being the easiest, this hint should be " + gameInputData.getHint().hintDiff;
+        String prompt = "Give a small piece of information about " + gameInputData.getCity().getName() + ", DO NOT IN ANY CIRCUMSTANCE mention the name of the city. do not use any special characters, or slashes, or formatters. On a scale of 1-3 with 1 being the most vague or difficult hint and 3 being the easiest, this hint should be " + gameInputData.getHint().hintDiff;
         if (!gameInputData.getHint().keyword.isEmpty()) {
             prompt += " difficulty. Make it somewhat related to the keyword: " + gameInputData.getHint().keyword;
         }
         String hint = client.getResponse(prompt);
-        String cleanedString = hint.replaceAll("[^a-zA-Z0-9.,?!'\";:\\-]", "");
+        System.out.println(hint);
+        String cleanedString = hint.replaceAll("[^a-zA-Z0-9.,?!'\";:\\- ]", "");
+        System.out.println(cleanedString);
 
         GameOutputData gameOutputData = new GameOutputData(cleanedString, false, gameInputData.getCity());
         gamePresenter.hintView(gameOutputData, Integer.parseInt(gameInputData.getHint().hintDiff));
@@ -59,6 +66,7 @@ public class GameInteractor implements GameInputBoundary{
 
     @Override
     public void exit(){
+        gameState = new GameState();
         gamePresenter.exit();
     }
 
@@ -71,5 +79,8 @@ public class GameInteractor implements GameInputBoundary{
     public void returnToMain(){
         gamePresenter.returnToMain();
     }
+
+    @Override
+    public void backToHint(){gamePresenter.backToHint();}
 
 }
