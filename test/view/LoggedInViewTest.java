@@ -3,6 +3,8 @@ package view;
 import interface_adapter.CancelController;
 import interface_adapter.Guest.GuestController;
 import interface_adapter.Guest.GuestViewModel;
+import interface_adapter.LoggedIn.LoggedInController;
+import interface_adapter.LoggedIn.LoggedInViewModel;
 import interface_adapter.Login.LoginController;
 import interface_adapter.Login.LoginViewModel;
 import interface_adapter.Signup.SignupController;
@@ -15,26 +17,20 @@ import org.junit.Test;
 
 import javax.swing.*;
 
-public class LoginViewTest extends AssertJSwingJUnitTestCase {
+public class LoggedInViewTest extends AssertJSwingJUnitTestCase {
 
     private FrameFixture window;
-    private LoginViewModel loginViewModel;
-    private LoginController loginController;
-    private GuestViewModel guestViewModel;
-    private GuestController guestController;
-    private CancelController cancelController;
-
+    private LoggedInController loggedInController;
     @Override
     protected void onSetUp() {
-        // Create instances of your controllers and view models here or mock them
         ViewManagerModel viewManagerModel = new ViewManagerModel();
 
 
-        LoginViewModel loginViewModel = new LoginViewModel();
+        LoggedInViewModel loginViewModel = new LoggedInViewModel();
 
         JFrame frame = GuiActionRunner.execute(() -> {
-            LoginView loginView = new LoginView(
-                    loginViewModel, loginController, cancelController
+            LoggedInView loginView = new LoggedInView(
+                    loginViewModel, loggedInController
             );
             JFrame newFrame = new JFrame("Test Frame");
             newFrame.add(loginView);
@@ -49,9 +45,8 @@ public class LoginViewTest extends AssertJSwingJUnitTestCase {
     @Test
     public void test() {
 
-        window.textBox("usernameInputField").enterText("takenUsername");
+        window.button("logOut").click();
 
-        window.textBox("passwordInputField").enterText("hi");
-
+        window.button("playGame").click();
     }
 }

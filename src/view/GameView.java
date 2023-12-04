@@ -109,6 +109,11 @@ public class GameView extends JPanel implements ActionListener, PropertyChangeLi
         feedbackLabel.setPreferredSize(new Dimension(getWidth(), 40)); // Assuming you want the feedback label to match the height of the other components
         feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(feedbackLabel, BorderLayout.SOUTH);
+
+        hintInputField.setName("hintInputField");
+        hintButton.setName("hintButton");
+        guessButton.setName("guessButton");
+        returnButton.setName("returnButton");
     }
 
     private JPanel createHintPanel() {

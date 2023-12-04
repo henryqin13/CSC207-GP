@@ -61,6 +61,9 @@ public class GameOverView extends JPanel implements ActionListener, PropertyChan
         backButton.setFont(new Font("Serif", Font.BOLD, 26));
         backButton.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(backButton);
+
+        startOverButton.setName("startOverButton");
+        backButton.setName("backButton");
     }
 
     private void setupListeners() {

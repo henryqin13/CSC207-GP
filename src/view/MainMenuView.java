@@ -71,6 +71,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         buttons.add(guest);
         buttons.setPreferredSize(new Dimension(900, 300));
 
+        signUp.setName("signUp");
+        logIn.setName("logIn");
+        guest.setName("guest");
 
 
         signUp.addActionListener(

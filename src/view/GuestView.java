@@ -62,6 +62,9 @@ public class GuestView extends JPanel implements ActionListener, PropertyChangeL
 
         exit.addActionListener(this);
 
+        exit.setName("exit");
+        startGame.setName("startGame");
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(gamePic);

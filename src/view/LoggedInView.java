@@ -67,6 +67,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        logOut.setName("logOut");
+        playGame.setName("playGame");
+
         this.add(gamePic);
         this.add(title);
         this.add(welcomeMessage);
