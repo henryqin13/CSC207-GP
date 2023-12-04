@@ -22,6 +22,11 @@ public class GameInteractor implements GameInputBoundary{
     @Override
     public void executeGame() {
         String city = client.getResponse("Give a random city");
+        if (city.contains(",")) {
+            city = city.split(",")[0].trim();
+        } else {
+            city = city.trim();
+        }
         System.out.println(city);
         gameState = new GameState();
 
